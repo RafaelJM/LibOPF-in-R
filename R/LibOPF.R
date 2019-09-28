@@ -259,3 +259,100 @@ opfknn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opfknn_train")
 }
+
+#tools -------------------------------------------------------------------------------------
+
+#'Calculate cluster centroids using K-means
+#'
+#'@param inputFile path to input file in the OPF binary format
+#'@param numberClusters number of clusters (k)
+#'@param outputFile path to output file containing cluster centroids
+#'
+#'@details
+#'Creates a file with the cluster centroids.
+#'
+#'@export
+#'@useDynLib kmeans
+kmeans <- function(inputFile, numberClusters, outputFile){
+  argv <- c("", inputFile, numberClusters, outputFile)
+  .C("main",length(argv),as.character(argv), PACKAGE = "kmeans")
+}
+
+#'Check the OPF file
+#'
+#'@param inputFile path to input ASCII file in the LibOPF format
+#'
+#'@details
+#'usage opf_check <input ASCII file in the LibOPF format>:
+#'Note that the input file for opf_check must be a text file.
+#'Use opf2txt to convert your OPF binary file into a text file.
+#'
+#'@export
+#'@useDynLib opf_check
+opf_check <- function(inputFile){
+  argv <- c("", inputFile)
+  .C("main",length(argv),as.character(argv), PACKAGE = "opf_check")
+}
+
+#'Converts OPF to SVM
+#'
+#'@param inputFile path to OPF input file
+#'@param outputFile path to SVM output file
+#'
+#'@export
+#'@useDynLib opf2svm
+opf2svm <- function(inputFile, outputFile){
+  argv <- c("", inputFile, outputFile)
+  .C("main",length(argv),as.character(argv), PACKAGE = "opf2svm")
+}
+
+#'Converts OPF to text
+#'
+#'@param inputFile path to OPF input file
+#'@param outputFile path to text output file
+#'
+#'@export
+#'@useDynLib opf2txt
+opf2txt <- function(inputFile, outputFile){
+  argv <- c("", inputFile, outputFile)
+  .C("main",length(argv),as.character(argv), PACKAGE = "opf2txt")
+}
+
+#'Calculates mean of accuracy
+#'
+#'@param inputFile path to accuracy file
+#'@param numberAccuracy how much accuracy will take
+#'@param message text that will be show
+#'
+#'@export
+#'@useDynLib statistcs
+statistcs <- function(inputFile, numberAccuracy, message){
+  argv <- c("", inputFile, numberAccuracy, message)
+  .C("main",length(argv),as.character(argv), PACKAGE = "statistcs")
+}
+
+#'Converts SVM to OPF
+#'
+#'@param inputFile path to SVM input file
+#'@param outputFile path to OPF output file
+#'
+#'@export
+#'@useDynLib svm2opf
+svm2opf <- function(inputFile, outputFile){
+  argv <- c("", inputFile, outputFile)
+  .C("main",length(argv),as.character(argv), PACKAGE = "svm2opf")
+}
+
+#'Converts text to OPF
+#'
+#'@param inputFile path to text input file
+#'@param outputFile path to OPF output file
+#'
+#'@export
+#'@useDynLib txt2opf
+txt2opf <- function(inputFile, outputFile){
+  argv <- c("", inputFile, outputFile)
+  .C("main",length(argv),as.character(argv), PACKAGE = "txt2opf")
+}
+
+
