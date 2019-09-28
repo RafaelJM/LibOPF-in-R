@@ -4,7 +4,7 @@
 \alias{opf_classify}
 \title{Executes the test phase of the OPF classifier}
 \usage{
-opf_classify(dataSet, precomputedDistance = "")
+opf_classify(dataSet, precomputedDistance = NA)
 }
 \arguments{
 \item{dataSet}{path to test set in the OPF file format}

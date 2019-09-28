@@ -4,7 +4,7 @@
 \alias{opfknn_train}
 \title{Executes the training phase of the OPF classifier with knn adjacency}
 \usage{
-opfknn_train(trainFile, evaluatFile, kmax, precomputedDistance = "")
+opfknn_train(trainFile, evaluatFile, kmax, precomputedDistance = NA)
 }
 \arguments{
 \item{trainFile}{path to training set in the OPF file format}

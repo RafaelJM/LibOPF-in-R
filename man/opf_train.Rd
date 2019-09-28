@@ -4,7 +4,7 @@
 \alias{opf_train}
 \title{Executes the training phase of the OPF classifier}
 \usage{
-opf_train(dataSet, precomputedDistance = "")
+opf_train(dataSet, precomputedDistance = NA)
 }
 \arguments{
 \item{dataSet}{path to training set in the OPF file format}

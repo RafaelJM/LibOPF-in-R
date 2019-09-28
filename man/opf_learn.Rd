@@ -4,7 +4,7 @@
 \alias{opf_learn}
 \title{Executes the learning phase for the OPF classifier}
 \usage{
-opf_learn(trainFile, evaluatFile, precomputedDistance = "")
+opf_learn(trainFile, evaluatFile, precomputedDistance = NA)
 }
 \arguments{
 \item{trainFile}{path to training set in the OPF file format}

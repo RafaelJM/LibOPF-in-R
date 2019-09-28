@@ -5,7 +5,7 @@
 \title{Executes the semi supervised training phase of the OPF classifier}
 \usage{
 opf_semi(labeledTrainFile, unLabeledTrainFile, evaluatFile = "",
-  precomputedDistance = "")
+  precomputedDistance = NA)
 }
 \arguments{
 \item{labeledTrainFile}{path to labeled training set in the OPF file format}

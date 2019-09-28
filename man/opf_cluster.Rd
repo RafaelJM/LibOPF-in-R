@@ -4,7 +4,7 @@
 \alias{opf_cluster}
 \title{Computes clusters by OPF}
 \usage{
-opf_cluster(dataSet, kmax, calculateOp, value, precomputedDistance = "")
+opf_cluster(dataSet, kmax, calculateOp, value, precomputedDistance = NA)
 }
 \arguments{
 \item{dataSet}{path to unlabeled data set in the OPF file format}

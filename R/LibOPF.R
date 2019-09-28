@@ -8,6 +8,7 @@
 #'Computes and creates a .acc file, with the same name as the input, that contains the accuracy. Also creates a .time that contais the processing time.
 #'
 #'@export
+#'@useDynLib opf_accuracy
 opf_accuracy <- function(dataSet){
 	argv <- c("", dataSet)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opf_accuracy")
@@ -23,6 +24,7 @@ opf_accuracy <- function(dataSet){
 #'Computes and creates a .acc file, with the same name as the input, that contains the accuracy. Also creates a .time that contais the processing time.
 #'
 #'@export
+#'@useDynLib opf_accuracy4label
 opf_accuracy4label <- function(dataSet){
 	argv <- c("", dataSet)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opf_accuracy4label")
@@ -37,6 +39,7 @@ opf_accuracy4label <- function(dataSet){
 #'Creates a file .out, which is used in opf_accuracy, for example.
 #'
 #'@export
+#'@useDynLib opf_classify
 opf_classify <- function(dataSet,precomputedDistance = NA){
   	argv <- c("", dataSet)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
@@ -55,6 +58,7 @@ opf_classify <- function(dataSet,precomputedDistance = NA){
 #'Creates a file .out, which is used in opf_knn_classify, for example.
 #'
 #'@export
+#'@useDynLib opf_cluster
 opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = NA){
   	argv <- c("", dataSet,kmax,calculateOp,value)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
@@ -81,6 +85,7 @@ opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = 
 #'Reads the dataset and create a distances.dat with the distances.
 #'
 #'@export
+#'@useDynLib opf_distance
 opf_distance <- function(dataSet, distanceOp, normalize){
   	argv <- c("", dataSet,distanceOp,normalize)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opf_cluster")
@@ -96,6 +101,7 @@ opf_distance <- function(dataSet, distanceOp, normalize){
 #'Generate k files with the name fold_(number).dat
 #'
 #'@export
+#'@useDynLib opf_fold
 opf_fold <- function(dataSet, k, normalize){
 	argv <- c("", dataSet,k,normalize)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opf_fold")
@@ -107,6 +113,7 @@ opf_fold <- function(dataSet, k, normalize){
 #'dataSet path to OPF file
 #'
 #'@export
+#'@useDynLib opf_info
 opf_info <- function(dataSet){
 	argv <- c("", dataSet)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opf_info")
@@ -122,6 +129,7 @@ opf_info <- function(dataSet){
 #'Execute the training phase and generates an output file named classifier.opf
 #'
 #'@export
+#'@useDynLib opf_learn
 opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
   	argv <- c("", trainFile, evaluatFile)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
@@ -133,6 +141,7 @@ opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
 #'@param dataSets vector of paths to dataSets in the OPF file format
 #'
 #'@export
+#'@useDynLib opf_merge
 opf_merge <- function(dataSets){
   	argv <- c("", dataSets)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opf_merge")
@@ -144,6 +153,7 @@ opf_merge <- function(dataSets){
 #'@param normalizedOutput path to normalized output dataSet in the OPF file format
 #'
 #'@export
+#'@useDynLib opf_normalize
 opf_normalize <- function(dataSet, normalizedOutput){
   	argv <- c("", dataSet, normalizedOutput)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opf_normalize")
@@ -157,6 +167,7 @@ opf_normalize <- function(dataSet, normalizedOutput){
 #'@param percentageAccuracy percentage of accuracy [0,1]
 #'
 #'@export
+#'@useDynLib opf_pruning
 opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precomputedDistance){
   	argv <- c("", dataTraining,  dataEvaluating,  percentageAccuracy)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
@@ -174,6 +185,7 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
 #'Creates a file .out, which is used in opf_classify, for example.
 #'
 #'@export
+#'@useDynLib opf_semi
 opf_semi <- function(labeledTrainFile,  unLabeledTrainFile,  evaluatFile = "",  precomputedDistance = NA){
   	argv <- c("", labeledTrainFile,  unLabeledTrainFile,  evaluatFile)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
@@ -192,6 +204,7 @@ opf_semi <- function(labeledTrainFile,  unLabeledTrainFile,  evaluatFile = "",  
 #'produces two or three files, training.dat, testing.dat and evaluating.dat
 #'
 #'@export
+#'@useDynLib opf_split
 opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize){
   	argv <- c("", dataSet, training_p, evaluating_p, testing_p, normalize)
 	.C("main",length(argv),as.character(argv), PACKAGE = "opf_split")
@@ -206,6 +219,7 @@ opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize){
 #'Execute the training phase and generates an output file named classifier.opf
 #'
 #'@export
+#'@useDynLib opf_train
 opf_train <- function(dataSet, precomputedDistance = NA){
   argv <- c("", dataSet)
   if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
@@ -221,6 +235,7 @@ opf_train <- function(dataSet, precomputedDistance = NA){
 #'Creates a file .out, which is used in opf_accuracy, for example.
 #'
 #'@export
+#'@useDynLib opfknn_classify
 opfknn_classify <- function(dataSet, precomputedDistance = NA){
 	argv <- c("", dataSet)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
@@ -238,6 +253,7 @@ opfknn_classify <- function(dataSet, precomputedDistance = NA){
 #'Creates a file .out, which is used in opf_knn_classify, for example. Also creates a .time that contais the processing time.
 #'
 #'@export
+#'@useDynLib opfknn_train
 opfknn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA){
 	argv <- c("", trainFile, evaluatFile, kmax)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)

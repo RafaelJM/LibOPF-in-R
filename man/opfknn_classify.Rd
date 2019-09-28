@@ -4,7 +4,7 @@
 \alias{opfknn_classify}
 \title{Executes the test phase of the OPF classifier with knn adjacency}
 \usage{
-opfknn_classify(dataSet, precomputedDistance = "")
+opfknn_classify(dataSet, precomputedDistance = NA)
 }
 \arguments{
 \item{dataSet}{path to test set in the OPF file format}
