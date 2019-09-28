@@ -1,0 +1,168 @@
+LIB=./lib
+INCLUDE=./include
+SRC=./src
+OBJ=./obj
+UTIL=util
+
+AR = C:/Rtools/mingw_64/bin/ar
+CC=C:/Rtools/mingw_64/bin/gcc
+SH=R CMD SHLIB
+
+FLAGS=  -O3 -Wall
+
+DLLF = $(SHLIB_LD) -shared $(DLLFLAGS)
+INCFLAGS = -I$(INCLUDE) -I$(INCLUDE)/$(UTIL)
+
+O.C.: libOPF opf_split opf_accuracy opf_accuracy4label opf_train opf_semi opf_classify opf_learn opf_distance opf_info opf_fold opf_merge opf_cluster opf_pruning statistics txt2opf opf2txt opf_check opf_normalize opfknn_train opfknn_classify opf2svm svm2opf kmeans
+
+libOPF: libOPF-build
+	echo "libOPF.a built..."
+
+libOPF-build: \
+util \
+$(OBJ)/OPF.o \
+
+	$(AR) csr $(LIB)/libOPF.a \
+$(OBJ)/common.o \
+$(OBJ)/set.o \
+$(OBJ)/gqueue.o \
+$(OBJ)/realheap.o \
+$(OBJ)/sgctree.o \
+$(OBJ)/subgraph.o \
+$(OBJ)/OPF.o \
+
+$(OBJ)/OPF.o: $(SRC)/OPF.c
+	$(CC) $(FLAGS) -c $(SRC)/OPF.c $(INCFLAGS) \
+	-o $(OBJ)/OPF.o
+
+opf_split: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_split.c -L./lib -o bin/opf_split.o -lOPF -lm
+	$(DLLF) -o opf_split.dll bin/opf_split.o -L./lib -lOPF -lm
+	
+opf_accuracy: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_accuracy.c  -L./lib -o bin/opf_accuracy.o -lOPF -lm
+	$(DLLF) -o opf_accuracy.dll bin/opf_accuracy.o -L./lib -lOPF -lm
+	
+opf_accuracy4label: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_accuracy4label.c  -L./lib -o bin/opf_accuracy4label.o -lOPF -lm
+	$(DLLF) -o opf_accuracy4label.dll bin/opf_accuracy4label.o -L./lib -lOPF -lm
+	
+opf_train: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_train.c  -L./lib -o bin/opf_train.o -lOPF -lm
+	$(DLLF) -o opf_train.dll bin/opf_train.o -L./lib -lOPF -lm
+
+opf_semi: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_semi.c  -L./lib -o bin/opf_semi.o -lOPF -lm
+	$(DLLF) -o opf_semi.dll bin/opf_semi.o -L./lib -lOPF -lm
+	
+opf_classify: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_classify.c  -L./lib -o bin/opf_classify.o -lOPF -lm
+	$(DLLF) -o opf_classify.dll bin/opf_classify.o -L./lib -lOPF -lm
+	
+opf_learn: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_learn.c  -L./lib -o bin/opf_learn.o -lOPF -lm
+	$(DLLF) -o opf_learn.dll bin/opf_learn.o -L./lib -lOPF -lm
+	
+opf_distance: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_distance.c  -L./lib -o bin/opf_distance.o -lOPF -lm
+	$(DLLF) -o opf_distance.dll bin/opf_distance.o -L./lib -lOPF -lm
+	
+opf_info: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_info.c  -L./lib -o bin/opf_info.o -lOPF -lm
+	$(DLLF) -o opf_info.dll bin/opf_info.o -L./lib -lOPF -lm
+	
+opf_fold: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_fold.c  -L./lib -o bin/opf_fold.o -lOPF -lm
+	$(DLLF) -o opf_fold.dll bin/opf_fold.o -L./lib -lOPF -lm
+	
+opf_merge: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_merge.c  -L./lib -o bin/opf_merge.o -lOPF -lm
+	$(DLLF) -o opf_merge.dll bin/opf_merge.o -L./lib -lOPF -lm
+	
+opf_cluster: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_cluster.c  -L./lib -o bin/opf_cluster.o -lOPF -lm
+	$(DLLF) -o opf_cluster.dll bin/opf_cluster.o -L./lib -lOPF -lm
+
+opf_normalize: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_normalize.c  -L./lib -o bin/opf_normalize.o -lOPF -lm
+	$(DLLF) -o opf_normalize.dll bin/opf_normalize.o -L./lib -lOPF -lm
+	
+opfknn_train: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opfknn_train.c  -L./lib -o bin/opfknn_train.o -lOPF -lm
+	$(DLLF) -o opfknn_train.dll bin/opfknn_train.o -L./lib -lOPF -lm
+	
+opfknn_classify: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opfknn_classify.c  -L./lib -o bin/opfknn_classify.o -lOPF -lm
+	$(DLLF) -o opfknn_classify.dll bin/opfknn_classify.o -L./lib -lOPF -lm
+	
+opf_pruning: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c src/opf_pruning.c  -L./lib -o bin/opf_pruning.o -lOPF -lm
+	$(DLLF) -o opf_pruning.dll bin/opf_pruning.o -L./lib -lOPF -lm
+	
+statistics:
+	$(CC) $(FLAGS) -c tools/src/statistics.c  -o bin/statistics.o -lm
+	$(DLLF) -o statistics.dll bin/statistics.o -L./lib -lOPF -lm
+	
+txt2opf: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c tools/src/txt2opf.c  -L./lib -o bin/txt2opf.o -lOPF -lm
+	$(DLLF) -o txt2opf.dll bin/txt2opf.o -L./lib -lOPF -lm
+
+opf_check: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c tools/src/opf_check.c  -L./lib -o bin/opf_check.o -lOPF -lm
+	$(DLLF) -o opf_check.dll bin/opf_check.o -L./lib -lOPF -lm
+	
+opf2txt: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c tools/src/opf2txt.c  -L./lib -o bin/opf2txt.o -lOPF -lm
+	$(DLLF) -o opf2txt.dll bin/opf2txt.o -L./lib -lOPF -lm
+	
+opf2svm: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c tools/src/opf2svm.c  -L./lib -o bin/opf2svm.o -lOPF -lm
+	$(DLLF) -o opf2svm.dll bin/opf2svm.o -L./lib -lOPF -lm
+	
+svm2opf: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c tools/src/svm2opf.c  -L./lib -o bin/svm2opf.o -lOPF -lm
+	$(DLLF) -o svm2opf.dll bin/svm2opf.o -L./lib -lOPF -lm
+	
+kmeans: libOPF
+	$(CC) $(FLAGS) $(INCFLAGS) -c tools/src/kmeans.c  -L./lib -o bin/kmeans.o -lOPF -lm
+	$(DLLF) -o kmeans.dll bin/kmeans.o -L./lib -lOPF -lm
+	
+util: $(SRC)/$(UTIL)/common.c $(SRC)/$(UTIL)/set.c $(SRC)/$(UTIL)/gqueue.c $(SRC)/$(UTIL)/realheap.c $(SRC)/$(UTIL)/sgctree.c $(SRC)/$(UTIL)/subgraph.c
+	$(CC) $(FLAGS) $(INCFLAGS) -c $(SRC)/$(UTIL)/common.c -o $(OBJ)/common.o
+	$(CC) $(FLAGS) $(INCFLAGS) -c $(SRC)/$(UTIL)/set.c -o $(OBJ)/set.o
+	$(CC) $(FLAGS) $(INCFLAGS) -c $(SRC)/$(UTIL)/gqueue.c -o $(OBJ)/gqueue.o
+	$(CC) $(FLAGS) $(INCFLAGS) -c $(SRC)/$(UTIL)/realheap.c -o $(OBJ)/realheap.o
+	$(CC) $(FLAGS) $(INCFLAGS) -c $(SRC)/$(UTIL)/sgctree.c -o $(OBJ)/sgctree.o
+	$(CC) $(FLAGS) $(INCFLAGS) -c $(SRC)/$(UTIL)/subgraph.c -o $(OBJ)/subgraph.o
+
+
+## Compiling LibOPF with LibIFT
+
+opf-ift: libOPF-ift
+
+libOPF-ift: libOPF-ift-build
+	echo "libOPF.a built with IFT..."
+
+libOPF-ift-build: \
+OPF-ift.o \
+
+	ar csr $(LIB)/libOPF.a \
+$(OBJ)/OPF.o \
+
+
+OPF-ift.o: $(SRC)/OPF.c
+	$(CC) $(FLAGS) -c $(SRC)/OPF.c -I$(INCLUDE) -I$(IFT_DIR)/include \
+	-o $(OBJ)/OPF.o
+
+## Cleaning-up
+
+clean:
+	rm -f $(LIB)/lib*.a; rm -f $(OBJ)/*.o bin/* tools/opf_check tools/statistics tools/txt2opf tools/opf2txt tools/opf_check tools/opf2svm tools/svm2opf tools/kmeans
+
+clean_results:
+	rm -f *.out *.opf *.acc *.time *.opf training.dat evaluating.dat testing.dat
+
+clean_results_in_examples:
+	rm -f examples/*.out examples/*.opf examples/*.acc examples/*.time examples/*.opf examples/training.dat examples/evaluating.dat examples/testing.dat
+
+
