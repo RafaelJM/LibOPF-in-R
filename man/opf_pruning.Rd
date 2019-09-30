@@ -14,7 +14,7 @@ opf_pruning(dataTraining, dataEvaluating, percentageAccuracy,
 
 \item{percentageAccuracy}{percentage of accuracy [0,1]}
 
-\item{dataEvaluating}{path to evaluating set in the OPF file format}
+\item{precomputedDistance}{path to precomputed distance file (leave it in blank if you are not using this resource)}
 }
 \description{
 Executes the pruning algorithm of the OPF classifier

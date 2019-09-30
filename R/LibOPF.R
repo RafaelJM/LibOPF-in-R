@@ -163,8 +163,8 @@ opf_normalize <- function(dataSet, normalizedOutput){
 #'
 #'@param dataTraining path to training set in the OPF file format
 #'@param dataEvaluating path to evaluating set in the OPF file format
-#'@param dataEvaluating path to evaluating set in the OPF file format
 #'@param percentageAccuracy percentage of accuracy [0,1]
+#'@param precomputedDistance path to precomputed distance file (leave it in blank if you are not using this resource)
 #'
 #'@export
 #'@useDynLib opf_pruning
@@ -325,10 +325,10 @@ opf2txt <- function(inputFile, outputFile){
 #'@param message text that will be show
 #'
 #'@export
-#'@useDynLib statistcs
-statistcs <- function(inputFile, numberAccuracy, message){
+#'@useDynLib statistics
+statistics <- function(inputFile, numberAccuracy, message){
   argv <- c("", inputFile, numberAccuracy, message)
-  .C("main",length(argv),as.character(argv), PACKAGE = "statistcs")
+  .C("main",length(argv),as.character(argv), PACKAGE = "statistics")
 }
 
 #'Converts SVM to OPF
