@@ -81,7 +81,7 @@ static int main(int argc, char **argv)
 	return 0;
 }
 
-SEXP opf_accuracy4label(int argc, char **argv){
-	main(argc,argv);
-	return NULL;
+void opf_accuracy4label(int *argc, char **argv){
+	main(*argc,argv);
+	
 }

@@ -175,7 +175,7 @@ Subgraph *CopySubgraph(Subgraph *g)
     return clone;
   }
   else
-    return NULL;
+    return(NULL);
 }
 
 //Copy nodes

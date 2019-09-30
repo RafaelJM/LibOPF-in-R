@@ -141,7 +141,7 @@ static int main(int argc, char **argv)
 	return 0;
 }
 
-SEXP svm2opf(int argc, char **argv){
-	main(argc,argv);
-	return NULL;
+void svm2opf(int *argc, char **argv){
+	main(*argc,argv);
+	
 }

@@ -1262,7 +1262,7 @@ Subgraph **kFoldSubgraph(Subgraph *sg, int k)
     {
       sprintf(msg, "You do not have a sufficient amount of samples from class %d", i);
       Error(msg, "kFoldSubgraph"); if(errorOccurred) return(NULL);
-      return NULL;
+      return(NULL);
     }
   }
 

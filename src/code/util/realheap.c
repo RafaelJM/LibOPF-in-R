@@ -123,7 +123,7 @@ RealHeap *CreateRealHeap(int n, float *cost)
   if (cost == NULL)
   {
     Rprintf("Cannot create heap without cost map in CreateRealHeap");
-    return NULL;
+    return(NULL);
   }
 
   H = (RealHeap *)malloc(sizeof(RealHeap));

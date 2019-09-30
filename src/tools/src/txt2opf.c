@@ -87,7 +87,7 @@ static int main(int argc, char **argv)
 	return 0;
 }
 
-SEXP txt2opf(int argc, char **argv){
-	main(argc,argv);
-	return NULL;
+void txt2opf(int *argc, char **argv){
+	main(*argc,argv);
+	
 }

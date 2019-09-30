@@ -56,7 +56,7 @@ static int main(int argc, char **argv)
 	return 0;
 }
 
-SEXP opf_merge(int argc, char **argv){
-	main(argc,argv);
-	return NULL;
+void opf_merge(int *argc, char **argv){
+	main(*argc,argv);
+	
 }

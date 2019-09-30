@@ -105,7 +105,7 @@ static int main(int argc, char **argv)
   return 0;
 }
 
-SEXP opf_semi(int argc, char **argv){
-	main(argc,argv);
-	return NULL;
+void opf_semi(int *argc, char **argv){
+	main(*argc,argv);
+	
 }
