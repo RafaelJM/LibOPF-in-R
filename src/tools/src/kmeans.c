@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "OPF.h"
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 
 	if (argc != 4)
@@ -59,4 +59,9 @@ int main(int argc, char **argv)
 	fprintf(stderr, "OK\n");
 
 	return 0;
+}
+
+SEXP kmeans(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

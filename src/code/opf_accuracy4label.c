@@ -1,6 +1,6 @@
 #include "OPF.h"
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	fflush(stdout);
 	fprintf(stdout, "\nProgram that computes the OPF accuracy for each class of a given set\n");
@@ -79,4 +79,9 @@ int main(int argc, char **argv)
 	free(Acc);
 
 	return 0;
+}
+
+SEXP opf_accuracy4label(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

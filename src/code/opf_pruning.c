@@ -1,6 +1,6 @@
 #include "OPF.h"
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	fflush(stdout);
 	fprintf(stdout, "\nProgram that executes the pruning algorithm of the OPF classifier\n");
@@ -85,4 +85,9 @@ int main(int argc, char **argv)
 	fprintf(stdout, " OK\n");
 
 	return 0;
+}
+
+SEXP opf_pruning(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

@@ -106,7 +106,7 @@ int CheckLine(char *line, int nlabels, int nfeats, int lineid)
     return 1;
 }
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 
     if (argc != 2)
@@ -155,4 +155,9 @@ int main(int argc, char **argv)
         fprintf(stderr, "\nThis file is in the proper format. Enjoy.\n");
 
     return 1;
+}
+
+SEXP opf_check(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

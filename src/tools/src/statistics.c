@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <R.h>
+#include <Rinternals.h>
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
@@ -44,4 +46,9 @@ int main(int argc, char **argv)
 	fprintf(stderr, "\n%s %f with standard deviation: %f\n", argv[3], MeanAcc, Std);
 
 	return 0;
+}
+
+SEXP statistics(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

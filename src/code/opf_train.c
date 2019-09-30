@@ -1,6 +1,6 @@
 #include "OPF.h"
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	fflush(stdout);
 	fprintf(stdout, "\nProgram that executes the training phase of the OPF classifier\n");
@@ -80,4 +80,9 @@ int main(int argc, char **argv)
 	fclose(f);
 
 	return 0;
+}
+
+SEXP opf_train(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

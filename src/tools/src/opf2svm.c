@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "OPF.h"
 
-void WriteSubgraph2SVMFormat(Subgraph *cg, char *file)
+static void WriteSubgraph2SVMFormat(Subgraph *cg, char *file)
 {
 	int i, j;
 	FILE *fp = NULL;
@@ -19,7 +19,7 @@ void WriteSubgraph2SVMFormat(Subgraph *cg, char *file)
 	fclose(fp);
 }
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
@@ -32,4 +32,9 @@ int main(int argc, char **argv)
 	DestroySubgraph(&g);
 
 	return 0;
+}
+
+SEXP opf2svm(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

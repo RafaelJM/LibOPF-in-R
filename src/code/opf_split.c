@@ -16,7 +16,7 @@ void CheckInputData(float TrPercentage, float EvalPercentage, float TestPercenta
 	printf(" OK");
 }
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	fflush(stdout);
 	fprintf(stdout, "\nProgram that generates training, evaluation and test sets for the OPF classifier\n");
@@ -86,4 +86,9 @@ int main(int argc, char **argv)
 	fprintf(stdout, " OK\n");
 
 	return 0;
+}
+
+SEXP opf_split(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

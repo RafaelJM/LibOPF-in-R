@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "OPF.h"
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 
 	if (argc != 3)
@@ -85,4 +85,9 @@ int main(int argc, char **argv)
 	fclose(fpOut);
 
 	return 0;
+}
+
+SEXP txt2opf(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

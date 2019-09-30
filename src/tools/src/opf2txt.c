@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <R.h>
+#include <Rinternals.h>
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 
 	if (argc != 3)
@@ -52,4 +54,9 @@ int main(int argc, char **argv)
 	result++;
 
 	return 0;
+}
+
+SEXP opf2txt(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

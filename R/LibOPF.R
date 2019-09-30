@@ -11,7 +11,7 @@
 #'@useDynLib opf_accuracy
 opf_accuracy <- function(dataSet){
 	argv <- c("", dataSet)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_accuracy")
+	.Call("opf_accuracy",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Computes the OPF accuracy for each class of a given set
@@ -27,7 +27,7 @@ opf_accuracy <- function(dataSet){
 #'@useDynLib opf_accuracy4label
 opf_accuracy4label <- function(dataSet){
 	argv <- c("", dataSet)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_accuracy4label")
+	.Call("opf_accuracy4label",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Executes the test phase of the OPF classifier
@@ -43,7 +43,7 @@ opf_accuracy4label <- function(dataSet){
 opf_classify <- function(dataSet,precomputedDistance = NA){
   	argv <- c("", dataSet)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_classify")
+	.Call("opf_classify",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Computes clusters by OPF
@@ -62,7 +62,7 @@ opf_classify <- function(dataSet,precomputedDistance = NA){
 opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = NA){
   	argv <- c("", dataSet,kmax,calculateOp,value)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_cluster")
+	.Call("opf_cluster",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Generates the precomputed distance file for the OPF classifier
@@ -88,7 +88,7 @@ opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = 
 #'@useDynLib opf_distance
 opf_distance <- function(dataSet, distanceOp, normalize){
   	argv <- c("", dataSet,distanceOp,normalize)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_cluster")
+	.Call("opf_distance",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Generates k folds (files) for the OPF classifier
@@ -104,7 +104,7 @@ opf_distance <- function(dataSet, distanceOp, normalize){
 #'@useDynLib opf_fold
 opf_fold <- function(dataSet, k, normalize){
 	argv <- c("", dataSet,k,normalize)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_fold")
+	.Call("opf_fold",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Gives information about the OPF file
@@ -116,7 +116,7 @@ opf_fold <- function(dataSet, k, normalize){
 #'@useDynLib opf_info
 opf_info <- function(dataSet){
 	argv <- c("", dataSet)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_info")
+	.Call("opf_info",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Executes the learning phase for the OPF classifier
@@ -133,7 +133,7 @@ opf_info <- function(dataSet){
 opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
   	argv <- c("", trainFile, evaluatFile)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_learn")
+	.Call("opf_learn",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Merge subgraphs
@@ -144,7 +144,7 @@ opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
 #'@useDynLib opf_merge
 opf_merge <- function(dataSets){
   	argv <- c("", dataSets)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_merge")
+	.Call("opf_merge",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Normalizes data for the OPF classifier
@@ -156,7 +156,7 @@ opf_merge <- function(dataSets){
 #'@useDynLib opf_normalize
 opf_normalize <- function(dataSet, normalizedOutput){
   	argv <- c("", dataSet, normalizedOutput)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_normalize")
+	.Call("opf_normalize",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Executes the pruning algorithm of the OPF classifier
@@ -171,7 +171,7 @@ opf_normalize <- function(dataSet, normalizedOutput){
 opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precomputedDistance){
   	argv <- c("", dataTraining,  dataEvaluating,  percentageAccuracy)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_pruning")
+	.Call("opf_pruning",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Executes the semi supervised training phase of the OPF classifier
@@ -189,7 +189,7 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
 opf_semi <- function(labeledTrainFile,  unLabeledTrainFile,  evaluatFile = "",  precomputedDistance = NA){
   	argv <- c("", labeledTrainFile,  unLabeledTrainFile,  evaluatFile)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_semi")
+	.Call("opf_semi",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Generates training, evaluation and test sets for the OPF classifier
@@ -207,7 +207,7 @@ opf_semi <- function(labeledTrainFile,  unLabeledTrainFile,  evaluatFile = "",  
 #'@useDynLib opf_split
 opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize){
   	argv <- c("", dataSet, training_p, evaluating_p, testing_p, normalize)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opf_split")
+	.Call("opf_split",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Executes the training phase of the OPF classifier
@@ -223,7 +223,7 @@ opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize){
 opf_train <- function(dataSet, precomputedDistance = NA){
   argv <- c("", dataSet)
   if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
-  .C("main",length(argv),as.character(argv), PACKAGE = "opf_train")
+  .Call("opf_train",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Executes the test phase of the OPF classifier with knn adjacency
@@ -239,7 +239,7 @@ opf_train <- function(dataSet, precomputedDistance = NA){
 opfknn_classify <- function(dataSet, precomputedDistance = NA){
 	argv <- c("", dataSet)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opfknn_classify")
+	.Call("opfknn_classify",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Executes the training phase of the OPF classifier with knn adjacency
@@ -257,7 +257,7 @@ opfknn_classify <- function(dataSet, precomputedDistance = NA){
 opfknn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA){
 	argv <- c("", trainFile, evaluatFile, kmax)
 	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
-	.C("main",length(argv),as.character(argv), PACKAGE = "opfknn_train")
+	.Call("opfknn_train",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #tools -------------------------------------------------------------------------------------
@@ -275,7 +275,7 @@ opfknn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA)
 #'@useDynLib kmeans
 kmeans <- function(inputFile, numberClusters, outputFile){
   argv <- c("", inputFile, numberClusters, outputFile)
-  .C("main",length(argv),as.character(argv), PACKAGE = "kmeans")
+  .Call("kmeans",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Check the OPF file
@@ -291,7 +291,7 @@ kmeans <- function(inputFile, numberClusters, outputFile){
 #'@useDynLib opf_check
 opf_check <- function(inputFile){
   argv <- c("", inputFile)
-  .C("main",length(argv),as.character(argv), PACKAGE = "opf_check")
+  .Call("opf_check",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Converts OPF to SVM
@@ -303,7 +303,7 @@ opf_check <- function(inputFile){
 #'@useDynLib opf2svm
 opf2svm <- function(inputFile, outputFile){
   argv <- c("", inputFile, outputFile)
-  .C("main",length(argv),as.character(argv), PACKAGE = "opf2svm")
+  .Call("opf2svm",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Converts OPF to text
@@ -315,7 +315,7 @@ opf2svm <- function(inputFile, outputFile){
 #'@useDynLib opf2txt
 opf2txt <- function(inputFile, outputFile){
   argv <- c("", inputFile, outputFile)
-  .C("main",length(argv),as.character(argv), PACKAGE = "opf2txt")
+  .Call("opf2txt",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Calculates mean of accuracy
@@ -328,7 +328,7 @@ opf2txt <- function(inputFile, outputFile){
 #'@useDynLib statistics
 statistics <- function(inputFile, numberAccuracy, message){
   argv <- c("", inputFile, numberAccuracy, message)
-  .C("main",length(argv),as.character(argv), PACKAGE = "statistics")
+  .Call("statistics",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Converts SVM to OPF
@@ -340,7 +340,7 @@ statistics <- function(inputFile, numberAccuracy, message){
 #'@useDynLib svm2opf
 svm2opf <- function(inputFile, outputFile){
   argv <- c("", inputFile, outputFile)
-  .C("main",length(argv),as.character(argv), PACKAGE = "svm2opf")
+  .Call("svm2opf",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 #'Converts text to OPF
@@ -352,7 +352,7 @@ svm2opf <- function(inputFile, outputFile){
 #'@useDynLib txt2opf
 txt2opf <- function(inputFile, outputFile){
   argv <- c("", inputFile, outputFile)
-  .C("main",length(argv),as.character(argv), PACKAGE = "txt2opf")
+  .Call("txt2opf",length(argv),as.character(argv), PACKAGE = "LibOPF")
 }
 
 

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	fflush(stdout);
 	fprintf(stdout, "\nProgram that gives information about the OPF file\n");
@@ -58,4 +58,9 @@ int main(int argc, char **argv)
 	fclose(fp);
 
 	return 0;
+}
+
+SEXP opf_info(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

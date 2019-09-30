@@ -1,6 +1,6 @@
 #include "OPF.h"
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	int i, n, op;
 	float value;
@@ -125,4 +125,9 @@ int main(int argc, char **argv)
 	}
 
 	return 0;
+}
+
+SEXP opf_cluster(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

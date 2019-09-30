@@ -15,7 +15,7 @@ struct data
 	int nfeats;
 };
 
-void InsertLabel(struct label **node, int real, int value)
+static void InsertLabel(struct label **node, int real, int value)
 {
 	struct label *p = calloc(1, sizeof(struct label));
 	p->real = real;
@@ -79,7 +79,7 @@ struct data CountData(char *file)
 	return d;
 }
 
-int main(int argc, char **argv)
+static int main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
@@ -139,4 +139,9 @@ int main(int argc, char **argv)
 	fclose(file);
 	free(line);
 	return 0;
+}
+
+SEXP svm2opf(int argc, char **argv){
+	main(argc,argv);
+	return NULL;
 }

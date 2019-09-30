@@ -11,6 +11,8 @@
 #include <sys/time.h>
 #include <ctype.h>
 #include <float.h>
+#include <R.h>
+#include <Rinternals.h>
 
 #include "common.h"
 #include "set.h"
