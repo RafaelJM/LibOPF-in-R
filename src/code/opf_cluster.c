@@ -6,27 +6,27 @@ static int main(int argc, char **argv)
 	float value;
 	char fileName[256];
 
-	fprintf(stdout, "\nProgram that computes clusters by OPF\n");
-	fprintf(stdout, "\nIf you have any problem, please contact: ");
-	fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-	fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-	fprintf(stdout, "\nLibOPF version 2.0 (2009)\n");
-	fprintf(stdout, "\n");
+	Rprintf("\nProgram that computes clusters by OPF\n");
+	Rprintf("\nIf you have any problem, please contact: ");
+	Rprintf("\n- alexandre.falcao@gmail.com");
+	Rprintf("\n- papa.joaopaulo@gmail.com\n");
+	Rprintf("\nLibOPF version 2.0 (2009)\n");
+	Rprintf("\n");
 
 	if ((argc != 6) && (argc != 5))
 	{
-		fprintf(stderr, "\nusage opf_cluster <P1> <P2> <P3> <P4> <P5> <P6>");
-		fprintf(stderr, "\nP1: unlabeled data set in the OPF file format");
-		fprintf(stderr, "\nP2: kmax(maximum degree for the knn graph)");
-		fprintf(stderr, "\nP3: P3 0 (height), 1(area) and 2(volume)");
-		fprintf(stderr, "\nP4: value of parameter P3 in (0-1)");
-		fprintf(stderr, "\nP5: precomputed distance file (leave it in blank if you are not using this resource");
+		REprintf("\nusage opf_cluster <P1> <P2> <P3> <P4> <P5> <P6>");
+		REprintf("\nP1: unlabeled data set in the OPF file format");
+		REprintf("\nP2: kmax(maximum degree for the knn graph)");
+		REprintf("\nP3: P3 0 (height), 1(area) and 2(volume)");
+		REprintf("\nP4: value of parameter P3 in (0-1)");
+		REprintf("\nP5: precomputed distance file (leave it in blank if you are not using this resource");
 		return 0;
 	}
 
 	if (argc == 6)
 		opf_PrecomputedDistance = 1;
-	fprintf(stdout, "\nReading data file ...");
+	Rprintf("\nReading data file ...");
 	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
 
 	if (opf_PrecomputedDistance)
@@ -41,11 +41,11 @@ static int main(int argc, char **argv)
 	value = atof(argv[4]);
 	if ((value < 1) && (value > 0))
 	{
-		fprintf(stdout, "\n\n Filtering clusters ... ");
+		Rprintf("\n\n Filtering clusters ... ");
 		switch (op)
 		{
 		case 0:
-			fprintf(stdout, "\n by dome height ... ");
+			Rprintf("\n by dome height ... ");
 			float Hmax = 0;
 			for (i = 0; i < g->nnodes; i++)
 				if (g->node[i].dens > Hmax)
@@ -53,26 +53,26 @@ static int main(int argc, char **argv)
 			opf_ElimMaxBelowH(g, value * Hmax);
 			break;
 		case 1:
-			fprintf(stdout, "\n by area ... ");
+			Rprintf("\n by area ... ");
 			opf_ElimMaxBelowArea(g, (int)(value * g->nnodes)); if(errorOccurred) return 0;
 			break;
 		case 2:
-			fprintf(stdout, "\n by volume ... ");
+			Rprintf("\n by volume ... ");
 			double Vmax = 0;
 			for (i = 0; i < g->nnodes; i++)
 				Vmax += g->node[i].dens;
 			opf_ElimMaxBelowVolume(g, (int)(value * Vmax / g->nnodes)); if(errorOccurred) return 0;
 			break;
 		default:
-			fprintf(stderr, "\nInvalid option for parameter P3 ... ");
+			REprintf("\nInvalid option for parameter P3 ... ");
 			return 0;
 			break;
 		}
 	}
 
-	fprintf(stdout, "\n\nClustering by OPF ");
+	Rprintf("\n\nClustering by OPF ");
 	opf_OPFClustering(g); if(errorOccurred) return 0;
-	printf("num of clusters %d\n", g->nlabels);
+	Rprintf("num of clusters %d\n", g->nlabels);
 
 	/* If the training set has true labels, then create a
 	   classifier by propagating the true label of each root to
@@ -102,20 +102,20 @@ static int main(int argc, char **argv)
 	    g->node[i].truelabel = g->node[i].label+1;
 	}*/
 
-	fprintf(stdout, "\nWriting classifier's model file ...");
-	fflush(stdout);
+	Rprintf("\nWriting classifier's model file ...");
+	
 	opf_WriteModelFile(g, "classifier.opf");
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nWriting output file ...");
-	fflush(stdout);
+	Rprintf("\nWriting output file ...");
+	
 	sprintf(fileName, "%s.out", argv[1]);
 	opf_WriteOutputFile(g, fileName);
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\n\nDeallocating memory ...\n");
+	Rprintf("\n\nDeallocating memory ...\n");
 	DestroySubgraph(&g);
 	if (opf_PrecomputedDistance)
 	{

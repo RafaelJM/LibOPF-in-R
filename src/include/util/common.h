@@ -9,6 +9,8 @@
 #include <float.h>
 #include <sys/time.h>
 #include <time.h>
+#include <R.h>
+#include <Rinternals.h>
 
 /* Error messages */
 

@@ -8,7 +8,7 @@ static int main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		fprintf(stderr, "\nusage statistics <file name> <running times> <message>\n");
+		REprintf("\nusage statistics <file name> <running times> <message>\n");
 		return 0;
 	}
 
@@ -20,7 +20,7 @@ static int main(int argc, char **argv)
 	fpIn = fopen(argv[1], "r");
 	if (!fpIn)
 	{
-		fprintf(stderr, "\nunable to open file %s\n", argv[1]);
+		REprintf("\nunable to open file %s\n", argv[1]);
 		return 0;
 	}
 
@@ -29,7 +29,7 @@ static int main(int argc, char **argv)
 	{
 		if (fscanf(fpIn, "%f", &aux) != 1)
 		{
-			fprintf(stderr, "\n Could not read accuracy");
+			REprintf("\n Could not read accuracy");
 			return 0;
 		}
 		acc[i - 1] = aux;
@@ -43,7 +43,7 @@ static int main(int argc, char **argv)
 	fclose(fpIn);
 	free(acc);
 
-	fprintf(stderr, "\n%s %f with standard deviation: %f\n", argv[3], MeanAcc, Std);
+	REprintf("\n%s %f with standard deviation: %f\n", argv[3], MeanAcc, Std);
 
 	return 0;
 }

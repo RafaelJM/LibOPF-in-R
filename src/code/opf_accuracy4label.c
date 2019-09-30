@@ -2,19 +2,19 @@
 
 static int main(int argc, char **argv)
 {
-	fflush(stdout);
-	fprintf(stdout, "\nProgram that computes the OPF accuracy for each class of a given set\n");
-	fprintf(stdout, "\nIf you have any problem, please contact: ");
-	fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-	fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-	fprintf(stdout, "\nLibOPF version 2.0 (2009)\n");
-	fprintf(stdout, "\n");
-	fflush(stdout);
+	
+	Rprintf("\nProgram that computes the OPF accuracy for each class of a given set\n");
+	Rprintf("\nIf you have any problem, please contact: ");
+	Rprintf("\n- alexandre.falcao@gmail.com");
+	Rprintf("\n- papa.joaopaulo@gmail.com\n");
+	Rprintf("\nLibOPF version 2.0 (2009)\n");
+	Rprintf("\n");
+	
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "\nusage opf_accuracyforlabel <P1>");
-		fprintf(stderr, "\nP1: data set in the OPF file format\n");
+		REprintf("\nusage opf_accuracyforlabel <P1>");
+		REprintf("\nP1: data set in the OPF file format\n");
 		return 0;
 	}
 
@@ -23,19 +23,19 @@ static int main(int argc, char **argv)
 	FILE *f = NULL;
 	char fileName[256];
 
-	fprintf(stdout, "\nReading data file ...");
-	fflush(stdout);
+	Rprintf("\nReading data file ...");
+	
 	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nReading output file ...");
-	fflush(stdout);
+	Rprintf("\nReading output file ...");
+	
 	sprintf(fileName, "%s.out", argv[1]);
 	f = fopen(fileName, "r");
 	if (!f)
 	{
-		fprintf(stderr, "\nunable to open file %s", argv[2]);
+		REprintf("\nunable to open file %s", argv[2]);
 		return 0;
 	}
 
@@ -47,18 +47,18 @@ static int main(int argc, char **argv)
 		}
 	}
 	fclose(f);
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nComputing accuracy ...");
-	fflush(stdout);
+	Rprintf("\nComputing accuracy ...");
+	
 	Acc = opf_Accuracy4Label(g); if(errorOccurred) return 0;
 	for (i = 1; i <= g->nlabels; i++)
-		fprintf(stdout, "\nClass %d: %.2f%%", i, Acc[i] * 100);
-	fflush(stdout);
+		Rprintf("\nClass %d: %.2f%%", i, Acc[i] * 100);
+	
 
-	fprintf(stdout, "\nWriting accuracy in output file ...");
-	fflush(stdout);
+	Rprintf("\nWriting accuracy in output file ...");
+	
 	sprintf(fileName, "%s.acc", argv[1]);
 	f = fopen(fileName, "a");
 	fprintf(f, "%f", Acc[1]);
@@ -68,13 +68,13 @@ static int main(int argc, char **argv)
 		fprintf(f, "\n");
 	}
 	fclose(f);
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nDeallocating memory ...");
-	fflush(stdout);
+	Rprintf("\nDeallocating memory ...");
+	
 	DestroySubgraph(&g);
-	fprintf(stdout, " OK\n");
+	Rprintf(" OK\n");
 
 	free(Acc);
 

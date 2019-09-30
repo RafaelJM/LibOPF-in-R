@@ -2,23 +2,23 @@
 
 static int main(int argc, char **argv)
 {
-  fflush(stdout);
-  fprintf(stdout, "\nProgram that executes the semi supervised training phase of the OPF classifier\n");
-  fprintf(stdout, "\nIf you have any problem, please contact: ");
-  fprintf(stdout, "\n- paraguassuec@gmail.com");
-  fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-  fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-  fprintf(stdout, opf_version);
-  fprintf(stdout, "\n");
-  fflush(stdout);
+  
+  Rprintf("\nProgram that executes the semi supervised training phase of the OPF classifier\n");
+  Rprintf("\nIf you have any problem, please contact: ");
+  Rprintf("\n- paraguassuec@gmail.com");
+  Rprintf("\n- alexandre.falcao@gmail.com");
+  Rprintf("\n- papa.joaopaulo@gmail.com\n");
+  Rprintf(opf_version);
+  Rprintf("\n");
+  
 
   if ((argc != 5) && (argc != 4) && (argc != 3) && (argc != 2))
   {
-    fprintf(stderr, "\nusage opf_semi_train <P1> <P2>");
-    fprintf(stderr, "\nP1: Labeled training set in the OPF file format");
-    fprintf(stderr, "\nP2: Unlabeled training set in the OPF file format");
-    fprintf(stderr, "\nP3: Evaluation set in the OPF file format");
-    fprintf(stderr, "\nP4: Precomputed distance file (leave it in blank if you are not using this resource)\n");
+    REprintf("\nusage opf_semi_train <P1> <P2>");
+    REprintf("\nP1: Labeled training set in the OPF file format");
+    REprintf("\nP2: Unlabeled training set in the OPF file format");
+    REprintf("\nP3: Evaluation set in the OPF file format");
+    REprintf("\nP4: Precomputed distance file (leave it in blank if you are not using this resource)\n");
     return 0;
   }
 
@@ -36,54 +36,54 @@ static int main(int argc, char **argv)
   if (argc == 5)
     opf_PrecomputedDistance = 1;
 
-  fprintf(stdout, "\nReading labeled data file...");
-  fflush(stdout);
+  Rprintf("\nReading labeled data file...");
+  
   Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
-  fprintf(stdout, " OK");
-  fflush(stdout);
+  Rprintf(" OK");
+  
 
-  fprintf(stdout, "\nReading unlabeled data file...");
-  fflush(stdout);
+  Rprintf("\nReading unlabeled data file...");
+  
   Subgraph *gunl = ReadSubgraph(argv[2]); if(errorOccurred) return 0;
-  fprintf(stdout, " OK");
-  fflush(stdout);
+  Rprintf(" OK");
+  
 
   if (opf_ComputeEvaluation)
   {
-    fprintf(stdout, "\nReading evaluation data file...");
-    fflush(stdout);
+    Rprintf("\nReading evaluation data file...");
+    
     geval = ReadSubgraph(argv[3]); if(errorOccurred) return 0;
-    fprintf(stdout, " OK");
-    fflush(stdout);
+    Rprintf(" OK");
+    
   }
 
   if (opf_PrecomputedDistance)
     opf_DistanceValue = opf_ReadDistances(argv[4], &n); if(errorOccurred) return 0;
 
-  fprintf(stdout, "\nTraining Semi OPF classifier ...");
-  fflush(stdout);
+  Rprintf("\nTraining Semi OPF classifier ...");
+  
   gettimeofday(&tic, NULL);
   Subgraph *s = opf_OPFSemiLearning(g, gunl, geval); if(errorOccurred) return 0;
   opf_OPFTraining(s); if(errorOccurred) return 0;
   gettimeofday(&toc, NULL);
-  fprintf(stdout, " OK");
-  fflush(stdout);
+  Rprintf(" OK");
+  
 
-  fprintf(stdout, "\nWriting classifier's model file ...");
-  fflush(stdout);
+  Rprintf("\nWriting classifier's model file ...");
+  
   opf_WriteModelFile(s, "classifier.opf");
-  fprintf(stdout, " OK");
-  fflush(stdout);
+  Rprintf(" OK");
+  
 
-  fprintf(stdout, "\nWriting output file ...");
-  fflush(stdout);
+  Rprintf("\nWriting output file ...");
+  
   sprintf(fileName, "%s.out", argv[1]);
   opf_WriteOutputFile(s, fileName);
-  fprintf(stdout, " OK");
-  fflush(stdout);
+  Rprintf(" OK");
+  
 
-  fprintf(stdout, "\nDeallocating memory ...");
-  fflush(stdout);
+  Rprintf("\nDeallocating memory ...");
+  
   DestroySubgraph(&s);
   if (opf_PrecomputedDistance)
   {
@@ -91,11 +91,11 @@ static int main(int argc, char **argv)
       free(opf_DistanceValue[i]);
     free(opf_DistanceValue);
   }
-  fprintf(stdout, " OK\n");
+  Rprintf(" OK\n");
 
   time = ((toc.tv_sec - tic.tv_sec) * 1000.0 + (toc.tv_usec - tic.tv_usec) * 0.001) / 1000.0;
-  fprintf(stdout, "\nExecution time: %f seconds\n", time);
-  fflush(stdout);
+  Rprintf("\nExecution time: %f seconds\n", time);
+  
 
   sprintf(fileName, "%s.time", argv[1]);
   f = fopen(fileName, "a");

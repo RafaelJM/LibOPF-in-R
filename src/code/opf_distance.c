@@ -3,28 +3,28 @@
 
 static int main(int argc, char **argv)
 {
-	fflush(stdout);
-	fprintf(stdout, "\nProgram that generates the precomputed distance file for the OPF classifier\n");
-	fprintf(stdout, "\nIf you have any problem, please contact: ");
-	fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-	fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-	fprintf(stdout, "\nLibOPF version 2.0 (2009)\n");
-	fprintf(stdout, "\n");
-	fflush(stdout);
+	
+	Rprintf("\nProgram that generates the precomputed distance file for the OPF classifier\n");
+	Rprintf("\nIf you have any problem, please contact: ");
+	Rprintf("\n- alexandre.falcao@gmail.com");
+	Rprintf("\n- papa.joaopaulo@gmail.com\n");
+	Rprintf("\nLibOPF version 2.0 (2009)\n");
+	Rprintf("\n");
+	
 
 	if (argc != 4)
 	{
-		fprintf(stderr, "\nusage opf_distance <P1> <P2> <P3>");
-		fprintf(stderr, "\nP1: Dataset in the OPF file format");
-		fprintf(stderr, "\nP2: Distance ID\n");
-		fprintf(stderr, "\n	1 - Euclidean");
-		fprintf(stderr, "\n	2 - Chi-Square");
-		fprintf(stderr, "\n	3 - Manhattan (L1)");
-		fprintf(stderr, "\n	4 - Canberra");
-		fprintf(stderr, "\n	5 - Squared Chord");
-		fprintf(stderr, "\n	6 - Squared Chi-Squared");
-		fprintf(stderr, "\n	7 - BrayCurtis");
-		fprintf(stderr, "\nP3: Distance normalization? 1- yes 0 - no");
+		REprintf("\nusage opf_distance <P1> <P2> <P3>");
+		REprintf("\nP1: Dataset in the OPF file format");
+		REprintf("\nP2: Distance ID\n");
+		REprintf("\n	1 - Euclidean");
+		REprintf("\n	2 - Chi-Square");
+		REprintf("\n	3 - Manhattan (L1)");
+		REprintf("\n	4 - Canberra");
+		REprintf("\n	5 - Squared Chord");
+		REprintf("\n	6 - Squared Chi-Squared");
+		REprintf("\n	7 - BrayCurtis");
+		REprintf("\nP3: Distance normalization? 1- yes 0 - no");
 		return 0;
 	}
 
@@ -42,7 +42,7 @@ static int main(int argc, char **argv)
 	switch (distance)
 	{
 	case 1:
-		fprintf(stdout, "\n	Computing euclidean distance ...");
+		Rprintf("\n	Computing euclidean distance ...");
 		for (i = 0; i < sg->nnodes; i++)
 		{
 			for (j = 0; j < sg->nnodes; j++)
@@ -57,7 +57,7 @@ static int main(int argc, char **argv)
 		}
 		break;
 	case 2:
-		fprintf(stdout, "\n	Computing chi-square distance ...\n");
+		Rprintf("\n	Computing chi-square distance ...\n");
 		for (i = 0; i < sg->nnodes; i++)
 		{
 			for (j = 0; j < sg->nnodes; j++)
@@ -72,7 +72,7 @@ static int main(int argc, char **argv)
 		}
 		break;
 	case 3:
-		fprintf(stdout, "\n	Computing Manhattan distance ...\n");
+		Rprintf("\n	Computing Manhattan distance ...\n");
 		for (i = 0; i < sg->nnodes; i++)
 		{
 			for (j = 0; j < sg->nnodes; j++)
@@ -87,7 +87,7 @@ static int main(int argc, char **argv)
 		}
 		break;
 	case 4:
-		fprintf(stdout, "\n	Computing Canberra distance ...\n");
+		Rprintf("\n	Computing Canberra distance ...\n");
 		for (i = 0; i < sg->nnodes; i++)
 		{
 			for (j = 0; j < sg->nnodes; j++)
@@ -102,7 +102,7 @@ static int main(int argc, char **argv)
 		}
 		break;
 	case 5:
-		fprintf(stdout, "\n	Computing Squared Chord distance ...\n");
+		Rprintf("\n	Computing Squared Chord distance ...\n");
 		for (i = 0; i < sg->nnodes; i++)
 		{
 			for (j = 0; j < sg->nnodes; j++)
@@ -117,7 +117,7 @@ static int main(int argc, char **argv)
 		}
 		break;
 	case 6:
-		fprintf(stdout, "\n	Computing Squared Chi-squared distance ...\n");
+		Rprintf("\n	Computing Squared Chi-squared distance ...\n");
 		for (i = 0; i < sg->nnodes; i++)
 		{
 			for (j = 0; j < sg->nnodes; j++)
@@ -132,7 +132,7 @@ static int main(int argc, char **argv)
 		}
 		break;
 	case 7:
-		fprintf(stdout, "\n	Computing Bray Curtis distance ...\n");
+		Rprintf("\n	Computing Bray Curtis distance ...\n");
 		for (i = 0; i < sg->nnodes; i++)
 		{
 			for (j = 0; j < sg->nnodes; j++)
@@ -147,7 +147,7 @@ static int main(int argc, char **argv)
 		}
 		break;
 	default:
-		fprintf(stderr, "\nInvalid distance ID ...\n");
+		REprintf("\nInvalid distance ID ...\n");
 	}
 
 	if (!normalize)
@@ -161,9 +161,9 @@ static int main(int argc, char **argv)
 		}
 	}
 
-	fprintf(stdout, "\n\nDistances generated ...\n");
-	fflush(stdout);
-	fprintf(stdout, "\n\nDeallocating memory ...\n");
+	Rprintf("\n\nDistances generated ...\n");
+	
+	Rprintf("\n\nDeallocating memory ...\n");
 	for (i = 0; i < sg->nnodes; i++)
 		free(Distances[i]);
 	free(Distances);

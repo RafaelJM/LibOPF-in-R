@@ -2,20 +2,20 @@
 
 static int main(int argc, char **argv)
 {
-	fflush(stdout);
-	fprintf(stdout, "\nProgram that executes the test phase of the OPF classifier with knn adjacency\n");
-	fprintf(stdout, "\nIf you have any problem, please contact: ");
-	fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-	fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-	fprintf(stdout, "\nLibOPF version 2.0 (2009)\n");
-	fprintf(stdout, "\n");
-	fflush(stdout);
+	
+	Rprintf("\nProgram that executes the test phase of the OPF classifier with knn adjacency\n");
+	Rprintf("\nIf you have any problem, please contact: ");
+	Rprintf("\n- alexandre.falcao@gmail.com");
+	Rprintf("\n- papa.joaopaulo@gmail.com\n");
+	Rprintf("\nLibOPF version 2.0 (2009)\n");
+	Rprintf("\n");
+	
 
 	if ((argc != 3) && (argc != 2))
 	{
-		fprintf(stderr, "\nusage opfknn_classify <P1> <P2>");
-		fprintf(stderr, "\nP1: test set in the OPF file format");
-		fprintf(stderr, "\nP2: precomputed distance file (leave it in blank if you are not using this resource\n");
+		REprintf("\nusage opfknn_classify <P1> <P2>");
+		REprintf("\nP1: test set in the OPF file format");
+		REprintf("\nP2: precomputed distance file (leave it in blank if you are not using this resource\n");
 		return 0;
 	}
 
@@ -27,32 +27,32 @@ static int main(int argc, char **argv)
 
 	if (argc == 3)
 		opf_PrecomputedDistance = 1;
-	fprintf(stdout, "\nReading data files ...");
-	fflush(stdout);
+	Rprintf("\nReading data files ...");
+	
 	Subgraph *gTest = ReadSubgraph(argv[1]), *gTrain = opf_ReadModelFile("classifier.opf"); if(errorOccurred) return 0;
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
 	if (opf_PrecomputedDistance){
 		opf_DistanceValue = opf_ReadDistances(argv[2], &n); if(errorOccurred) return 0;
 	}
 
-	fprintf(stdout, "\nClassifying test set ...");
-	fflush(stdout);
+	Rprintf("\nClassifying test set ...");
+	
 	gettimeofday(&tic, NULL);
 	opf_OPFknnClassify(gTrain, gTest); if(errorOccurred) return 0;
 	gettimeofday(&toc, NULL);
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nWriting output file ...");
-	fflush(stdout);
+	Rprintf("\nWriting output file ...");
+	
 	sprintf(fileName, "%s.out", argv[1]);
 	opf_WriteOutputFile(gTest, fileName);
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nDeallocating memory ...");
+	Rprintf("\nDeallocating memory ...");
 	DestroySubgraph(&gTrain);
 	DestroySubgraph(&gTest);
 	if (opf_PrecomputedDistance)
@@ -61,11 +61,11 @@ static int main(int argc, char **argv)
 			free(opf_DistanceValue[i]);
 		free(opf_DistanceValue);
 	}
-	fprintf(stdout, " OK\n");
+	Rprintf(" OK\n");
 
 	time = ((toc.tv_sec - tic.tv_sec) * 1000.0 + (toc.tv_usec - tic.tv_usec) * 0.001) / 1000.0;
-	fprintf(stdout, "\nTesting time: %f seconds\n", time);
-	fflush(stdout);
+	Rprintf("\nTesting time: %f seconds\n", time);
+	
 
 	sprintf(fileName, "%s.time", argv[1]);
 	f = fopen(fileName, "a");

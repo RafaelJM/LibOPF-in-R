@@ -288,8 +288,8 @@ void opf_OPFLearning(Subgraph **sgtrain, Subgraph **sgeval)
   do
   {
     AccAnt = Acc;
-    fflush(stdout);
-    fprintf(stdout, "\nrunning iteration ... %d ", i);
+    
+    Rprintf("\nrunning iteration ... %d ", i);
     opf_OPFTraining(*sgtrain); if(errorOccurred) return;
     opf_OPFClassifying(*sgtrain, *sgeval);
     Acc = opf_Accuracy(*sgeval); if(errorOccurred) return;
@@ -301,8 +301,8 @@ void opf_OPFLearning(Subgraph **sgtrain, Subgraph **sgeval)
       sg = CopySubgraph(*sgtrain); if(errorOccurred) return;
     }
     opf_SwapErrorsbyNonPrototypes(&(*sgtrain), &(*sgeval));
-    fflush(stdout);
-    fprintf(stdout, "opf_Accuracy in the evaluation set: %.2f %%\n", Acc * 100);
+    
+    Rprintf("opf_Accuracy in the evaluation set: %.2f %%\n", Acc * 100);
     i++;
     delta = fabs(Acc - AccAnt);
   } while ((delta > 0.0001) && (i <= iterations));
@@ -318,15 +318,15 @@ void opf_OPFAgglomerativeLearning(Subgraph **sgtrain, Subgraph **sgeval)
   /*while  there exists misclassified samples in sgeval*/
   do
   {
-    fflush(stdout);
-    fprintf(stdout, "\nrunning iteration ... %d ", i++);
+    
+    Rprintf("\nrunning iteration ... %d ", i++);
     n = 0;
     opf_OPFTraining(*sgtrain); if(errorOccurred) return;
     opf_OPFClassifying(*sgtrain, *sgeval);
     Acc = opf_Accuracy(*sgeval); if(errorOccurred) return;
-    fprintf(stdout, " %f", Acc * 100);
+    Rprintf(" %f", Acc * 100);
     opf_MoveMisclassifiedNodes(&(*sgeval), &(*sgtrain), &n); if(errorOccurred) return;
-    fprintf(stdout, "\nMisclassified nodes: %d", n);
+    Rprintf("\nMisclassified nodes: %d", n);
   } while (n);
 }
 
@@ -347,7 +347,7 @@ int opf_OPFknnLearning(Subgraph *Train, Subgraph *Eval, int kmax)
 
   for (k = 1; k <= kmax; k++)
   {
-    fprintf(stderr, "\nEvaluating k = %d ... ", k);
+    REprintf("\nEvaluating k = %d ... ", k);
     Train_cpy->bestk = k;
 
     opf_CreateArcs(Train_cpy, k); if(errorOccurred) return(0);
@@ -356,7 +356,7 @@ int opf_OPFknnLearning(Subgraph *Train, Subgraph *Eval, int kmax)
 
     opf_OPFknnClassify(Train_cpy, Eval_cpy); if(errorOccurred) return(0);
     Acc = opf_Accuracy(Eval_cpy); if(errorOccurred) return(0);
-    fprintf(stderr, " %.2f%%", Acc * 100);
+    REprintf(" %.2f%%", Acc * 100);
 
     if (Acc > MaxAcc)
     {
@@ -369,7 +369,7 @@ int opf_OPFknnLearning(Subgraph *Train, Subgraph *Eval, int kmax)
 
   DestroySubgraph(&Train_cpy);
   DestroySubgraph(&Eval_cpy);
-  fprintf(stderr, "\n	-> best k: %d", bestk);
+  REprintf("\n	-> best k: %d", bestk);
 
   return bestk;
 }
@@ -1838,7 +1838,7 @@ void opf_BestkMinCut(Subgraph *sg, int kmin, int kmax)
   opf_CreateArcs(sg, sg->bestk); if(errorOccurred) return;
   opf_PDF(sg); if(errorOccurred) return;
 
-  fprintf(stderr, "Best k: %d ", sg->bestk);
+  REprintf("Best k: %d ", sg->bestk);
 }
 
 // Create adjacent list in subgraph: a knn graph
@@ -2031,7 +2031,7 @@ double Purity(Subgraph *g)
         max = counter[i][j];
     }
     purity += max;
-    fprintf(stderr, "\nRow[%d]: %lf", i, max);
+    REprintf("\nRow[%d]: %lf", i, max);
     max = -9999999999;
   }
 
@@ -2561,7 +2561,7 @@ void opf_OPFPruning(Subgraph **gTrain, Subgraph **gEval, float desiredAcc)
 
   while ((t <= max_iterations) && (fabs(currentAcc - oldAcc) <= desiredAcc))
   {
-    fprintf(stderr, "\nRunning iteration %d ... ", t);
+    REprintf("\nRunning iteration %d ... ", t);
     oldAcc = currentAcc;
     opf_ResetSubgraph(*gTrain);
 
@@ -2572,8 +2572,8 @@ void opf_OPFPruning(Subgraph **gTrain, Subgraph **gEval, float desiredAcc)
     opf_OPFTraining(*gTrain); if(errorOccurred) return;
     opf_OPFClassifying(*gTrain, *gEval);
     currentAcc = opf_Accuracy(*gEval); if(errorOccurred) return;
-    fprintf(stderr, "Current accuracy: %.2f%% ", currentAcc * 100);
+    REprintf("Current accuracy: %.2f%% ", currentAcc * 100);
     t++;
-    fprintf(stderr, "OK");
+    REprintf("OK");
   }
 }

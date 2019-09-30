@@ -8,11 +8,11 @@ static int main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "\nusage: opf2txt <opf file name> <output file name> \n");
+		REprintf("\nusage: opf2txt <opf file name> <output file name> \n");
 		return 0;
 	}
 
-	fprintf(stderr, "\nProgram to convert files written in the OPF binary format to the OPF ASCII format.");
+	REprintf("\nProgram to convert files written in the OPF binary format to the OPF ASCII format.");
 
 	FILE *fpIn = NULL, *fpOut = NULL;
 	int n, ndata, nclasses, label, i, j;

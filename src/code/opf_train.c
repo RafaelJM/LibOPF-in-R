@@ -2,20 +2,20 @@
 
 static int main(int argc, char **argv)
 {
-	fflush(stdout);
-	fprintf(stdout, "\nProgram that executes the training phase of the OPF classifier\n");
-	fprintf(stdout, "\nIf you have any problem, please contact: ");
-	fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-	fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-	fprintf(stdout, "\nLibOPF version 2.0 (2009)\n");
-	fprintf(stdout, "\n");
-	fflush(stdout);
+	
+	Rprintf("\nProgram that executes the training phase of the OPF classifier\n");
+	Rprintf("\nIf you have any problem, please contact: ");
+	Rprintf("\n- alexandre.falcao@gmail.com");
+	Rprintf("\n- papa.joaopaulo@gmail.com\n");
+	Rprintf("\nLibOPF version 2.0 (2009)\n");
+	Rprintf("\n");
+	
 
 	if ((argc != 3) && (argc != 2))
 	{
-		fprintf(stderr, "\nusage opf_train <P1> <P2>");
-		fprintf(stderr, "\nP1: training set in the OPF file format");
-		fprintf(stderr, "\nP2: precomputed distance file (leave it in blank if you are not using this resource)\n");
+		REprintf("\nusage opf_train <P1> <P2>");
+		REprintf("\nP1: training set in the OPF file format");
+		REprintf("\nP2: precomputed distance file (leave it in blank if you are not using this resource)\n");
 		return 0;
 	}
 
@@ -28,39 +28,39 @@ static int main(int argc, char **argv)
 	if (argc == 3)
 		opf_PrecomputedDistance = 1;
 
-	fprintf(stdout, "\nReading data file ...");
-	fflush(stdout);
+	Rprintf("\nReading data file ...");
+	
 	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
 	if (opf_PrecomputedDistance){
 		opf_DistanceValue = opf_ReadDistances(argv[2], &n); if(errorOccurred) return 0;
 	}
 
-	fprintf(stdout, "\nTraining OPF classifier ...");
-	fflush(stdout);
+	Rprintf("\nTraining OPF classifier ...");
+	
 	gettimeofday(&tic, NULL);
 	opf_OPFTraining(g); if(errorOccurred) return 0;
 	gettimeofday(&toc, NULL);
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nWriting classifier's model file ...");
-	fflush(stdout);
+	Rprintf("\nWriting classifier's model file ...");
+	
 	opf_WriteModelFile(g, "classifier.opf");
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nWriting output file ...");
-	fflush(stdout);
+	Rprintf("\nWriting output file ...");
+	
 	sprintf(fileName, "%s.out", argv[1]);
 	opf_WriteOutputFile(g, fileName);
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nDeallocating memory ...");
-	fflush(stdout);
+	Rprintf("\nDeallocating memory ...");
+	
 	DestroySubgraph(&g);
 	if (opf_PrecomputedDistance)
 	{
@@ -68,11 +68,11 @@ static int main(int argc, char **argv)
 			free(opf_DistanceValue[i]);
 		free(opf_DistanceValue);
 	}
-	fprintf(stdout, " OK\n");
+	Rprintf(" OK\n");
 
 	time = ((toc.tv_sec - tic.tv_sec) * 1000.0 + (toc.tv_usec - tic.tv_usec) * 0.001) / 1000.0;
-	fprintf(stdout, "\nTraining time: %f seconds\n", time);
-	fflush(stdout);
+	Rprintf("\nTraining time: %f seconds\n", time);
+	
 
 	sprintf(fileName, "%s.time", argv[1]);
 	f = fopen(fileName, "a");

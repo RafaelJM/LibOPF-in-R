@@ -3,33 +3,33 @@
 
 static int main(int argc, char **argv)
 {
-	fflush(stdout);
-	fprintf(stdout, "\nProgram that merge subgraphs\n");
-	fprintf(stdout, "\nIf you have any problem, please contact: ");
-	fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-	fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-	fprintf(stdout, "\nLibOPF version 2.0 (2010)\n");
-	fprintf(stdout, "\n");
-	fflush(stdout);
+	
+	Rprintf("\nProgram that merge subgraphs\n");
+	Rprintf("\nIf you have any problem, please contact: ");
+	Rprintf("\n- alexandre.falcao@gmail.com");
+	Rprintf("\n- papa.joaopaulo@gmail.com\n");
+	Rprintf("\nLibOPF version 2.0 (2010)\n");
+	Rprintf("\n");
+	
 
 	if ((argc == 2) || (argc <= 1))
 	{
-		fprintf(stderr, "\nusage opf_merge <P1> <P2> ... <Pn>");
-		fprintf(stderr, "\nP1: input dataset 1 in the OPF file format");
-		fprintf(stderr, "\nP2: input dataset 2 in the OPF file format");
-		fprintf(stderr, "\nPn: input dataset n in the OPF file format\n");
+		REprintf("\nusage opf_merge <P1> <P2> ... <Pn>");
+		REprintf("\nP1: input dataset 1 in the OPF file format");
+		REprintf("\nP2: input dataset 2 in the OPF file format");
+		REprintf("\nPn: input dataset n in the OPF file format\n");
 		return 0;
 	}
 	Subgraph **g = (Subgraph **)malloc(sizeof(Subgraph **) * (argc - 1)), *merged = NULL, *aux = NULL;
 	int i;
 
-	fprintf(stdout, "\nReading data sets ...");
-	fflush(stdout);
+	Rprintf("\nReading data sets ...");
+	
 	for (i = 0; i < argc - 1; i++){
 		g[i] = ReadSubgraph(argv[i + 1]); if(errorOccurred) return 0;
 	}
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
 	aux = CopySubgraph(g[0]); if(errorOccurred) return 0;
 	for (i = 1; i < argc - 1; i++)
@@ -40,18 +40,18 @@ static int main(int argc, char **argv)
 		DestroySubgraph(&merged);
 	}
 
-	fprintf(stdout, "\nWriting data set to disk ...");
-	fflush(stdout);
+	Rprintf("\nWriting data set to disk ...");
+	
 	WriteSubgraph(aux, "merged.dat"); if(errorOccurred) return 0;
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nDeallocating memory ...");
+	Rprintf("\nDeallocating memory ...");
 	for (i = 0; i < argc - 1; i++)
 		DestroySubgraph(&g[i]);
 	DestroySubgraph(&aux);
 	free(g);
-	fprintf(stdout, " OK\n");
+	Rprintf(" OK\n");
 
 	return 0;
 }

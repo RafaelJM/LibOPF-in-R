@@ -3,56 +3,56 @@
 
 static int main(int argc, char **argv)
 {
-	fflush(stdout);
-	fprintf(stdout, "\nProgram that generates k folds (files) for the OPF classifier\n");
-	fprintf(stdout, "\nIf you have any problem, please contact: ");
-	fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-	fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-	fprintf(stdout, "\nLibOPF version 2.0 (2009)\n");
-	fprintf(stdout, "\n");
-	fflush(stdout);
+	
+	Rprintf("\nProgram that generates k folds (files) for the OPF classifier\n");
+	Rprintf("\nIf you have any problem, please contact: ");
+	Rprintf("\n- alexandre.falcao@gmail.com");
+	Rprintf("\n- papa.joaopaulo@gmail.com\n");
+	Rprintf("\nLibOPF version 2.0 (2009)\n");
+	Rprintf("\n");
+	
 
 	if (argc != 4)
 	{
-		fprintf(stderr, "\nusage opf_fold <P1> <P2> <P3>");
-		fprintf(stderr, "\nP1: input dataset in the OPF file format");
-		fprintf(stderr, "\nP2: k");
-		fprintf(stderr, "\nP3: normalize features? 1 - Yes  0 - No\n\n");
+		REprintf("\nusage opf_fold <P1> <P2> <P3>");
+		REprintf("\nP1: input dataset in the OPF file format");
+		REprintf("\nP2: k");
+		REprintf("\nP3: normalize features? 1 - Yes  0 - No\n\n");
 		return 0;
 	}
 	Subgraph *g = NULL, **fold = NULL;
 	int k = atoi(argv[2]), i, op = atoi(argv[3]);
 	char fileName[16];
 
-	fprintf(stdout, "\nReading data set ...");
-	fflush(stdout);
+	Rprintf("\nReading data set ...");
+	
 	g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
-	fprintf(stdout, " OK");
-	fflush(stdout);
+	Rprintf(" OK");
+	
 
-	fprintf(stdout, "\nCreating %d folds ...", k);
-	fflush(stdout);
+	Rprintf("\nCreating %d folds ...", k);
+	
 	fold = opf_kFoldSubgraph(g, k); if(errorOccurred) return 0;
-	fprintf(stdout, " OK\n");
+	Rprintf(" OK\n");
 
 	for (i = 0; i < k; i++)
 	{
-		fprintf(stdout, "\nWriting fold %d ...", i + 1);
-		fflush(stdout);
+		Rprintf("\nWriting fold %d ...", i + 1);
+		
 		sprintf(fileName, "fold_%d.dat", i + 1);
 		if (op){
 			opf_NormalizeFeatures(fold[i]); if(errorOccurred) return 0;
 		}
 		WriteSubgraph(fold[i], fileName); if(errorOccurred) return 0;
 	}
-	fprintf(stdout, " OK\n");
+	Rprintf(" OK\n");
 
-	fprintf(stdout, "\nDeallocating memory ...");
+	Rprintf("\nDeallocating memory ...");
 	DestroySubgraph(&g);
 	for (i = 0; i < k; i++)
 		DestroySubgraph(&fold[i]);
 	free(fold);
-	fprintf(stdout, " OK\n");
+	Rprintf(" OK\n");
 
 	return 0;
 }

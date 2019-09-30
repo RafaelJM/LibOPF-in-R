@@ -4,19 +4,19 @@
 
 static int main(int argc, char **argv)
 {
-	fflush(stdout);
-	fprintf(stdout, "\nProgram that gives information about the OPF file\n");
-	fprintf(stdout, "\nIf you have any problem, please contact: ");
-	fprintf(stdout, "\n- alexandre.falcao@gmail.com");
-	fprintf(stdout, "\n- papa.joaopaulo@gmail.com\n");
-	fprintf(stdout, "\nLibOPF version 2.0 (2009)\n");
-	fprintf(stdout, "\n");
-	fflush(stdout);
+	
+	Rprintf("\nProgram that gives information about the OPF file\n");
+	Rprintf("\nIf you have any problem, please contact: ");
+	Rprintf("\n- alexandre.falcao@gmail.com");
+	Rprintf("\n- papa.joaopaulo@gmail.com\n");
+	Rprintf("\nLibOPF version 2.0 (2009)\n");
+	Rprintf("\n");
+	
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "\nusage opf_info <P1>");
-		fprintf(stderr, "\nP1: OPF file\n");
+		REprintf("\nusage opf_info <P1>");
+		REprintf("\nP1: OPF file\n");
 		return 0;
 	}
 
@@ -33,26 +33,26 @@ static int main(int argc, char **argv)
 
 	if (fread(&ndata, sizeof(int), 1, fp) != 1)
 	{
-		fprintf(stderr, "\n Could not read number of samples");
+		REprintf("\n Could not read number of samples");
 		return 0;
 	}
 	if (fread(&nlabels, sizeof(int), 1, fp) != 1)
 	{
-		fprintf(stderr, "\n Could not read number of labels");
+		REprintf("\n Could not read number of labels");
 		return 0;
 	}
 
 	if (fread(&nfeats, sizeof(int), 1, fp) != 1)
 	{
-		fprintf(stderr, "\n Could not read number of features");
+		REprintf("\n Could not read number of features");
 		return 0;
 	}
 
-	fprintf(stdout, "\nInformations about %s file\n --------------------------------", argv[1]);
-	fprintf(stdout, "\nData size: %d", ndata);
-	fprintf(stdout, "\nFeatures size: %d", nfeats);
-	fprintf(stdout, "\nLabels number: %d", nlabels);
-	fprintf(stdout, "\n--------------------------------\n");
+	Rprintf("\nInformations about %s file\n --------------------------------", argv[1]);
+	Rprintf("\nData size: %d", ndata);
+	Rprintf("\nFeatures size: %d", nfeats);
+	Rprintf("\nLabels number: %d", nlabels);
+	Rprintf("\n--------------------------------\n");
 
 	DestroySubgraph(&g);
 	fclose(fp);

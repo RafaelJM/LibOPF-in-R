@@ -23,7 +23,7 @@ static int main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
-		fprintf(stderr, "\nusage opf2svm <input libopf file> <output libsvm file>\n");
+		REprintf("\nusage opf2svm <input libopf file> <output libsvm file>\n");
 		return 0;
 	}
 

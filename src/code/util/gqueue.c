@@ -174,7 +174,7 @@ void InsertGQueue(GQueue **Q, int elem)
         if ((maxvalue - minvalue) > ((*Q)->C.nbuckets - 1))
         {
             (*Q) = GrowGQueue(Q, 2 * (maxvalue - minvalue) + 1); if(errorOccurred) return;
-            fprintf(stdout, "Warning: Doubling queue size\n");
+            Rprintf("Warning: Doubling queue size\n");
         }
         if ((*Q)->C.removal_policy == MINVALUE)
         {

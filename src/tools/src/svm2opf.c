@@ -83,7 +83,7 @@ static int main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
-		fprintf(stderr, "\nusage svm2opf <input libsvm file> <output libopf file>\n");
+		REprintf("\nusage svm2opf <input libsvm file> <output libopf file>\n");
 		return 0;
 	}
 
@@ -97,13 +97,13 @@ static int main(int argc, char **argv)
 	char *seg;
 
 	d = CountData(argv[1]);
-	fprintf(stderr, "Allocating memory...\n");
+	REprintf("Allocating memory...\n");
 	Subgraph *graph = CreateSubgraph(d.ndata); if(errorOccurred) return 0;
-	fprintf(stderr, "OK.\n\n");
+	REprintf("OK.\n\n");
 	//struct label *node = NULL;
 	graph->nlabels = d.nlabels;
 	graph->nfeats = d.nfeats;
-	fprintf(stderr, "Creating graph...\n");
+	REprintf("Creating graph...\n");
 	for (i = 0; i < d.ndata; i++)
 	{
 		fgets(line, N, file);
@@ -127,14 +127,14 @@ static int main(int argc, char **argv)
 			index = atoi(seg);
 			seg = strtok(NULL, " \n");
 			value = atof(seg);
-			//fprintf(stderr, "%d %f\n", index, value);
+			//REprintf("%d %f\n", index, value);
 			graph->node[i].feat[index - 1] = value;
 		}
 	}
-	fprintf(stderr, "OK.\n\n");
-	fprintf(stderr, "Writing graph to OPF format...\n");
+	REprintf("OK.\n\n");
+	REprintf("Writing graph to OPF format...\n");
 	WriteSubgraph(graph, argv[2]);
-	fprintf(stderr, "\nOK.\n\n");
+	REprintf("\nOK.\n\n");
 	DestroySubgraph(&graph);
 	fclose(file);
 	free(line);

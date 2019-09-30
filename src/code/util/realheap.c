@@ -122,7 +122,7 @@ RealHeap *CreateRealHeap(int n, float *cost)
 
   if (cost == NULL)
   {
-    fprintf(stdout, "Cannot create heap without cost map in CreateRealHeap");
+    Rprintf("Cannot create heap without cost map in CreateRealHeap");
     return NULL;
   }
 

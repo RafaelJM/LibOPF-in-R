@@ -111,7 +111,7 @@ static int main(int argc, char **argv)
 
     if (argc != 2)
     {
-        fprintf(stderr, "\nusage opf_check <input ASCII file in the LibOPF format>\nNote that the input file for opf_check must be a text file.\nUse opf2txt to convert your OPF binary file into a text file.\n");
+        REprintf("\nusage opf_check <input ASCII file in the LibOPF format>\nNote that the input file for opf_check must be a text file.\nUse opf2txt to convert your OPF binary file into a text file.\n");
         return 0;
     }
     FILE *fp = NULL;
@@ -122,7 +122,7 @@ static int main(int argc, char **argv)
     fp = fopen(argv[1], "r");
     if (!fp)
     {
-        fprintf(stderr, "\nunable to open file %s\n", argv[1]);
+        REprintf("\nunable to open file %s\n", argv[1]);
         return 0;
     }
 
@@ -130,9 +130,9 @@ static int main(int argc, char **argv)
     result = fgets(header, HEADERSIZE, fp);
     if (!CheckHeader(header, &nsamples, &nlabels, &nfeats))
     {
-        fprintf(stderr, "\nAn error has been found at line 1 (HEADER).");
-        fprintf(stderr, "\nThe header should contain only three integers:");
-        fprintf(stderr, "\n<#samples> <#labels> <#features>\n");
+        REprintf("\nAn error has been found at line 1 (HEADER).");
+        REprintf("\nThe header should contain only three integers:");
+        REprintf("\n<#samples> <#labels> <#features>\n");
         OK = 0;
     }
 
@@ -142,7 +142,7 @@ static int main(int argc, char **argv)
         result = fgets(line, LINESIZE, fp);
         if (!CheckLine(line, nlabels, nfeats, i))
         {
-            fprintf(stderr, "\nAn error has been found at line %d\n", i + 1);
+            REprintf("\nAn error has been found at line %d\n", i + 1);
             OK = 0;
             break;
         }
@@ -152,7 +152,7 @@ static int main(int argc, char **argv)
         result++;
 
     if (OK)
-        fprintf(stderr, "\nThis file is in the proper format. Enjoy.\n");
+        REprintf("\nThis file is in the proper format. Enjoy.\n");
 
     return 1;
 }

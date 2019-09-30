@@ -50,14 +50,14 @@ float *AllocFloatArray(int n)
 void Error(char *msg, char *func)
 { /* It prints error message and exits
                                     the program. */
-    fprintf(stderr, "Error:%s in %s\n", msg, func);
+    REprintf("Error:%s in %s\n", msg, func);
     errorOccurred = 1;
 }
 
 void Warning(char *msg, char *func)
 { /* It prints warning message and
                                        leaves the routine. */
-    fprintf(stdout, "Warning:%s in %s\n", msg, func);
+    Rprintf("Warning:%s in %s\n", msg, func);
 }
 
 void Change(int *a, int *b)

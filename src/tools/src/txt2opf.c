@@ -7,13 +7,13 @@ static int main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "\nusage txt2opf <P1> <P2>\n");
-		fprintf(stderr, "\nP1: input file name in the OPF ASCII format");
-		fprintf(stderr, "\nP2: output file name in the OPF binary format\n");
+		REprintf("\nusage txt2opf <P1> <P2>\n");
+		REprintf("\nP1: input file name in the OPF ASCII format");
+		REprintf("\nP2: output file name in the OPF binary format\n");
 		return 0;
 	}
 
-	fprintf(stderr, "\nProgram to convert files written in the OPF ASCII format to the OPF binary format.");
+	REprintf("\nProgram to convert files written in the OPF ASCII format to the OPF binary format.");
 
 	FILE *fpIn = NULL, *fpOut = NULL;
 	int n, nfeats, nclasses, i, j, label;
@@ -26,30 +26,30 @@ static int main(int argc, char **argv)
 	/*writing the number of samples*/
 	if (fscanf(fpIn, "%d", &n) != 1)
 	{
-		fprintf(stderr, "\n Could not read number of samples");
+		REprintf("\n Could not read number of samples");
 		return 0;
 	}
-	fprintf(stderr, "\n number of samples: %d", n);
+	REprintf("\n number of samples: %d", n);
 	fwrite(&n, sizeof(int), 1, fpOut);
 
 	/*writing the number of classes*/
 	if (fscanf(fpIn, "%d", &nclasses) != 1)
 	{
-		fprintf(stderr, "\n Could not read number of classes \n");
+		REprintf("\n Could not read number of classes \n");
 		return 0;
 	}
 
-	fprintf(stderr, "\n number of classes: %d", nclasses);
+	REprintf("\n number of classes: %d", nclasses);
 	fwrite(&nclasses, sizeof(int), 1, fpOut);
 
 	/*writing the number of features*/
 	if (fscanf(fpIn, "%d", &nfeats) != 1)
 	{
-		fprintf(stderr, "\n Could not read number of features \n");
+		REprintf("\n Could not read number of features \n");
 		return 0;
 	}
 
-	fprintf(stderr, "\n number of features: %d", nfeats);
+	REprintf("\n number of features: %d", nfeats);
 	fwrite(&nfeats, sizeof(int), 1, fpOut);
 
 	/*writing data*/
@@ -57,14 +57,14 @@ static int main(int argc, char **argv)
 	{
 		if (fscanf(fpIn, "%d", &id) != 1)
 		{
-			fprintf(stderr, "\n Could not read sample id at line %d \n", i);
+			REprintf("\n Could not read sample id at line %d \n", i);
 			return 0;
 		}
 		fwrite(&id, sizeof(int), 1, fpOut);
 
 		if (fscanf(fpIn, "%d", &label) != 1)
 		{
-			fprintf(stderr, "\n Could not read sample label at line %d \n", i);
+			REprintf("\n Could not read sample label at line %d \n", i);
 			return 0;
 		}
 		fwrite(&label, sizeof(int), 1, fpOut);
@@ -73,7 +73,7 @@ static int main(int argc, char **argv)
 		{
 			if (fscanf(fpIn, "%f", &aux) != 1)
 			{
-				fprintf(stderr, "\n Could not read sample features at line %d, feature %d  \n", i, j);
+				REprintf("\n Could not read sample features at line %d, feature %d  \n", i, j);
 				return 0;
 			}
 
