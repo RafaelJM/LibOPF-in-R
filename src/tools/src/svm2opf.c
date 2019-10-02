@@ -97,13 +97,13 @@ static int main(int argc, char **argv)
 	char *seg;
 
 	d = CountData(argv[1]);
-	REprintf("Allocating memory...\n");
+	Rprintf("Allocating memory...\n");
 	Subgraph *graph = CreateSubgraph(d.ndata); if(errorOccurred) return 0;
-	REprintf("OK.\n\n");
+	Rprintf("OK.\n\n");
 	//struct label *node = NULL;
 	graph->nlabels = d.nlabels;
 	graph->nfeats = d.nfeats;
-	REprintf("Creating graph...\n");
+	Rprintf("Creating graph...\n");
 	for (i = 0; i < d.ndata; i++)
 	{
 		fgets(line, N, file);
@@ -131,10 +131,10 @@ static int main(int argc, char **argv)
 			graph->node[i].feat[index - 1] = value;
 		}
 	}
-	REprintf("OK.\n\n");
-	REprintf("Writing graph to OPF format...\n");
+	Rprintf("OK.\n\n");
+	Rprintf("Writing graph to OPF format...\n");
 	WriteSubgraph(graph, argv[2]);
-	REprintf("\nOK.\n\n");
+	Rprintf("\nOK.\n\n");
 	DestroySubgraph(&graph);
 	fclose(file);
 	free(line);

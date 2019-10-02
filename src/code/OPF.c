@@ -347,7 +347,7 @@ int opf_OPFknnLearning(Subgraph *Train, Subgraph *Eval, int kmax)
 
   for (k = 1; k <= kmax; k++)
   {
-    REprintf("\nEvaluating k = %d ... ", k);
+    Rprintf("\nEvaluating k = %d ... ", k);
     Train_cpy->bestk = k;
 
     opf_CreateArcs(Train_cpy, k); if(errorOccurred) return(0);
@@ -356,7 +356,7 @@ int opf_OPFknnLearning(Subgraph *Train, Subgraph *Eval, int kmax)
 
     opf_OPFknnClassify(Train_cpy, Eval_cpy); if(errorOccurred) return(0);
     Acc = opf_Accuracy(Eval_cpy); if(errorOccurred) return(0);
-    REprintf(" %.2f%%", Acc * 100);
+    Rprintf(" %.2f%%", Acc * 100);
 
     if (Acc > MaxAcc)
     {
@@ -369,7 +369,7 @@ int opf_OPFknnLearning(Subgraph *Train, Subgraph *Eval, int kmax)
 
   DestroySubgraph(&Train_cpy);
   DestroySubgraph(&Eval_cpy);
-  REprintf("\n	-> best k: %d", bestk);
+  Rprintf("\n	-> best k: %d", bestk);
 
   return bestk;
 }
@@ -1838,7 +1838,7 @@ void opf_BestkMinCut(Subgraph *sg, int kmin, int kmax)
   opf_CreateArcs(sg, sg->bestk); if(errorOccurred) return;
   opf_PDF(sg); if(errorOccurred) return;
 
-  REprintf("Best k: %d ", sg->bestk);
+  Rprintf("Best k: %d ", sg->bestk);
 }
 
 // Create adjacent list in subgraph: a knn graph
@@ -2031,7 +2031,7 @@ double Purity(Subgraph *g)
         max = counter[i][j];
     }
     purity += max;
-    REprintf("\nRow[%d]: %lf", i, max);
+    Rprintf("\nRow[%d]: %lf", i, max);
     max = -9999999999;
   }
 
@@ -2561,7 +2561,7 @@ void opf_OPFPruning(Subgraph **gTrain, Subgraph **gEval, float desiredAcc)
 
   while ((t <= max_iterations) && (fabs(currentAcc - oldAcc) <= desiredAcc))
   {
-    REprintf("\nRunning iteration %d ... ", t);
+    Rprintf("\nRunning iteration %d ... ", t);
     oldAcc = currentAcc;
     opf_ResetSubgraph(*gTrain);
 
@@ -2572,8 +2572,8 @@ void opf_OPFPruning(Subgraph **gTrain, Subgraph **gEval, float desiredAcc)
     opf_OPFTraining(*gTrain); if(errorOccurred) return;
     opf_OPFClassifying(*gTrain, *gEval);
     currentAcc = opf_Accuracy(*gEval); if(errorOccurred) return;
-    REprintf("Current accuracy: %.2f%% ", currentAcc * 100);
+    Rprintf("Current accuracy: %.2f%% ", currentAcc * 100);
     t++;
-    REprintf("OK");
+    Rprintf("OK");
   }
 }

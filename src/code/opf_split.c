@@ -3,13 +3,13 @@
 
 void CheckInputData(float TrPercentage, float EvalPercentage, float TestPercentage)
 {
-	REprintf("\nSummation of set percentages = %.1f ...", TrPercentage + EvalPercentage + TestPercentage);
+	Rprintf("\nSummation of set percentages = %.1f ...", TrPercentage + EvalPercentage + TestPercentage);
 	if ((float)(TrPercentage + EvalPercentage + TestPercentage) != (float)1.0){
 		Error("Percentage summation is not equal to 1", "CheckInputData"); return;
 	}
-	REprintf(" OK");
+	Rprintf(" OK");
 
-	REprintf("\nChecking set percentages ...");
+	Rprintf("\nChecking set percentages ...");
 	if (TrPercentage == 0.0f || TestPercentage == 0.0f){
 		Error("Percentage of either training set or test set is equal to 0", "CheckInputData"); return;
 	}

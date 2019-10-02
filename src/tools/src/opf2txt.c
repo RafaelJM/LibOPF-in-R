@@ -12,7 +12,7 @@ static int main(int argc, char **argv)
 		return 0;
 	}
 
-	REprintf("\nProgram to convert files written in the OPF binary format to the OPF ASCII format.");
+	Rprintf("\nProgram to convert files written in the OPF binary format to the OPF ASCII format.");
 
 	FILE *fpIn = NULL, *fpOut = NULL;
 	int n, ndata, nclasses, label, i, j;

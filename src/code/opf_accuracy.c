@@ -51,14 +51,12 @@ static int main(int argc, char **argv)
 	CM = opf_ConfusionMatrix(g);
 	for (i = 1; i <= g->nlabels; i++)
 	{
-		REprintf("\n");
+		Rprintf("\n");
 		tmp = 0;
 		for (j = 1; j <= g->nlabels; j++)
 		{
 			tmp += CM[i][j];
-			REprintf("CM[%d][%d]: %d	", i, j, CM[i][j]);
 		}
-		REprintf("	%.2f%%", (CM[i][i] / tmp) * 100);
 	}
 
 	for (i = 0; i < g->nlabels + 1; i++)

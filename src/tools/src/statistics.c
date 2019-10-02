@@ -43,7 +43,7 @@ static int main(int argc, char **argv)
 	fclose(fpIn);
 	free(acc);
 
-	REprintf("\n%s %f with standard deviation: %f\n", argv[3], MeanAcc, Std);
+	Rprintf("\n%s %f with standard deviation: %f\n", argv[3], MeanAcc, Std);
 
 	return 0;
 }

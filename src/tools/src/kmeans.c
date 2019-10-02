@@ -14,7 +14,7 @@ static int main(int argc, char **argv)
 		return 0;
 	}
 
-	REprintf("\nProgram to calculate cluster centroids using K-means.\n");
+	Rprintf("\nProgram to calculate cluster centroids using K-means.\n");
 
 	int i, j, k = atoi(argv[2]);
 	double **mean = NULL;
@@ -22,20 +22,20 @@ static int main(int argc, char **argv)
 	FILE *fp = NULL;
 
 	fflush(stderr);
-	REprintf("\nReading dataset ... ");
+	Rprintf("\nReading dataset ... ");
 	g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
-	REprintf("OK");
+	Rprintf("OK");
 
 	mean = (double **)calloc(k, sizeof(double *));
 	for (i = 0; i < k; i++)
 		mean[i] = (double *)calloc(g->nfeats, sizeof(double *));
 
 	fflush(stderr);
-	REprintf("\nRunning k-means ... ");
+	Rprintf("\nRunning k-means ... ");
 	kMeans(g, mean, k);
-	REprintf("OK");
+	Rprintf("OK");
 
-	REprintf("\nPurity of clustering: %lf", Purity(g));
+	Rprintf("\nPurity of clustering: %lf", Purity(g));
 
 	Rprintf("\nWriting output file ...");
 	
@@ -51,12 +51,12 @@ static int main(int argc, char **argv)
 	
 
 	fflush(stderr);
-	REprintf("\nDeallocating memory ... ");
+	Rprintf("\nDeallocating memory ... ");
 	for (i = 0; i < k; i++)
 		free(mean[i]);
 	free(mean);
 	DestroySubgraph(&g);
-	REprintf("OK\n");
+	Rprintf("OK\n");
 
 	return 0;
 }

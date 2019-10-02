@@ -13,7 +13,7 @@ static int main(int argc, char **argv)
 		return 0;
 	}
 
-	REprintf("\nProgram to convert files written in the OPF ASCII format to the OPF binary format.");
+	Rprintf("\nProgram to convert files written in the OPF ASCII format to the OPF binary format.");
 
 	FILE *fpIn = NULL, *fpOut = NULL;
 	int n, nfeats, nclasses, i, j, label;
@@ -29,7 +29,7 @@ static int main(int argc, char **argv)
 		REprintf("\n Could not read number of samples");
 		return 0;
 	}
-	REprintf("\n number of samples: %d", n);
+	Rprintf("\n number of samples: %d", n);
 	fwrite(&n, sizeof(int), 1, fpOut);
 
 	/*writing the number of classes*/
@@ -39,7 +39,7 @@ static int main(int argc, char **argv)
 		return 0;
 	}
 
-	REprintf("\n number of classes: %d", nclasses);
+	Rprintf("\n number of classes: %d", nclasses);
 	fwrite(&nclasses, sizeof(int), 1, fpOut);
 
 	/*writing the number of features*/
@@ -49,7 +49,7 @@ static int main(int argc, char **argv)
 		return 0;
 	}
 
-	REprintf("\n number of features: %d", nfeats);
+	Rprintf("\n number of features: %d", nfeats);
 	fwrite(&nfeats, sizeof(int), 1, fpOut);
 
 	/*writing data*/
