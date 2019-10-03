@@ -136,10 +136,11 @@ Subgraph *ReadSubgraph(char *file)
       Error("Could not read node true label", "ReadSubGraph"); return(NULL);
 	}
 
-    for (j = 0; j < g->nfeats; j++)
+    for (j = 0; j < g->nfeats; j++){
       if (fread(&g->node[i].feat[j], sizeof(float), 1, fp) != 1){
         Error("Could not read node features", "ReadSubGraph"); return(NULL);
 	  }
+	}
   }
 
   fclose(fp);

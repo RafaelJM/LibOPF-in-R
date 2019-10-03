@@ -4,7 +4,7 @@
 
 static int main(int argc, char **argv)
 {
-
+	errorOccurred = 0;
 	if (argc != 3)
 	{
 		REprintf("\nusage txt2opf <P1> <P2>\n");

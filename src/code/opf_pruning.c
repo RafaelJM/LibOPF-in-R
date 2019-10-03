@@ -2,7 +2,7 @@
 
 static int main(int argc, char **argv)
 {
-	
+	errorOccurred = 0;
 	Rprintf("\nProgram that executes the pruning algorithm of the OPF classifier\n");
 	Rprintf("\nIf you have any problem, please contact: ");
 	Rprintf("\n- alexandre.falcao@gmail.com");

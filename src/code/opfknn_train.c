@@ -2,7 +2,7 @@
 
 static int main(int argc, char **argv)
 {
-	
+	errorOccurred = 0;
 	Rprintf("\nProgram that executes the training phase of the OPF classifier with knn adjacency\n");
 	Rprintf("\nIf you have any problem, please contact: ");
 	Rprintf("\n- alexandre.falcao@gmail.com");

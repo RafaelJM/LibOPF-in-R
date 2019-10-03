@@ -81,6 +81,7 @@ struct data CountData(char *file)
 
 static int main(int argc, char **argv)
 {
+	errorOccurred = 0;
 	if (argc != 3)
 	{
 		REprintf("\nusage svm2opf <input libsvm file> <output libopf file>\n");

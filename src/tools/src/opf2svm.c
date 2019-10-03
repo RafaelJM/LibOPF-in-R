@@ -21,6 +21,7 @@ static void WriteSubgraph2SVMFormat(Subgraph *cg, char *file)
 
 static int main(int argc, char **argv)
 {
+	errorOccurred = 0;
 	if (argc != 3)
 	{
 		REprintf("\nusage opf2svm <input libopf file> <output libsvm file>\n");

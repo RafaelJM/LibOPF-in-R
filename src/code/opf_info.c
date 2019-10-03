@@ -4,7 +4,7 @@
 
 static int main(int argc, char **argv)
 {
-	
+	errorOccurred = 0;
 	Rprintf("\nProgram that gives information about the OPF file\n");
 	Rprintf("\nIf you have any problem, please contact: ");
 	Rprintf("\n- alexandre.falcao@gmail.com");

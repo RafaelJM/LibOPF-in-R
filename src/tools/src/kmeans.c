@@ -4,7 +4,7 @@
 
 static int main(int argc, char **argv)
 {
-
+	errorOccurred = 0;
 	if (argc != 4)
 	{
 		REprintf("\nusage kmeans <P1> <P2> <P3>\n");

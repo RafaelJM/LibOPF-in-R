@@ -18,7 +18,7 @@ void CheckInputData(float TrPercentage, float EvalPercentage, float TestPercenta
 
 static int main(int argc, char **argv)
 {
-	
+	errorOccurred = 0;
 	Rprintf("\nProgram that generates training, evaluation and test sets for the OPF classifier\n");
 	Rprintf("\nIf you have any problem, please contact: ");
 	Rprintf("\n- alexandre.falcao@gmail.com");

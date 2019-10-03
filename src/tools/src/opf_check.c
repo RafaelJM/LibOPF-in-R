@@ -108,7 +108,7 @@ int CheckLine(char *line, int nlabels, int nfeats, int lineid)
 
 static int main(int argc, char **argv)
 {
-
+	errorOccurred = 0;
     if (argc != 2)
     {
         REprintf("\nusage opf_check <input ASCII file in the LibOPF format>\nNote that the input file for opf_check must be a text file.\nUse opf2txt to convert your OPF binary file into a text file.\n");

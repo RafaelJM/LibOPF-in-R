@@ -2,6 +2,7 @@
 
 static int main(int argc, char **argv)
 {
+	errorOccurred = 0;
 	int i, n, op;
 	float value;
 	char fileName[256];
