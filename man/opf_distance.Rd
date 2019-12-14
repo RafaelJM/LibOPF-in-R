@@ -4,27 +4,28 @@
 \alias{opf_distance}
 \title{Generates the precomputed distance file for the OPF classifier}
 \usage{
-opf_distance(dataSet, distanceOp, normalize)
+opf_distance(dataSet, distanceOp, normalize = 0)
 }
 \arguments{
-\item{dataSet}{path to dataset in the OPF file format}
+\item{dataSet}{Subgraph object, normaly is the full data}
 
 \item{distanceOp}{distance calculation option}
 
 \item{normalize}{distance normalization? 1- yes 0 - no}
 }
+\value{
+Returns
+}
 \description{
 Generates the precomputed distance file for the OPF classifier
 }
 \details{
-Options for distance calculation:
-1 - Euclidean
-2 - Chi-Square
-3 - Manhattan (L1)
-4 - Canberra
-5 - Squared Chord
-6 - Squared Chi-Squared
+Options for distance calculation:\cr
+1 - Euclidean\cr
+2 - Chi-Square\cr
+3 - Manhattan (L1)\cr
+4 - Canberra\cr
+5 - Squared Chord\cr
+6 - Squared Chi-Squared\cr
 7 - BrayCurtis
-
-Reads the dataset and create a distances.dat with the distances.
 }

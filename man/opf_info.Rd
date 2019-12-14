@@ -7,7 +7,7 @@
 opf_info(dataSet)
 }
 \arguments{
-\item{dataSet}{path to OPF file}
+\item{dataSet}{The OPF object}
 }
 \description{
 Gives information about the OPF file

@@ -4,15 +4,16 @@
 \alias{opf_accuracy}
 \title{Computes the OPF accuracy of a given set}
 \usage{
-opf_accuracy(dataSet)
+opf_accuracy(dataSet, classification)
 }
 \arguments{
-\item{dataSet}{path to data set in the OPF file format (.dat and .dat.out)}
+\item{dataSet}{Subgraph object, normaly is the training object}
+
+\item{classification}{The classification array produced by the classification of the test subgraph}
+}
+\value{
+Calculated test subgraph classification accuracy
 }
 \description{
 Computes the OPF accuracy of a given set
-}
-\details{
-Reads the .dat and .dat.out file with the name that was past in the variable dataSet
-Computes and creates a .acc file, with the same name as the input, that contains the accuracy. Also creates a .time that contais the processing time.
 }

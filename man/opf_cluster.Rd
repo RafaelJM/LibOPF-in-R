@@ -7,7 +7,7 @@
 opf_cluster(dataSet, kmax, calculateOp, value, precomputedDistance = NA)
 }
 \arguments{
-\item{dataSet}{path to unlabeled data set in the OPF file format}
+\item{dataSet}{Unlabeled subgraph object}
 
 \item{kmax}{kmax(maximum degree for the knn graph)}
 
@@ -15,11 +15,11 @@ opf_cluster(dataSet, kmax, calculateOp, value, precomputedDistance = NA)
 
 \item{value}{value of parameter "op" in (0-1)}
 
-\item{precomputedDistance}{path to precomputed distance file (leave it in blank if you are not using this resource}
+\item{precomputedDistance}{The precomputed distance subgraph object (leave it in blank if you are not using this resource)}
+}
+\value{
+Returns a list which contains the classifier object and the classificantion array object
 }
 \description{
 Computes clusters by OPF
-}
-\details{
-Creates a file .out, which is used in opf_knn_classify, for example.
 }

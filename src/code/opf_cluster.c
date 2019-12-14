@@ -16,7 +16,7 @@ static int main(int argc, char **argv)
 
 	if ((argc != 6) && (argc != 5))
 	{
-		REprintf("\nusage opf_cluster <P1> <P2> <P3> <P4> <P5> <P6>");
+		REprintf("\nusage opf_cluster <P1> <P2> <P3> <P4> <P5>");
 		REprintf("\nP1: unlabeled data set in the OPF file format");
 		REprintf("\nP2: kmax(maximum degree for the knn graph)");
 		REprintf("\nP3: P3 0 (height), 1(area) and 2(volume)");
@@ -105,7 +105,7 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nWriting classifier's model file ...");
 	
-	opf_WriteModelFile(g, "classifier.opf");
+	opf_WriteModelFile(g, strcat(argv[1],".classifier.opf"));
 	Rprintf(" OK");
 	
 

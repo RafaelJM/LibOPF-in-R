@@ -42,7 +42,7 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nWriting data set to disk ...");
 	
-	WriteSubgraph(aux, "merged.dat"); if(errorOccurred) return 0;
+	WriteSubgraph(aux, strcat(argv[1],".merged.dat")); if(errorOccurred) return 0;
 	Rprintf(" OK");
 	
 

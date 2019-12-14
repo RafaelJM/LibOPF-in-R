@@ -2,20 +2,17 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf_fold}
 \alias{opf_fold}
-\title{Generates k folds (files) for the OPF classifier}
+\title{Generates k folds (objects) for the OPF classifier}
 \usage{
 opf_fold(dataSet, k, normalize)
 }
 \arguments{
-\item{dataSet}{path to input dataSet in the OPF file format}
+\item{dataSet}{The graph object}
 
 \item{k}{number of folds}
 
 \item{normalize}{distance normalization? 1- yes 0 - no}
 }
 \description{
-Generates k folds (files) for the OPF classifier
-}
-\details{
-Generate k files with the name fold_(number).dat
+Generates k folds (objects) for the OPF classifier
 }

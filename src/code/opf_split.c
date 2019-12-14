@@ -69,11 +69,11 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nWriting data sets to disk ...");
 	
-	WriteSubgraph(gTraining, "training.dat"); if(errorOccurred) return 0;
+	WriteSubgraph(gTraining, strcat(argv[1],".training.dat")); if(errorOccurred) return 0;
 	if (evaluating_p > 0){
-		WriteSubgraph(gEvaluating, "evaluating.dat"); if(errorOccurred) return 0;
+		WriteSubgraph(gEvaluating, strcat(argv[1],".evaluating.dat")); if(errorOccurred) return 0;
 	}
-	WriteSubgraph(gTesting, "testing.dat"); if(errorOccurred) return 0;
+	WriteSubgraph(gTesting, strcat(argv[1],".testing.dat")); if(errorOccurred) return 0;
 	Rprintf(" OK");
 	
 

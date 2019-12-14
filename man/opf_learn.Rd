@@ -7,11 +7,11 @@
 opf_learn(trainFile, evaluatFile, precomputedDistance = NA)
 }
 \arguments{
-\item{trainFile}{path to training set in the OPF file format}
+\item{trainFile}{The training set object}
 
-\item{evaluatFile}{path to evaluation set in the OPF file format}
+\item{evaluatFile}{The evaluation set object}
 
-\item{precomputedDistance}{path to precomputed distance file (leave it in blank if you are not using this resource}
+\item{precomputedDistance}{The precomputed distance subgraph object (leave it in blank if you are not using this resource)}
 }
 \description{
 Executes the learning phase for the OPF classifier

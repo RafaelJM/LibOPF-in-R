@@ -4,8 +4,12 @@
 \alias{opf_pruning}
 \title{Executes the pruning algorithm of the OPF classifier}
 \usage{
-opf_pruning(dataTraining, dataEvaluating, percentageAccuracy,
-  precomputedDistance)
+opf_pruning(
+  dataTraining,
+  dataEvaluating,
+  percentageAccuracy,
+  precomputedDistance
+)
 }
 \arguments{
 \item{dataTraining}{path to training set in the OPF file format}

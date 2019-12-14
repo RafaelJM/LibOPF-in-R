@@ -4,16 +4,18 @@
 \alias{opf_classify}
 \title{Executes the test phase of the OPF classifier}
 \usage{
-opf_classify(dataSet, precomputedDistance = NA)
+opf_classify(dataSet, classifier, precomputedDistance = NA)
 }
 \arguments{
-\item{dataSet}{path to test set in the OPF file format}
+\item{dataSet}{Testing subgraph object}
 
-\item{precomputedDistance}{path to precomputed distance file (leave it in blank if you are not using this resource)}
+\item{classifier}{The classifier model object}
+
+\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
+}
+\value{
+Returns the given graph classification array
 }
 \description{
 Executes the test phase of the OPF classifier
-}
-\details{
-Creates a file .out, which is used in opf_accuracy, for example.
 }

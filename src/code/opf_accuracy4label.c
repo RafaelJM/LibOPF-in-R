@@ -61,12 +61,12 @@ static int main(int argc, char **argv)
 	
 	sprintf(fileName, "%s.acc", argv[1]);
 	f = fopen(fileName, "a");
-	fprintf(f, "%f", Acc[1]);
-	for (i = 2; i <= g->nlabels; i++)
+	for (i = 1; i <= g->nlabels; i++)
 	{
-		fprintf(f, " %f", Acc[i]);
+		fprintf(f, "%f", Acc[i] * 100);
 		fprintf(f, "\n");
 	}
+	fprintf(f, "\n");
 	fclose(f);
 	Rprintf(" OK");
 	

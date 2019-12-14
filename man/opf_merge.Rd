@@ -7,7 +7,7 @@
 opf_merge(dataSets)
 }
 \arguments{
-\item{dataSets}{vector of paths to dataSets in the OPF file format}
+\item{dataSets}{vector of dataSets objects}
 }
 \description{
 Merge subgraphs

@@ -39,7 +39,7 @@ static int main(int argc, char **argv)
 	{
 		Rprintf("\nWriting fold %d ...", i + 1);
 		
-		sprintf(fileName, "fold_%d.dat", i + 1);
+		sprintf(fileName, strcat(argv[1],"1"));
 		if (op){
 			opf_NormalizeFeatures(fold[i]); if(errorOccurred) return 0;
 		}

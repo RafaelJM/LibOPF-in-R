@@ -53,7 +53,7 @@ static int main(int argc, char **argv)
 
 	Rprintf("\n\nWriting classifier's model file ...");
 	
-	opf_WriteModelFile(gTrain, "classifier.opf");
+	opf_WriteModelFile(gTrain, strcat(argv[1],".classifier.opf"));
 	Rprintf(" OK");
 	
 
