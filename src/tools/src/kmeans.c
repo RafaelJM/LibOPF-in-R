@@ -63,5 +63,4 @@ static int main(int argc, char **argv)
 
 void kmeans(int *argc, char **argv){
 	main(*argc,argv);
-	
 }

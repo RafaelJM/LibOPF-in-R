@@ -13,6 +13,9 @@ opf_learn(trainFile, evaluatFile, precomputedDistance = NA)
 
 \item{precomputedDistance}{The precomputed distance subgraph object (leave it in blank if you are not using this resource)}
 }
+\value{
+Returns the classifier model object
+}
 \description{
 Executes the learning phase for the OPF classifier
 }

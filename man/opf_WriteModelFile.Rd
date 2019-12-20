@@ -8,7 +8,7 @@ opf_WriteModelFile(g, file)
 }
 \arguments{
 \item{g}{the classifier object
-file file where you want to save the classificator}
+file where you want to save the classificator}
 }
 \description{
 Writes into a opf file the trained opf classifier

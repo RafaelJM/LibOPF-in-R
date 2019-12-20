@@ -7,13 +7,13 @@
 opf_knn_train(trainFile, evaluatFile, kmax, precomputedDistance = NA)
 }
 \arguments{
-\item{trainFile}{path to training set in the OPF file format}
+\item{trainFile}{Training subgraph object}
 
-\item{evaluatFile}{path to evaluating set in the OPF file format (used to learn k)}
+\item{evaluatFile}{Evaluation subgraph object}
 
 \item{kmax}{kmax(maximum degree for the knn graph)}
 
-\item{precomputedDistance}{path to precomputed distance file (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
 }
 \description{
 Executes the training phase of the OPF classifier with knn adjacency

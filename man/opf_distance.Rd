@@ -14,7 +14,7 @@ opf_distance(dataSet, distanceOp, normalize = 0)
 \item{normalize}{distance normalization? 1- yes 0 - no}
 }
 \value{
-Returns
+Returns a distance matrix
 }
 \description{
 Generates the precomputed distance file for the OPF classifier

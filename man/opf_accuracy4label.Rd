@@ -12,7 +12,7 @@ opf_accuracy4label(dataSet, classification)
 \item{classification}{The classification array produced by the classification of the test subgraph}
 }
 \value{
-Calculated test subgraph classification accuracy for each class
+Returns the calculated test subgraph classification accuracy for each class
 }
 \description{
 Computes the OPF accuracy for each class of a given set

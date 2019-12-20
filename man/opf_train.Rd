@@ -7,13 +7,13 @@
 opf_train(dataSet, precomputedDistance = NA)
 }
 \arguments{
-\item{dataSet}{path to training set in the OPF file format}
+\item{dataSet}{The training subgraph object}
 
-\item{precomputedDistance}{path to precomputed distance file (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
+}
+\value{
+Returns a list which contains the classifier object and the classificantion array object
 }
 \description{
 Executes the training phase of the OPF classifier
-}
-\details{
-Execute the training phase and generates an output file named classifier.opf
 }

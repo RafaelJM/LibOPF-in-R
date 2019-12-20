@@ -8,7 +8,7 @@ opf_WriteSubGraph(g, file)
 }
 \arguments{
 \item{g}{the graph object
-file file where you want to save the graph}
+file where you want to save the graph}
 }
 \description{
 Writes into a opf file a graph

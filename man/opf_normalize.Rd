@@ -4,12 +4,13 @@
 \alias{opf_normalize}
 \title{Normalizes data for the OPF classifier}
 \usage{
-opf_normalize(dataSet, normalizedOutput)
+opf_normalize(dataSet)
 }
 \arguments{
-\item{dataSet}{path to dataSet in the OPF file format}
-
-\item{normalizedOutput}{path to normalized output dataSet in the OPF file format}
+\item{dataSet}{The subgraph object}
+}
+\value{
+Returns the normalized subgraph
 }
 \description{
 Normalizes data for the OPF classifier

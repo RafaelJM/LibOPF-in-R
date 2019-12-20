@@ -4,7 +4,7 @@
 \alias{opf_WriteDistances}
 \title{Writes into a file the precalculated distances of the gives set produced by the opf distances}
 \usage{
-opf_WriteDistances(distances, fileName)
+opf_WriteDistances(distances, file)
 }
 \arguments{
 \item{distances}{the matrix produced by the opf distances

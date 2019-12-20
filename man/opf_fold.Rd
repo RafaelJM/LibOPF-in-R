@@ -4,7 +4,7 @@
 \alias{opf_fold}
 \title{Generates k folds (objects) for the OPF classifier}
 \usage{
-opf_fold(dataSet, k, normalize)
+opf_fold(dataSet, k, normalize = 0)
 }
 \arguments{
 \item{dataSet}{The graph object}
@@ -12,6 +12,9 @@ opf_fold(dataSet, k, normalize)
 \item{k}{number of folds}
 
 \item{normalize}{distance normalization? 1- yes 0 - no}
+}
+\value{
+Returns a array of subgraph objects
 }
 \description{
 Generates k folds (objects) for the OPF classifier

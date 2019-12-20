@@ -8,7 +8,7 @@ opf_WriteClassification(classes, file)
 }
 \arguments{
 \item{classes}{classification vector produced by the classificator
-file file where you want to save the classification vector}
+file where you want to save the classification vector}
 }
 \description{
 Writes into a file the node classification vector produced by the opf classificator

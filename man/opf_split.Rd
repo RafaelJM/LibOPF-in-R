@@ -7,7 +7,7 @@
 opf_split(dataSet, training_p, evaluating_p, testing_p, normalize)
 }
 \arguments{
-\item{dataSet}{path to input dataSet in the OPF file format}
+\item{dataSet}{The data subgraph object}
 
 \item{training_p}{percentage for the training set size [0,1]}
 
@@ -17,9 +17,9 @@ opf_split(dataSet, training_p, evaluating_p, testing_p, normalize)
 
 \item{normalize}{distance normalization? 1- yes 0 - no}
 }
+\value{
+Returns the Training, Evaluating and the Testing objects
+}
 \description{
 Generates training, evaluation and test sets for the OPF classifier
-}
-\details{
-produces two or three files, training.dat, testing.dat and evaluating.dat
 }

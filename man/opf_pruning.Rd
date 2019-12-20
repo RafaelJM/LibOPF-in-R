@@ -12,13 +12,16 @@ opf_pruning(
 )
 }
 \arguments{
-\item{dataTraining}{path to training set in the OPF file format}
+\item{dataTraining}{Training subgraph object}
 
-\item{dataEvaluating}{path to evaluating set in the OPF file format}
+\item{dataEvaluating}{Evaluating subgraph object}
 
 \item{percentageAccuracy}{percentage of accuracy [0,1]}
 
-\item{precomputedDistance}{path to precomputed distance file (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
+}
+\value{
+Returns the classifier model object
 }
 \description{
 Executes the pruning algorithm of the OPF classifier

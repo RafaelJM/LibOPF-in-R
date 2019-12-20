@@ -9,6 +9,9 @@ opf_merge(dataSets)
 \arguments{
 \item{dataSets}{vector of dataSets objects}
 }
+\value{
+Returns the merged subgraph object
+}
 \description{
 Merge subgraphs
 }

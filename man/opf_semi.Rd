@@ -7,22 +7,22 @@
 opf_semi(
   labeledTrainFile,
   unLabeledTrainFile,
-  evaluatFile = "",
+  evaluatFile = NA,
   precomputedDistance = NA
 )
 }
 \arguments{
-\item{labeledTrainFile}{path to labeled training set in the OPF file format}
+\item{labeledTrainFile}{Labeled training subgraph object}
 
-\item{unLabeledTrainFile}{path to unlabeled training set in the OPF file format}
+\item{unLabeledTrainFile}{Unlabeled training subgraph object}
 
-\item{evaluatFile}{path to evaluation set in the OPF file format}
+\item{evaluatFile}{Evaluation subgraph object}
 
-\item{precomputedDistance}{path to precomputed distance file (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
 }
 \description{
 Executes the semi supervised training phase of the OPF classifier
 }
 \details{
-Creates a file .out, which is used in opf_classify, for example.
+Returns the classifier model object
 }

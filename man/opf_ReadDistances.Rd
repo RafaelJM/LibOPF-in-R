@@ -4,10 +4,10 @@
 \alias{opf_ReadDistances}
 \title{Reads a file which has the precalculated distances}
 \usage{
-opf_ReadDistances(fileName)
+opf_ReadDistances(file)
 }
 \arguments{
-\item{file}{file which has the nodes classification}
+\item{file}{file which has the distances matrix}
 }
 \value{
 Returns the precalculated distances matrix

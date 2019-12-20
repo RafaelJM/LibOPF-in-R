@@ -78,13 +78,7 @@ opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = 
 	  argv <- append(argv,paste(file,".distances", sep = ""))
 	}
 	aux <- .C("opf_cluster",length(argv),as.character(argv))
-	setClass(Class="Return",
-	         representation(
-	           classifier="Subgraph",
-	           classification="vector"
-	         )
-	)
-	return(new("Return",classifier=opf_ReadModelFile(paste(file,".classifier.opf", sep = "")),classification=opf_ReadClassification(paste(file,".classifier.opf.out", sep = ""))))
+	return(c("classifier"=opf_ReadModelFile(paste(file,".classifier.opf", sep = "")),"classification"=opf_ReadClassification(paste(file,".classifier.opf.out", sep = ""))))
 }
 
 #'Generates the precomputed distance file for the OPF classifier
@@ -170,7 +164,7 @@ opf_info <- function(dataSet){
 #'@export
 opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){ #T
   file <- tempfile()
-  opf_WriteSubGraph(dataSet,file)
+  opf_WriteSubGraph(trainFile,file)
   opf_WriteSubGraph(evaluatFile,paste(file,".evaluet", sep = ""))
   argv <- c("", file, paste(file,".evaluet", sep = ""))
   if(!is.na(precomputedDistance)){
@@ -277,21 +271,11 @@ opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize){ 
   opf_WriteSubGraph(dataSet,file)
   argv <- c("", file, training_p, evaluating_p, testing_p, normalize=0)
 	aux <- .C("opf_split",length(argv),as.character(argv))
-	setClass(Class="Return",
-	         representation(
-	           Training="Subgraph",
-	           Evaluating="Subgraph",
-	           Testing="Subgraph"
-	         )
-	)
-	return <- new("Return")
-	if(training_p > 0.0) return$Training = opf_ReadSubGraph(paste(file,".training.dat", sep = ""))
-	if(evaluating_p > 0.0) return$Training = opf_ReadSubGraph(paste(file,".evaluating.dat", sep = ""))
-	if(testing_p > 0.0) return$Training = opf_ReadSubGraph(paste(file,".testing.dat", sep = ""))
+	return <- c("Training" = (if(training_p > 0.0) opf_ReadSubGraph(paste(file,".training.dat", sep = "")) else NA),
+	            "Evaluating" = (if(evaluating_p > 0.0) opf_ReadSubGraph(paste(file,".evaluating.dat", sep = "")) else NA),
+	            "Testing" = (if(testing_p > 0.0) opf_ReadSubGraph(paste(file,".testing.dat", sep = "")) else NA))
 	return(return)
 }
-
-#-------------------------------------------------------------------------------------------------------- parei aqui
 
 #'Executes the training phase of the OPF classifier
 #'
@@ -299,10 +283,10 @@ opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize){ 
 #'@param precomputedDistance The precomputed distance matrix (leave it in blank if you are not using this resource)
 #'
 #'@return
-#'Returns the classifier model object
+#'Returns a list which contains the classifier object and the classificantion array object
 #'
 #'@export
-opf_train <- function(dataSet, precomputedDistance = NA){
+opf_train <- function(dataSet, precomputedDistance = NA){ #T
   file <- tempfile()
   opf_WriteSubGraph(dataSet,file)
   argv <- c("", file)
@@ -311,61 +295,79 @@ opf_train <- function(dataSet, precomputedDistance = NA){
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
   aux <- .C("opf_train",length(argv),as.character(argv))
-  return(opf_ReadModelFile(paste(file,".classifier.opf", sep = ""))) #TEM COISA PARA ARRUMAR AQUI usar SPRINTF?
+  return(c("classifier"=opf_ReadModelFile(paste(file,".classifier.opf", sep = "")),"classification"=opf_ReadClassification(paste(file,".classifier.opf.out", sep = ""))))
 }
 
 #'Executes the test phase of the OPF classifier with knn adjacency
 #'
-#'@param dataSet path to test set in the OPF file format
-#'@param precomputedDistance path to precomputed distance file (leave it in blank if you are not using this resource)
+#'@param dataSet Testing subgraph object
+#'@param classifier The classifier model object
+#'@param precomputedDistance The precomputed distance matrix (leave it in blank if you are not using this resource)
 #'
-#'@details
-#'Creates a file .out, which is used in opf_accuracy, for example.
+#'@return
+#'Returns the given graph classification array
 #'
 #'@export
-opf_knn_classify <- function(dataSet, precomputedDistance = NA){
-	argv <- c("", dataSet)
-	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
+opf_knn_classify <- function(dataSet, classifier, precomputedDistance = NA){ #T
+  file <- tempfile()
+  opf_WriteSubGraph(dataSet,file)
+  opf_WriteModelFile(classifier,paste(file,".classifier.opf", sep = ""))
+  argv <- c("", file)
+  if(!is.na(precomputedDistance)){
+    opf_WriteDistances(precomputedDistance,paste(file,".distances", sep = ""))
+    argv <- append(argv,paste(file,".distances", sep = ""))
+  }
 	aux <- .C("opfknn_classify",length(argv),as.character(argv))
+	return(opf_ReadClassification(paste(file,".classifier.opf.out", sep = "")))
 }
 
 #'Executes the training phase of the OPF classifier with knn adjacency
 #'
-#'@param trainFile path to training set in the OPF file format
-#'@param evaluatFile path to evaluating set in the OPF file format (used to learn k)
+#'@param trainFile Training subgraph object
+#'@param evaluatFile Evaluation subgraph object
 #'@param kmax kmax(maximum degree for the knn graph)
-#'@param precomputedDistance path to precomputed distance file (leave it in blank if you are not using this resource)
+#'@param precomputedDistance The precomputed distance matrix (leave it in blank if you are not using this resource)
 #'
 #'@details
 #'Creates a file .out, which is used in opf_knn_classify, for example. Also creates a .time that contais the processing time.
 #'
 #'@export
-opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA){
-	argv <- c("", trainFile, evaluatFile, kmax)
-	if(!is.na(precomputedDistance)) argv <- append(argv,precomputedDistance)
+opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA){ #T
+  file <- tempfile()
+  opf_WriteSubGraph(trainFile,file)
+  opf_WriteSubGraph(evaluatFile,paste(file,".evaluat", sep = ""))
+	argv <- c("", file, paste(file,".evaluat", sep = ""), kmax)
+	if(!is.na(precomputedDistance)){
+	  opf_WriteDistances(precomputedDistance,paste(file,".distances", sep = ""))
+	  argv <- append(argv,paste(file,".distances", sep = ""))
+	}
 	aux <- .C("opfknn_train",length(argv),as.character(argv))
+	return(c("classifier"=opf_ReadModelFile(paste(file,".classifier.opf", sep = "")),"classification"=opf_ReadClassification(paste(file,".classifier.opf.out", sep = ""))))
 }
 
 #tools -------------------------------------------------------------------------------------
 
 #'Calculate cluster centroids using K-means
 #'
-#'@param inputFile path to input file in the OPF binary format
+#'@param data Subgraph object
 #'@param numberClusters number of clusters (k)
 #'@param outputFile path to output file containing cluster centroids
 #'
-#'@details
-#'Creates a file with the cluster centroids.
+#'@return
+#'Returns a matrix whitch has the positions
 #'
 #'@export
-kmeans <- function(inputFile, numberClusters, outputFile){
-  argv <- c("", inputFile, numberClusters, outputFile)
+kmeans <- function(data, numberClusters, outputFile = NA){ #TT
+  file <- tempfile()
+  opf_WriteSubGraph(trainFile,file)
+  argv <- c("", file, numberClusters, (if(is.na(outputFile)) paste(file,".out", sep = "") else outputFile))
   aux <- .C("kmeans",length(argv),as.character(argv))
+  return(as.double(readLines((if(is.na(outputFile)) paste(file,".out", sep = "") else outputFile))))
 }
 
 #'Check the OPF file
 #'
-#'@param inputFile path to input ASCII file in the LibOPF format
+#'@param data the object
 #'
 #'@details
 #'usage opf_check <input ASCII file in the LibOPF format>:
@@ -373,7 +375,7 @@ kmeans <- function(inputFile, numberClusters, outputFile){
 #'Use opf2txt to convert your OPF binary file into a text file.
 #'
 #'@export
-opf_check <- function(inputFile){
+opf_check <- function(data){ #Testar e fazer
   argv <- c("", inputFile)
   aux <- .C("opf_check",length(argv),as.character(argv))
 }
@@ -548,7 +550,7 @@ opf_ReadSubGraph <- function(file){ #ReadSubgraph
 #'
 #'@param
 #'g the graph object
-#'file file where you want to save the graph
+#'file where you want to save the graph
 #'
 #'@export
 opf_WriteSubGraph <- function(g, file){ #WriteSubgraph
@@ -616,7 +618,7 @@ opf_ReadModelFile <- function(file){ #opf_ReadModelFile
 #'
 #'@param
 #'g the classifier object
-#'file file where you want to save the classificator
+#'file where you want to save the classificator
 #'
 #'@export
 opf_WriteModelFile <- function(g, file){
@@ -669,7 +671,7 @@ opf_ReadClassification <- function(file){ #opf_WriteOutputFile
 #'
 #'@param
 #'classes classification vector produced by the classificator
-#'file file where you want to save the classification vector
+#'file where you want to save the classification vector
 #'
 #'@export
 opf_WriteClassification <- function(classes, file){ #opf_WriteOutputFile
@@ -681,15 +683,15 @@ opf_WriteClassification <- function(classes, file){ #opf_WriteOutputFile
 #'Reads a file which has the precalculated distances
 #'
 #'@param
-#'file file which has the nodes classification
+#'file file which has the distances matrix
 #'
 #'@return
 #'Returns the precalculated distances matrix
 #'
 #'@export
-opf_ReadDistances <- function(fileName)
+opf_ReadDistances <- function(file)
 {
-  fp <- file(fileName,"rb");
+  fp <- file(file,"rb");
   nsamples <- readBin(fp, "int", size=4, endian = "little")
   #if (fread(&nsamples, sizeof(int), 1, fp) != 1)
   #  Error("Could not read number of samples","opf_ReadDistances"); #arrumar
@@ -712,9 +714,9 @@ opf_ReadDistances <- function(fileName)
 #'file file where you want to save the distances
 #'
 #'@export
-opf_WriteDistances <- function(distances, fileName)
+opf_WriteDistances <- function(distances, file)
 {
-  fp <- file(fileName,"wb");
+  fp <- file(file,"wb");
   writeBin(as.integer(nrow(distances)), size = 4, fp)
   for (i in 1:as.integer(nrow(distances)))
   {

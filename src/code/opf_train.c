@@ -48,7 +48,7 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nWriting classifier's model file ...");
 	
-	opf_WriteModelFile(g, "classifier.opf");
+	opf_WriteModelFile(g, strcat(argv[1],".classifier.opf"));
 	Rprintf(" OK");
 	
 
