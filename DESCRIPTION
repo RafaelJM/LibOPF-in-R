@@ -1,8 +1,8 @@
 Package: LibOPF
 Type: Package
-Title: Functions for Free Usage to the Design of Optimum-Path Forest Classifiers
+Title: Functions to the design of Optimum-Path Forest classifiers
 Version: 0.1.0
-Author: João Paulo Papa and Alexandre Xavier Falcão and Rafael Junqueira Martarelli
+Author: João Paulo Papa and Rafael Junqueira Martarelli
 Maintainer: Rafael Junqueira Martarelli <rfel.jm@gmail.com>
 Description: The LibOPF is a framework to develop pattern recognition techniques based on optimum-path forests (OPF), with methods for supervised learning and data clustering. Please visit our Wiki for all the information needed to work with LibOPF: <https://github.com/jppbsi/LibOPF/wiki> and <http://www.ic.unicamp.br/~afalcao/libopf/> for mor information.
 License: MIT + file LICENSE
