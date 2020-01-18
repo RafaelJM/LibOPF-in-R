@@ -30,3 +30,5 @@ export(opf_write_modelfile)
 export(opf_write_subGraph)
 export(svm2opf)
 export(txt2opf)
+
+useDynLib(libOPF, .registration = TRUE)
