@@ -2,24 +2,24 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf_cluster}
 \alias{opf_cluster}
-\title{Computes clusters by OPF}
+\title{Computes clusters by unsupervised OPF}
 \usage{
 opf_cluster(dataSet, kmax, calculateOp, value, precomputedDistance = NA)
 }
 \arguments{
-\item{dataSet}{Unlabeled subgraph object}
+\item{dataSet}{The training object produced by the opf_split function (subGraph object)}
 
-\item{kmax}{kmax(maximum degree for the knn graph)}
+\item{kmax}{The kmax (maximum degree for the knn graph)}
 
-\item{calculateOp}{how its calculate. 0 for (height), 1 for (area) and 2 for (volume)}
+\item{calculateOp}{Clusters by: 0 for height, 1 for area and 2 for volume}
 
-\item{value}{value of parameter "op" in (0-1)}
+\item{value}{Value of parameter "calculateOp" in [0-1]}
 
-\item{precomputedDistance}{The precomputed distance subgraph object (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
 \value{
-Returns a list which contains the classifier object and the classificantion array object
+Returns a list which contains the classifier object and the classification list object (i.e., clusters' id)
 }
 \description{
-Computes clusters by OPF
+Computes clusters by unsupervised OPF
 }

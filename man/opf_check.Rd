@@ -2,15 +2,15 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf_check}
 \alias{opf_check}
-\title{Check the OPF file}
+\title{Checks the OPF file for proper formatting purposes}
 \usage{
-opf_check(inputFile)
+opf_check(file)
 }
 \arguments{
-\item{inputFile}{path to input ASCII file in the LibOPF format}
+\item{file}{The text OPF file name}
 }
 \description{
-Check the OPF file
+Checks the OPF file for proper formatting purposes
 }
 \details{
 usage opf_check <input ASCII file in the LibOPF format>:

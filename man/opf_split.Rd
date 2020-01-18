@@ -7,7 +7,7 @@
 opf_split(dataSet, training_p, evaluating_p, testing_p, normalize)
 }
 \arguments{
-\item{dataSet}{The data subgraph object}
+\item{dataSet}{The data (subGraph object)}
 
 \item{training_p}{percentage for the training set size [0,1]}
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf_semi}
 \alias{opf_semi}
-\title{Executes the semi supervised training phase of the OPF classifier}
+\title{Executes the semi supervised training phase}
 \usage{
 opf_semi(
   labeledTrainFile,
@@ -12,17 +12,17 @@ opf_semi(
 )
 }
 \arguments{
-\item{labeledTrainFile}{Labeled training subgraph object}
+\item{labeledTrainFile}{The labeled training object (subGraph object)}
 
-\item{unLabeledTrainFile}{Unlabeled training subgraph object}
+\item{unLabeledTrainFile}{The unlabeled training object (subGraph object)}
 
-\item{evaluatFile}{Evaluation subgraph object}
+\item{evaluatFile}{The evaluation object produced by the opf_split (subGraph object)}
 
-\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
 \description{
-Executes the semi supervised training phase of the OPF classifier
+Executes the semi supervised training phase
 }
 \details{
-Returns the classifier model object
+Returns the learned model object
 }

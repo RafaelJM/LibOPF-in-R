@@ -2,16 +2,16 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf_merge}
 \alias{opf_merge}
-\title{Merge subgraphs}
+\title{Merge subGraphs}
 \usage{
 opf_merge(dataSets)
 }
 \arguments{
-\item{dataSets}{vector of dataSets objects}
+\item{dataSets}{array of subGraph objects}
 }
 \value{
-Returns the merged subgraph object
+Returns the merged subGraph object
 }
 \description{
-Merge subgraphs
+Merge subGraphs
 }

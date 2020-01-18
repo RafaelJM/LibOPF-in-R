@@ -7,17 +7,17 @@
 opf_knn_train(trainFile, evaluatFile, kmax, precomputedDistance = NA)
 }
 \arguments{
-\item{trainFile}{Training subgraph object}
+\item{trainFile}{The training object produced by the opf_split (subGraph object)}
 
-\item{evaluatFile}{Evaluation subgraph object}
+\item{evaluatFile}{The evaluation object produced by the opf_split (subGraph object)}
 
-\item{kmax}{kmax(maximum degree for the knn graph)}
+\item{kmax}{kmax (maximum degree for the knn graph)}
 
-\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
 \description{
 Executes the training phase of the OPF classifier with knn adjacency
 }
 \details{
-Creates a file .out, which is used in opf_knn_classify, for example. Also creates a .time that contais the processing time.
+Returns a list which contains the classifier object and the classification list object
 }

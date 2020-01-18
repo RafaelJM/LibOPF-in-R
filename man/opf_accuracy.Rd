@@ -2,18 +2,18 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf_accuracy}
 \alias{opf_accuracy}
-\title{Computes the OPF accuracy of a given set}
+\title{Computes the OPF accuracy}
 \usage{
 opf_accuracy(dataSet, classification)
 }
 \arguments{
-\item{dataSet}{Subgraph object, normaly is the training object}
+\item{dataSet}{Data object used in the opf_classify function (subGraph object), normaly is the testing object}
 
-\item{classification}{The classification array produced by the classification of the test subgraph}
+\item{classification}{The output list produced by opf_classify function}
 }
 \value{
-Returns the calculated test subgraph classification accuracy
+Returns the classification accuracy
 }
 \description{
-Computes the OPF accuracy of a given set
+Computes the OPF accuracy
 }

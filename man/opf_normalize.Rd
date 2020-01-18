@@ -7,10 +7,10 @@
 opf_normalize(dataSet)
 }
 \arguments{
-\item{dataSet}{The subgraph object}
+\item{dataSet}{The subGraph object}
 }
 \value{
-Returns the normalized subgraph
+Returns the normalized subGraph
 }
 \description{
 Normalizes data for the OPF classifier

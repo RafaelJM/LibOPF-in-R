@@ -7,14 +7,14 @@
 opf_fold(dataSet, k, normalize = 0)
 }
 \arguments{
-\item{dataSet}{The graph object}
+\item{dataSet}{The subGraph object}
 
-\item{k}{number of folds}
+\item{k}{Number of folds}
 
-\item{normalize}{distance normalization? 1- yes 0 - no}
+\item{normalize}{Distance normalization? 1- yes 0 - no}
 }
 \value{
-Returns a array of subgraph objects
+Returns a list of subGraph objects
 }
 \description{
 Generates k folds (objects) for the OPF classifier

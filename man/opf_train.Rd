@@ -7,12 +7,12 @@
 opf_train(dataSet, precomputedDistance = NA)
 }
 \arguments{
-\item{dataSet}{The training subgraph object}
+\item{dataSet}{The training object produced by the opf_split (subGraph object)}
 
-\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
 \value{
-Returns a list which contains the classifier object and the classificantion array object
+Returns a list which contains the classifier object and the classification list object
 }
 \description{
 Executes the training phase of the OPF classifier

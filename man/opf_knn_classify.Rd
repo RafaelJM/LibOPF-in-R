@@ -7,14 +7,14 @@
 opf_knn_classify(dataSet, classifier, precomputedDistance = NA)
 }
 \arguments{
-\item{dataSet}{Testing subgraph object}
+\item{dataSet}{The testing object produced by the opf_split (subGraph object)}
 
-\item{classifier}{The classifier model object}
+\item{classifier}{The classifier object produced by one of the classification functions (model object)}
 
-\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
 \value{
-Returns the given graph classification array
+Returns the given subGraph classification list
 }
 \description{
 Executes the test phase of the OPF classifier with knn adjacency

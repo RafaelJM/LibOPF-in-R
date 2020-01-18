@@ -2,15 +2,15 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf2txt}
 \alias{opf2txt}
-\title{Converts OPF to text}
+\title{Converts an OPF subGraph object to a text file}
 \usage{
-opf2txt(inputFile, outputFile)
+opf2txt(data, outputFile)
 }
 \arguments{
-\item{inputFile}{path to OPF input file}
+\item{data}{OPF subGraph object}
 
-\item{outputFile}{path to text output file}
+\item{outputFile}{Text output file name}
 }
 \description{
-Converts OPF to text
+Converts an OPF subGraph object to a text file
 }

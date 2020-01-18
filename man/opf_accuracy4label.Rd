@@ -7,12 +7,12 @@
 opf_accuracy4label(dataSet, classification)
 }
 \arguments{
-\item{dataSet}{Subgraph object, normaly is the training object}
+\item{dataSet}{Data object used in in the opf_classify function (subGraph object), normaly is the testing object}
 
-\item{classification}{The classification array produced by the classification of the test subgraph}
+\item{classification}{The output list produced by opf_classify function}
 }
 \value{
-Returns the calculated test subgraph classification accuracy for each class
+Returns the classification accuracy for each class
 }
 \description{
 Computes the OPF accuracy for each class of a given set

@@ -2,15 +2,16 @@
 % Please edit documentation in R/LibOPF.R
 \name{svm2opf}
 \alias{svm2opf}
-\title{Converts SVM to OPF}
+\title{Converts a LIBSVM file to an OPF subGraph object}
 \usage{
-svm2opf(inputFile, outputFile)
+svm2opf(inputFile)
 }
 \arguments{
-\item{inputFile}{path to SVM input file}
-
-\item{outputFile}{path to OPF output file}
+\item{inputFile}{LIBSVM input file}
+}
+\value{
+Returns the OPF object
 }
 \description{
-Converts SVM to OPF
+Converts a LIBSVM file to an OPF subGraph object
 }

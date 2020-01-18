@@ -7,14 +7,14 @@
 opf_distance(dataSet, distanceOp, normalize = 0)
 }
 \arguments{
-\item{dataSet}{Subgraph object, normaly is the full data}
+\item{dataSet}{The subGraph object, normaly is the whole data}
 
-\item{distanceOp}{distance calculation option}
+\item{distanceOp}{Distance calculation option}
 
-\item{normalize}{distance normalization? 1- yes 0 - no}
+\item{normalize}{Distance normalization? 1- yes 0 - no}
 }
 \value{
-Returns a distance matrix
+Returns the distance matrix
 }
 \description{
 Generates the precomputed distance file for the OPF classifier

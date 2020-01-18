@@ -2,7 +2,7 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf_pruning}
 \alias{opf_pruning}
-\title{Executes the pruning algorithm of the OPF classifier}
+\title{Executes the pruning algorithm}
 \usage{
 opf_pruning(
   dataTraining,
@@ -12,17 +12,17 @@ opf_pruning(
 )
 }
 \arguments{
-\item{dataTraining}{Training subgraph object}
+\item{dataTraining}{The training object produced by the opf_split (subGraph object)}
 
-\item{dataEvaluating}{Evaluating subgraph object}
+\item{dataEvaluating}{The evaluating object produced by the opf_split (subGraph object)}
 
-\item{percentageAccuracy}{percentage of accuracy [0,1]}
+\item{percentageAccuracy}{Percentage of accuracy [0,1]}
 
-\item{precomputedDistance}{The precomputed distance matrix (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
 \value{
 Returns the classifier model object
 }
 \description{
-Executes the pruning algorithm of the OPF classifier
+Executes the pruning algorithm
 }

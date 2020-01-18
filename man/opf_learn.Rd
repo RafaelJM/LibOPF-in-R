@@ -2,23 +2,23 @@
 % Please edit documentation in R/LibOPF.R
 \name{opf_learn}
 \alias{opf_learn}
-\title{Executes the learning phase for the OPF classifier}
+\title{Executes the learning phase of the OPF classifier}
 \usage{
 opf_learn(trainFile, evaluatFile, precomputedDistance = NA)
 }
 \arguments{
-\item{trainFile}{The training set object}
+\item{trainFile}{The training object produced by the opf_split (subGraph object)}
 
-\item{evaluatFile}{The evaluation set object}
+\item{evaluatFile}{The evaluation produced object by the opf_split (subGraph object)}
 
-\item{precomputedDistance}{The precomputed distance subgraph object (leave it in blank if you are not using this resource)}
+\item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
 \value{
 Returns the classifier model object
 }
 \description{
-Executes the learning phase for the OPF classifier
+Executes the learning phase of the OPF classifier
 }
 \details{
-Execute the training phase and generates an output file named classifier.opf
+Executes the training phase
 }
