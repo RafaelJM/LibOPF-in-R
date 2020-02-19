@@ -4,7 +4,7 @@
 \alias{opf_split}
 \title{Generates training, evaluation and test sets for the OPF classifier}
 \usage{
-opf_split(dataSet, training_p, evaluating_p, testing_p, normalize)
+opf_split(dataSet, training_p, evaluating_p, testing_p, normalize = 0)
 }
 \arguments{
 \item{dataSet}{The data (subGraph object)}
@@ -18,7 +18,7 @@ opf_split(dataSet, training_p, evaluating_p, testing_p, normalize)
 \item{normalize}{distance normalization? 1- yes 0 - no}
 }
 \value{
-Returns the Training, Evaluating and the Testing objects
+Returns the training, evaluating and the testing objects
 }
 \description{
 Generates training, evaluation and test sets for the OPF classifier

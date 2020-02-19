@@ -55,7 +55,8 @@ static int main(int argc, char **argv)
 
 	Rprintf("\n\nWriting classifier's model file ...");
 	
-	opf_WriteModelFile(gTrain, strcat(argv[1],".classifier.opf"));
+	sprintf(fileName, "%s.classifier.opf", argv[1]);
+	opf_WriteModelFile(gTrain, fileName);
 	Rprintf(" OK");
 	
 	Rprintf(" OK");

@@ -29,7 +29,8 @@ static int main(int argc, char **argv)
 		opf_PrecomputedDistance = 1;
 	Rprintf("\nReading data files ...");
 	
-	Subgraph *gTest = ReadSubgraph(argv[1]), *gTrain = opf_ReadModelFile(strcat(argv[1],".classifier.opf")); if(errorOccurred) return 0;
+	sprintf(fileName, "%s.classifier.opf", argv[1]);
+	Subgraph *gTest = ReadSubgraph(argv[1]), *gTrain = opf_ReadModelFile(fileName); if(errorOccurred) return 0;
 	Rprintf(" OK");
 	
 

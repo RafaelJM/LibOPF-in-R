@@ -14,7 +14,7 @@ opf_learn(trainFile, evaluatFile, precomputedDistance = NA)
 \item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
 \value{
-Returns the classifier model object
+Returns a list which contains the classifier model object
 }
 \description{
 Executes the learning phase of the OPF classifier

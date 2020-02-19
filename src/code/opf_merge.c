@@ -22,7 +22,8 @@ static int main(int argc, char **argv)
 	}
 	Subgraph **g = (Subgraph **)malloc(sizeof(Subgraph **) * (argc - 1)), *merged = NULL, *aux = NULL;
 	int i;
-
+	char fileName[512];
+	
 	Rprintf("\nReading data sets ...");
 	
 	for (i = 0; i < argc - 1; i++){
@@ -42,7 +43,8 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nWriting data set to disk ...");
 	
-	WriteSubgraph(aux, strcat(argv[1],".merged.dat")); if(errorOccurred) return 0;
+	sprintf(fileName, "%s.merged.dat", argv[1]);
+	WriteSubgraph(aux, fileName); if(errorOccurred) return 0;
 	Rprintf(" OK");
 	
 

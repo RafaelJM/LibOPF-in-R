@@ -29,7 +29,9 @@ static int main(int argc, char **argv)
 	}
 
 	Subgraph *sg = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
-	FILE *fp = fopen(strcat(argv[1],".distances.dat"), "wb"); //Changed to send to tempdir
+	char fileName[256];
+	sprintf(fileName, "%s.distances.dat", argv[1]);
+	FILE *fp = fopen(fileName, "wb"); //Changed to send to tempdir
 	int i, j, distance = atoi(argv[2]), normalize = atoi(argv[3]);
 	float **Distances = NULL, max = -FLT_MAX;
 

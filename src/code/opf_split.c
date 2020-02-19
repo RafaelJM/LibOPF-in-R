@@ -40,6 +40,7 @@ static int main(int argc, char **argv)
 	Subgraph *g = NULL, *gAux = NULL, *gTraining = NULL, *gEvaluating = NULL, *gTesting = NULL;
 	float training_p = atof(argv[2]), evaluating_p = atof(argv[3]), testing_p = atof(argv[4]);
 	int normalize = atoi(argv[5]);
+	char fileName[256];
 
 	CheckInputData(training_p, evaluating_p, testing_p); if(errorOccurred) return 0;
 
@@ -69,11 +70,14 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nWriting data sets to disk ...");
 	
-	WriteSubgraph(gTraining, strcat(argv[1],".training.dat")); if(errorOccurred) return 0;
+	sprintf(fileName, "%s.training.dat", argv[1]);
+	WriteSubgraph(gTraining, fileName); if(errorOccurred) return 0;
 	if (evaluating_p > 0){
-		WriteSubgraph(gEvaluating, strcat(argv[1],".evaluating.dat")); if(errorOccurred) return 0;
+		sprintf(fileName, "%s.evaluating.dat", argv[1]);
+		WriteSubgraph(gEvaluating, fileName); if(errorOccurred) return 0;
 	}
-	WriteSubgraph(gTesting, strcat(argv[1],".testing.dat")); if(errorOccurred) return 0;
+	sprintf(fileName, "%s.testing.dat", argv[1]);
+	WriteSubgraph(gTesting, fileName); if(errorOccurred) return 0;
 	Rprintf(" OK");
 	
 
