@@ -7,10 +7,21 @@
 opf_write_modelfile(g, file)
 }
 \arguments{
-\item{g}{the classifier object}
+\item{g}{The classifier object}
 
-\item{file}{file name to save the classifier}
+\item{file}{The file name to save the classifier}
 }
 \description{
 Writes into a file the trained OPF classifier
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.5,0,0.5,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_train(T)
+opf_write_modelfile(Y$classifier, "C:/Users/Public/classifier.dat")
+}
+
 }

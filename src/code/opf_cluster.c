@@ -7,13 +7,6 @@ static int main(int argc, char **argv)
 	float value;
 	char fileName[256];
 
-	Rprintf("\nProgram that computes clusters by OPF\n");
-	Rprintf("\nIf you have any problem, please contact: ");
-	Rprintf("\n- alexandre.falcao@gmail.com");
-	Rprintf("\n- papa.joaopaulo@gmail.com\n");
-	Rprintf("\nLibOPF version 2.0 (2009)\n");
-	Rprintf("\n");
-
 	if ((argc != 6) && (argc != 5))
 	{
 		REprintf("\nusage opf_cluster <P1> <P2> <P3> <P4> <P5>");

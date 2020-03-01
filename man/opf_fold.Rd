@@ -19,3 +19,9 @@ Returns a list of subGraph objects
 \description{
 Generates k folds (objects) for the OPF classifier
 }
+\examples{
+\dontrun{
+folds <- opf_fold(dataset, 4)
+}
+
+}

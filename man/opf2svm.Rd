@@ -14,3 +14,9 @@ opf2svm(data, outputFile)
 \description{
 Converts an OPF subGraph object to a LIBSVM file
 }
+\examples{
+\dontrun{
+opf2svm(dataset,"C:/Users/Public/dataset.txt")
+}
+
+}

@@ -7,10 +7,21 @@
 opf_write_classification(classes, file)
 }
 \arguments{
-\item{classes}{classification list (i.e.,predicted labels) produced by the classifier}
+\item{classes}{The classification list (i.e.,predicted labels) produced by the classifier}
 
-\item{file}{where you want to save the classification vector}
+\item{file}{Where you want to save the classification vector}
 }
 \description{
 Writes into a file the predicted labels produced by the opf classificator
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.5,0,0.5,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_train(T)
+opf_write_modelfile(Y$classification, "C:/Users/Public/classification.txt")
+}
+
 }

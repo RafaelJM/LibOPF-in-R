@@ -9,17 +9,29 @@ opf_split(dataSet, training_p, evaluating_p, testing_p, normalize = 0)
 \arguments{
 \item{dataSet}{The data (subGraph object)}
 
-\item{training_p}{percentage for the training set size [0,1]}
+\item{training_p}{Percentage for the training set size [0,1]}
 
-\item{evaluating_p}{percentage for the evaluation set size [0,1] (leave 0 in the case of no learning)}
+\item{evaluating_p}{Percentage for the evaluation set size [0,1] (leave 0 in the case of no learning)}
 
-\item{testing_p}{percentage for the test set size [0,1]}
+\item{testing_p}{Percentage for the test set size [0,1]}
 
-\item{normalize}{distance normalization? 1- yes 0 - no}
+\item{normalize}{Distance normalization? 1- yes 0 - no}
 }
 \value{
 Returns the training, evaluating and the testing objects
 }
 \description{
 Generates training, evaluation and test sets for the OPF classifier
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.5,0,0.5,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_train(T)
+class <- opf_classify(T2, Y$classifier)
+acc <- opf_accuracy(T2, class)
+}
+
 }

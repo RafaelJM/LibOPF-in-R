@@ -7,11 +7,19 @@
 opf_merge(dataSets)
 }
 \arguments{
-\item{dataSets}{array of subGraph objects}
+\item{dataSets}{An array of subGraph objects}
 }
 \value{
 Returns the merged subGraph object
 }
 \description{
 Merge subGraphs
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.5,0,0.5,0)
+opf_merge(c(X$training,X$testing))
+}
+
 }

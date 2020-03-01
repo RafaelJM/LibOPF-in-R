@@ -15,3 +15,9 @@ Returns the OPF object
 \description{
 Converts a LIBSVM file to an OPF subGraph object
 }
+\examples{
+\dontrun{
+dataset <- opf2svm("C:/Users/Public/dataset.txt")
+}
+
+}

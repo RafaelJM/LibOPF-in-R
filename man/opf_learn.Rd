@@ -22,3 +22,16 @@ Executes the learning phase of the OPF classifier
 \details{
 Executes the training phase
 }
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.3,0.2,0.5,0)
+T <- X$training
+T2 <- X$testing
+E <- X$evaluating
+Y <- opf_learn(T,E)
+class <- opf_classify(T2, Y$classifier)
+acc <- opf_accuracy(T2, class)
+}
+
+}

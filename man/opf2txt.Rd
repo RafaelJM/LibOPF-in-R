@@ -14,3 +14,9 @@ opf2txt(data, outputFile)
 \description{
 Converts an OPF subGraph object to a text file
 }
+\examples{
+\dontrun{
+opf2txt(dataset,"C:/Users/Public/dataset.txt")
+}
+
+}

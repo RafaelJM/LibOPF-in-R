@@ -8,7 +8,7 @@ opf_pruning(
   dataTraining,
   dataEvaluating,
   percentageAccuracy,
-  precomputedDistance
+  precomputedDistance = NA
 )
 }
 \arguments{
@@ -25,4 +25,16 @@ Returns a list which contains the classifier model object
 }
 \description{
 Executes the pruning algorithm
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.8,0,0.2,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_pruning(T,E,0.8)
+class <- opf_knn_classify(T2, Y$classifier)
+acc <- opf_accuracy(T2, class)
+}
+
 }

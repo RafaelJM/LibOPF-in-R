@@ -6,6 +6,17 @@
 #'@return
 #'Returns the classification accuracy
 #'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T)
+#'class <- opf_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 opf_accuracy <- function(dataSet, classification){
@@ -24,6 +35,17 @@ opf_accuracy <- function(dataSet, classification){
 #'
 #'@return
 #'Returns the classification accuracy for each class
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T)
+#'class <- opf_classify(T2, Y$classifier)
+#'acc <- opf_accuracy4label(T2, class)
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -44,6 +66,17 @@ opf_accuracy4label <- function(dataSet, classification){
 #'
 #'@return
 #'Returns the given subGraph classification list (predicted labels)
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T)
+#'class <- opf_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -70,6 +103,17 @@ opf_classify <- function(dataSet, classifier, precomputedDistance = NA){
 #'
 #'@return
 #'Returns a list which contains the classifier object and the classification list object (i.e., clusters' id)
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.8,0,0.2,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_cluster(T,100,1,0.2)
+#'class <- opf_knn_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -104,6 +148,18 @@ opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = 
 #'@return
 #'Returns the distance matrix
 #'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'dist <- opf_distance(dat,3,0)
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T,dist)
+#'class <- opf_classify(T2, Y$classifier,dist)
+#'acc <- opf_accuracy(T2, class)
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 opf_distance <- function(dataSet, distanceOp, normalize = 0){
@@ -123,6 +179,11 @@ opf_distance <- function(dataSet, distanceOp, normalize = 0){
 #'@return
 #'Returns a list of subGraph objects
 #'
+#'@examples
+#'\dontrun{
+#'folds <- opf_fold(dataset, 4)
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 opf_fold <- function(dataSet, k, normalize = 0){
@@ -141,6 +202,11 @@ opf_fold <- function(dataSet, k, normalize = 0){
 #'Gives information about the OPF file
 #'
 #'@param dataSet The OPF file
+#'
+#'@examples
+#'\dontrun{
+#'opf_info(dataset)
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -167,6 +233,18 @@ opf_info <- function(dataSet){
 #'@return
 #'Returns a list which contains the classifier model object
 #'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.3,0.2,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'E <- X$evaluating
+#'Y <- opf_learn(T,E)
+#'class <- opf_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
@@ -184,10 +262,17 @@ opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
 
 #'Merge subGraphs
 #'
-#'@param dataSets array of subGraph objects
+#'@param dataSets An array of subGraph objects
 #'
 #'@return
 #'Returns the merged subGraph object
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'opf_merge(c(X$training,X$testing))
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -209,6 +294,11 @@ opf_merge <- function(dataSets){
 #'@return
 #'Returns the normalized subGraph
 #'
+#'@examples
+#'\dontrun{
+#'dat <- opf_normalize(dataset)
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 opf_normalize <- function(dataSet){
@@ -229,6 +319,17 @@ opf_normalize <- function(dataSet){
 #'@return
 #'Returns a list which contains the classifier model object
 #'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.8,0,0.2,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_pruning(T,E,0.8)
+#'class <- opf_knn_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precomputedDistance = NA){
@@ -246,17 +347,29 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
 
 #'Executes the semi supervised training phase
 #'
-#'@param labeledTrainFile The labeled training object (subGraph object)
-#'@param unLabeledTrainFile The unlabeled training object (subGraph object)
+#'@param labeledTrainSubGraph The labeled training object (subGraph object)
+#'@param unLabeledTrainSubGraph The unlabeled training object (subGraph object)
 #'@param evaluatFile The evaluation object produced by the opf_split (subGraph object)
 #'@param precomputedDistance The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)
 #'
 #'@details
 #'Returns the learned model object
 #'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'TUnlabeled <- opf_read_subGraph("C:/UnleabeledTrain.dat")
+#'X <- opf_split(dat,0.8,0,0.2,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_semi(T,TUnlabeled)
+#'class <- opf_knn_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
-opf_semi <- function(labeledTrainFile,  unLabeledTrainFile,  evaluatFile = NA,  precomputedDistance = NA){#?????? Arrumar C
+opf_semi <- function(labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile = NA,  precomputedDistance = NA){#?????? Arrumar C
     argv <- c("", labeledTrainFile,  unLabeledTrainFile,  evaluatFile)
     if(!is.na(precomputedDistance)){
       opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
@@ -268,13 +381,24 @@ opf_semi <- function(labeledTrainFile,  unLabeledTrainFile,  evaluatFile = NA,  
 #'Generates training, evaluation and test sets for the OPF classifier
 #'
 #'@param dataSet The data (subGraph object)
-#'@param training_p percentage for the training set size [0,1]
-#'@param evaluating_p percentage for the evaluation set size [0,1] (leave 0 in the case of no learning)
-#'@param testing_p percentage for the test set size [0,1]
-#'@param normalize distance normalization? 1- yes 0 - no
+#'@param training_p Percentage for the training set size [0,1]
+#'@param evaluating_p Percentage for the evaluation set size [0,1] (leave 0 in the case of no learning)
+#'@param testing_p Percentage for the test set size [0,1]
+#'@param normalize Distance normalization? 1- yes 0 - no
 #'
 #'@return
 #'Returns the training, evaluating and the testing objects
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T)
+#'class <- opf_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -295,6 +419,17 @@ opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize = 
 #'
 #'@return
 #'Returns a list which contains the classifier object and the classification list object
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T)
+#'class <- opf_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -319,6 +454,17 @@ opf_train <- function(dataSet, precomputedDistance = NA){
 #'@return
 #'Returns the given subGraph classification list
 #'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.8,0,0.2,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_cluster(T,100,1,0.2)
+#'class <- opf_knn_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 opf_knn_classify <- function(dataSet, classifier, precomputedDistance = NA){
@@ -338,11 +484,22 @@ opf_knn_classify <- function(dataSet, classifier, precomputedDistance = NA){
 #'
 #'@param trainFile The training object produced by the opf_split (subGraph object)
 #'@param evaluatFile The evaluation object produced by the opf_split (subGraph object)
-#'@param kmax kmax (maximum degree for the knn graph)
+#'@param kmax The kmax (maximum degree for the knn graph)
 #'@param precomputedDistance The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)
 #'
 #'@details
 #'Returns a list which contains the classifier object and the classification list object
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.8,0,0.2,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_knn_train(T,E,100)
+#'class <- opf_knn_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -370,6 +527,12 @@ opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA
 #'Note that the input file for opf_check must be a text file.
 #'Use opf2txt to convert your OPF binary file into a text file.
 #'
+#'@examples
+#'\dontrun{
+#'opf2txt(dataset,"C:/Users/Public/dataset.txt")
+#'opf_check("C:/dataset.txt")
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 opf_check <- function(file){
@@ -381,6 +544,11 @@ opf_check <- function(file){
 #'
 #'@param data The subGraph object
 #'@param outputFile LIBSVM output file name
+#'
+#'@examples
+#'\dontrun{
+#'opf2svm(dataset,"C:/Users/Public/dataset.txt")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -395,6 +563,11 @@ opf2svm <- function(data, outputFile){
 #'
 #'@param data OPF subGraph object
 #'@param outputFile Text output file name
+#'
+#'@examples
+#'\dontrun{
+#'opf2txt(dataset,"C:/Users/Public/dataset.txt")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -412,6 +585,11 @@ opf2txt <- function(data, outputFile){
 #'@return
 #'Returns the OPF object
 #'
+#'@examples
+#'\dontrun{
+#'dataset <- opf2svm("C:/Users/Public/dataset.txt")
+#'}
+#'
 #'@useDynLib libOPF
 #'@export
 svm2opf <- function(inputFile){
@@ -427,6 +605,11 @@ svm2opf <- function(inputFile){
 #'
 #'@return
 #'Returns the OPF object
+#'
+#'@examples
+#'\dontrun{
+#'dataset <- txt2opf("C:/Users/Public/dataset.txt")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -510,10 +693,13 @@ subGraph <- setRefClass (
 
 #'Creates an empty subGraph structure
 #'
-#'@param nnodes number of nodes
+#'@param nnodes Number of nodes
 #'
 #'@return
 #'Returns an empty subGraph
+#'
+#'@examples
+#'EmptySubgraph <- opf_create_subGraph(10)
 #'
 #'@useDynLib libOPF
 #'@export
@@ -531,10 +717,21 @@ opf_create_subGraph <- function(nnodes){
 
 #'Reads a file which contains the subGraph
 #'
-#'@param file file name
+#'@param file The file name
 #'
 #'@return
 #'Returns the subGraph object
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T)
+#'class <- opf_classify(T2, Y$classifier)
+#'acc <- opf_accuracy(T2, class)
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -557,8 +754,13 @@ opf_read_subGraph <- function(file){
 
 #'Writes into a file a subGraph
 #'
-#'@param g the subGraph object
-#'@param file file name to save the subGraph
+#'@param g The subGraph object
+#'@param file The file name to save the subGraph
+#'
+#'@examples
+#'\dontrun{
+#'opf_write_subGraph(dataset, "C:/Users/Public/dataset.dat")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -581,10 +783,15 @@ opf_write_subGraph <- function(g, file){
 
 #'Reads a file which contains the learned model
 #'
-#'@param file file which contains the learned model
+#'@param file The file which contains the learned model
 #'
 #'@return
 #'Returns the learned model object
+#'
+#'@examples
+#'\dontrun{
+#'classifier <- opf_read_modelfile("C:/Users/Public/classifier.dat")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -625,8 +832,18 @@ opf_read_modelfile <- function(file){
 
 #'Writes into a file the trained OPF classifier
 #'
-#'@param g the classifier object
-#'@param file file name to save the classifier
+#'@param g The classifier object
+#'@param file The file name to save the classifier
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T)
+#'opf_write_modelfile(Y$classifier, "C:/Users/Public/classifier.dat")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -662,10 +879,15 @@ opf_write_modelfile <- function(g, file){
 
 #'Reads a file which contains the nodes' predicted labels
 #'
-#'@param file file which contains the nodes' predicted labels
+#'@param file The file which contains the nodes' predicted labels
 #'
 #'@return
 #'Returns the predicted labels list
+#'
+#'@examples
+#'\dontrun{
+#'classification <- opf_read_classification("C:/Users/Public/classification.txt")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -678,8 +900,18 @@ opf_read_classification <- function(file){
 
 #'Writes into a file the predicted labels produced by the opf classificator
 #'
-#'@param classes classification list (i.e.,predicted labels) produced by the classifier
-#'@param file where you want to save the classification vector
+#'@param classes The classification list (i.e.,predicted labels) produced by the classifier
+#'@param file Where you want to save the classification vector
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'X <- opf_split(dat,0.5,0,0.5,0)
+#'T <- X$training
+#'T2 <- X$testing
+#'Y <- opf_train(T)
+#'opf_write_modelfile(Y$classification, "C:/Users/Public/classification.txt")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -691,10 +923,15 @@ opf_write_classification <- function(classes, file){
 
 #'Reads a file which contains the precalculated distances
 #'
-#'@param file file which contains the distances matrix
+#'@param file The file which contains the distances matrix
 #'
 #'@return
 #'Returns the precalculated distances matrix
+#'
+#'@examples
+#'\dontrun{
+#'distances <- opf_read_distances("C:/Users/Public/distances.dat")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -718,8 +955,15 @@ opf_read_distances <- function(file)
 
 #'Writes into a file the precalculated distances computed by opf_distances function
 #'
-#'@param distances the matrix produced by the opf distances function
-#'@param file file name where you want to save the distances
+#'@param distances The matrix produced by the opf distances function
+#'@param file The file name where you want to save the distances
+#'
+#'@examples
+#'\dontrun{
+#'dat <- opf_read_subGraph("C:/boat.dat")
+#'dist <- opf_distance(dat,3,0)
+#'opf_write_distances(dist, "C:/Users/Public/distances.dat")
+#'}
 #'
 #'@useDynLib libOPF
 #'@export
@@ -735,4 +979,36 @@ opf_write_distances <- function(distances, file)
     }
   }
   close(fp)
+}
+
+#'Runs an usage example
+#'
+#'@description
+#'This function will run this example:\cr
+#'
+#'dat <- opf_read_subGraph(dataset) (dataset is the subgraph file)\cr
+#'X <- opf_split(dat,0.5,0,0.5,0)\cr
+#'T <- X$training\cr
+#'T2 <- X$testing\cr
+#'Y <- opf_train(T)\cr
+#'class <- opf_classify(T2, Y$classifier)\cr
+#'acc <- opf_accuracy(T2, class)\cr
+#'
+#'@param dataset A dataset folder for the test
+#'
+#'@return
+#'Will return the accuracy
+#'
+#'@useDynLib libOPF
+#'@export
+opf_run_example <- function(dataset)
+{
+  dat <- opf_read_subGraph(dataset)
+  X <- opf_split(dat,0.5,0,0.5,0)
+  T <- X$training
+  T2 <- X$testing
+  Y <- opf_train(T)
+  class <- opf_classify(T2, Y$classifier)
+  acc <- opf_accuracy(T2, class)
+  return(acc)
 }

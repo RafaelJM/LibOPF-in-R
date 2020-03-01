@@ -2,14 +2,7 @@
 
 static int main(int argc, char **argv)
 {
-	errorOccurred = 0;
-	Rprintf("\nProgram that executes the learning phase for the OPF classifier\n");
-	Rprintf("\nIf you have any problem, please contact: ");
-	Rprintf("\n- alexandre.falcao@gmail.com");
-	Rprintf("\n- papa.joaopaulo@gmail.com\n");
-	Rprintf("\nLibOPF version 2.0 (2009)\n");
-	Rprintf("\n");
-	
+	errorOccurred = 0;	
 
 	if ((argc != 3) && (argc != 4))
 	{

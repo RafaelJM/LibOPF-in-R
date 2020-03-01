@@ -7,11 +7,23 @@
 opf_read_subGraph(file)
 }
 \arguments{
-\item{file}{file name}
+\item{file}{The file name}
 }
 \value{
 Returns the subGraph object
 }
 \description{
 Reads a file which contains the subGraph
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.5,0,0.5,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_train(T)
+class <- opf_classify(T2, Y$classifier)
+acc <- opf_accuracy(T2, class)
+}
+
 }

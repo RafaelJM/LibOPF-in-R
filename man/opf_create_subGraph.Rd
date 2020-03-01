@@ -7,11 +7,15 @@
 opf_create_subGraph(nnodes)
 }
 \arguments{
-\item{nnodes}{number of nodes}
+\item{nnodes}{Number of nodes}
 }
 \value{
 Returns an empty subGraph
 }
 \description{
 Creates an empty subGraph structure
+}
+\examples{
+EmptySubgraph <- opf_create_subGraph(10)
+
 }

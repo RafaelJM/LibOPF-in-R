@@ -7,11 +7,17 @@
 opf_read_classification(file)
 }
 \arguments{
-\item{file}{file which contains the nodes' predicted labels}
+\item{file}{The file which contains the nodes' predicted labels}
 }
 \value{
 Returns the predicted labels list
 }
 \description{
 Reads a file which contains the nodes' predicted labels
+}
+\examples{
+\dontrun{
+classification <- opf_read_classification("C:/Users/Public/classification.txt")
+}
+
 }

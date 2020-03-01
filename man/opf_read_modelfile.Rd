@@ -7,11 +7,17 @@
 opf_read_modelfile(file)
 }
 \arguments{
-\item{file}{file which contains the learned model}
+\item{file}{The file which contains the learned model}
 }
 \value{
 Returns the learned model object
 }
 \description{
 Reads a file which contains the learned model
+}
+\examples{
+\dontrun{
+classifier <- opf_read_modelfile("C:/Users/Public/classifier.dat")
+}
+
 }

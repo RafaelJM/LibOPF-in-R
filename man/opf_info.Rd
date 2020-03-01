@@ -12,3 +12,9 @@ opf_info(dataSet)
 \description{
 Gives information about the OPF file
 }
+\examples{
+\dontrun{
+opf_info(dataset)
+}
+
+}

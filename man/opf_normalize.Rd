@@ -15,3 +15,9 @@ Returns the normalized subGraph
 \description{
 Normalizes data for the OPF classifier
 }
+\examples{
+\dontrun{
+dat <- opf_normalize(dataset)
+}
+
+}

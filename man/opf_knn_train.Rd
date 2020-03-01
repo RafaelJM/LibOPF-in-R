@@ -11,7 +11,7 @@ opf_knn_train(trainFile, evaluatFile, kmax, precomputedDistance = NA)
 
 \item{evaluatFile}{The evaluation object produced by the opf_split (subGraph object)}
 
-\item{kmax}{kmax (maximum degree for the knn graph)}
+\item{kmax}{The kmax (maximum degree for the knn graph)}
 
 \item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
@@ -20,4 +20,16 @@ Executes the training phase of the OPF classifier with knn adjacency
 }
 \details{
 Returns a list which contains the classifier object and the classification list object
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.8,0,0.2,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_knn_train(T,E,100)
+class <- opf_knn_classify(T2, Y$classifier)
+acc <- opf_accuracy(T2, class)
+}
+
 }

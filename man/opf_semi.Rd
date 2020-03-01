@@ -5,16 +5,16 @@
 \title{Executes the semi supervised training phase}
 \usage{
 opf_semi(
-  labeledTrainFile,
-  unLabeledTrainFile,
+  labeledTrainSubGraph,
+  unLabeledTrainSubGraph,
   evaluatFile = NA,
   precomputedDistance = NA
 )
 }
 \arguments{
-\item{labeledTrainFile}{The labeled training object (subGraph object)}
+\item{labeledTrainSubGraph}{The labeled training object (subGraph object)}
 
-\item{unLabeledTrainFile}{The unlabeled training object (subGraph object)}
+\item{unLabeledTrainSubGraph}{The unlabeled training object (subGraph object)}
 
 \item{evaluatFile}{The evaluation object produced by the opf_split (subGraph object)}
 
@@ -25,4 +25,17 @@ Executes the semi supervised training phase
 }
 \details{
 Returns the learned model object
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+TUnlabeled <- opf_read_subGraph("C:/UnleabeledTrain.dat")
+X <- opf_split(dat,0.8,0,0.2,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_semi(T,TUnlabeled)
+class <- opf_knn_classify(T2, Y$classifier)
+acc <- opf_accuracy(T2, class)
+}
+
 }

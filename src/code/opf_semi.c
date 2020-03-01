@@ -2,15 +2,7 @@
 
 static int main(int argc, char **argv)
 {
-  errorOccurred = 0;
-  Rprintf("\nProgram that executes the semi supervised training phase of the OPF classifier\n");
-  Rprintf("\nIf you have any problem, please contact: ");
-  Rprintf("\n- paraguassuec@gmail.com");
-  Rprintf("\n- alexandre.falcao@gmail.com");
-  Rprintf("\n- papa.joaopaulo@gmail.com\n");
-  Rprintf(opf_version);
-  Rprintf("\n");
-  
+  errorOccurred = 0;  
 
   if ((argc != 5) && (argc != 4) && (argc != 3) && (argc != 2))
   {

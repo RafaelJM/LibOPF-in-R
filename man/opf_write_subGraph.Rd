@@ -7,10 +7,16 @@
 opf_write_subGraph(g, file)
 }
 \arguments{
-\item{g}{the subGraph object}
+\item{g}{The subGraph object}
 
-\item{file}{file name to save the subGraph}
+\item{file}{The file name to save the subGraph}
 }
 \description{
 Writes into a file a subGraph
+}
+\examples{
+\dontrun{
+opf_write_subGraph(dataset, "C:/Users/Public/dataset.dat")
+}
+
 }

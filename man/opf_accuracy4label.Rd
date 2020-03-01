@@ -17,3 +17,15 @@ Returns the classification accuracy for each class
 \description{
 Computes the OPF accuracy for each class of a given set
 }
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+X <- opf_split(dat,0.5,0,0.5,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_train(T)
+class <- opf_classify(T2, Y$classifier)
+acc <- opf_accuracy4label(T2, class)
+}
+
+}

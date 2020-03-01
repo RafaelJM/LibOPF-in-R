@@ -29,3 +29,16 @@ Options for distance calculation:\cr
 6 - Squared Chi-Squared\cr
 7 - BrayCurtis
 }
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+dist <- opf_distance(dat,3,0)
+X <- opf_split(dat,0.5,0,0.5,0)
+T <- X$training
+T2 <- X$testing
+Y <- opf_train(T,dist)
+class <- opf_classify(T2, Y$classifier,dist)
+acc <- opf_accuracy(T2, class)
+}
+
+}

@@ -17,3 +17,10 @@ usage opf_check <input ASCII file in the LibOPF format>:
 Note that the input file for opf_check must be a text file.
 Use opf2txt to convert your OPF binary file into a text file.
 }
+\examples{
+\dontrun{
+opf2txt(dataset,"C:/Users/Public/dataset.txt")
+opf_check("C:/dataset.txt")
+}
+
+}

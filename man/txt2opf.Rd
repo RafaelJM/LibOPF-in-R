@@ -15,3 +15,9 @@ Returns the OPF object
 \description{
 Converts a text file to an OPF subGraph object
 }
+\examples{
+\dontrun{
+dataset <- txt2opf("C:/Users/Public/dataset.txt")
+}
+
+}

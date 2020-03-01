@@ -7,10 +7,18 @@
 opf_write_distances(distances, file)
 }
 \arguments{
-\item{distances}{the matrix produced by the opf distances function}
+\item{distances}{The matrix produced by the opf distances function}
 
-\item{file}{file name where you want to save the distances}
+\item{file}{The file name where you want to save the distances}
 }
 \description{
 Writes into a file the precalculated distances computed by opf_distances function
+}
+\examples{
+\dontrun{
+dat <- opf_read_subGraph("C:/boat.dat")
+dist <- opf_distance(dat,3,0)
+opf_write_distances(dist, "C:/Users/Public/distances.dat")
+}
+
 }

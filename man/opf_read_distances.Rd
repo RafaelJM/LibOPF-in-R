@@ -7,11 +7,17 @@
 opf_read_distances(file)
 }
 \arguments{
-\item{file}{file which contains the distances matrix}
+\item{file}{The file which contains the distances matrix}
 }
 \value{
 Returns the precalculated distances matrix
 }
 \description{
 Reads a file which contains the precalculated distances
+}
+\examples{
+\dontrun{
+distances <- opf_read_distances("C:/Users/Public/distances.dat")
+}
+
 }
