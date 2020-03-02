@@ -10,12 +10,12 @@ opf_run_example(dataset)
 \item{dataset}{A dataset folder for the test}
 }
 \value{
-Will return the acc
+Will return the accuracy
 }
 \description{
 This function will run this example:\cr
 
-dat <- opf_read_subGraph("C:/boat.dat") (dataset is the subgraph file)\cr
+dat <- opf_read_subGraph(dataset) (dataset is the subgraph file)\cr
 X <- opf_split(dat,0.5,0,0.5,0)\cr
 T <- X$training\cr
 T2 <- X$testing\cr

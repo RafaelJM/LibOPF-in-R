@@ -85,7 +85,7 @@ opf_classify <- function(dataSet, classifier, precomputedDistance = NA){
   opf_write_subGraph(dataSet,file)
   opf_write_modelfile(classifier,paste(file,".classifier.opf", sep = ""))
   argv <- c("", file)
-  if(!is.na(precomputedDistance)){
+  if(length(precomputedDistance) > 1){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
@@ -121,7 +121,7 @@ opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = 
   file <- tempfile()
   opf_write_subGraph(dataSet,file)
   argv <- c("", file,kmax,calculateOp,value)
-  if(!is.na(precomputedDistance)){
+  if(length(precomputedDistance) > 1){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
@@ -252,7 +252,7 @@ opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
   opf_write_subGraph(trainFile,file)
   opf_write_subGraph(evaluatFile,paste(file,".evaluet", sep = ""))
   argv <- c("", file, paste(file,".evaluet", sep = ""))
-  if(!is.na(precomputedDistance)){
+  if(length(precomputedDistance) > 1){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
@@ -337,7 +337,7 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
   opf_write_subGraph(dataTraining,file)
   opf_write_subGraph(dataEvaluating,paste(file,".evaluate", sep = ""))
   argv <- c("", file,  paste(file,".evaluate", sep = ""),  percentageAccuracy)
-  if(!is.na(precomputedDistance)){
+  if(length(precomputedDistance) > 1){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
@@ -369,9 +369,9 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
 #'
 #'@useDynLib libOPF
 #'@export
-opf_semi <- function(labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile = NA,  precomputedDistance = NA){#?????? Arrumar C
+opf_semi <- function(labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile = NA,  precomputedDistance = NA){
     argv <- c("", labeledTrainFile,  unLabeledTrainFile,  evaluatFile)
-    if(!is.na(precomputedDistance)){
+    if(length(precomputedDistance) > 1){
       opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
       argv <- append(argv,paste(file,".distances", sep = ""))
     }
@@ -437,7 +437,7 @@ opf_train <- function(dataSet, precomputedDistance = NA){
   file <- tempfile()
   opf_write_subGraph(dataSet,file)
   argv <- c("", file)
-  if(!is.na(precomputedDistance)){
+  if(length(precomputedDistance) > 1){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
@@ -472,7 +472,7 @@ opf_knn_classify <- function(dataSet, classifier, precomputedDistance = NA){
   opf_write_subGraph(dataSet,file)
   opf_write_modelfile(classifier,paste(file,".classifier.opf", sep = ""))
   argv <- c("", file)
-  if(!is.na(precomputedDistance)){
+  if(length(precomputedDistance) > 1){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
@@ -508,7 +508,7 @@ opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA
   opf_write_subGraph(trainFile,file)
   opf_write_subGraph(evaluatFile,paste(file,".evaluat", sep = ""))
   argv <- c("", file, paste(file,".evaluat", sep = ""), kmax)
-  if(!is.na(precomputedDistance)){
+  if(length(precomputedDistance) > 1){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
@@ -624,6 +624,7 @@ txt2opf <- function(inputFile){
 #'
 #'@import methods
 #'@exportClass SNode
+#'@export SNode
 SNode <- setRefClass (
   "SNode",
   fields = list(
@@ -655,6 +656,9 @@ SNode <- setRefClass (
         position <<- 0
         nplatadj <<- 0
         status <<- -1
+        feat <<- vector(mode = "numeric")
+        relevant <<- 0
+        adj <<- -1
       })
 )
 
@@ -662,6 +666,7 @@ SNode <- setRefClass (
 #'
 #'@import methods
 #'@exportClass subGraph
+#'@export subGraph
 subGraph <- setRefClass (
   "subGraph",
   fields = list(
@@ -688,6 +693,7 @@ subGraph <- setRefClass (
         mindens <<- 0.0
         maxdens <<- 0.0
         K <<- 0.0
+        ordered_list_of_nodes <<- vector(mode = "integer")
       })
 )
 
@@ -709,7 +715,7 @@ opf_create_subGraph <- function(nnodes){
   sg$ordered_list_of_nodes <- vector(mode = "integer", length = nnodes)
   for(i in 1:nnodes){
     sg$node <- c(sg$node, SNode())
-    sg$node[[i]]$feat <- NA
+    sg$node[[i]]$feat <- vector(mode = "numeric")
     sg$node[[i]]$relevant <- 0
   }
   return(sg)
@@ -796,10 +802,6 @@ opf_write_subGraph <- function(g, file){
 #'@useDynLib libOPF
 #'@export
 opf_read_modelfile <- function(file){
-  #if((fp = fopen(file, "rb")) == NULL){ #arrumar
-  #  sprintf(msg, "%s%s", "Unable to open file ", file)
-  #  Error(msg,"ReadsubGraph")
-  #}
   binFile <- file(file, "rb")
   nnodes <- readBin(binFile, "int", size=4, endian = "little")
   g <- opf_create_subGraph(nnodes)
@@ -939,8 +941,6 @@ opf_read_distances <- function(file)
 {
   fp <- file(file,"rb");
   nsamples <- readBin(fp, "int", size=4, endian = "little")
-  #if (fread(&nsamples, sizeof(int), 1, fp) != 1)
-  #  Error("Could not read number of samples","opf_read_distances"); #arrumar
   M <- matrix(data = 0, nrow = nsamples, ncol = nsamples)
   for (i in 1:nsamples)
   {
