@@ -370,7 +370,7 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
 #'@useDynLib libOPF
 #'@export
 opf_semi <- function(labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile = NA,  precomputedDistance = NA){
-    argv <- c("", labeledTrainFile,  unLabeledTrainFile,  evaluatFile)
+    argv <- c("", labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile)
     if(length(precomputedDistance) > 1){
       opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
       argv <- append(argv,paste(file,".distances", sep = ""))
