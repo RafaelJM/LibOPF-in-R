@@ -8,7 +8,6 @@
 */
 
 /* .Call calls */
-extern SEXP kmeans(int, char **);
 extern SEXP opf_accuracy(int, char **);
 extern SEXP opf_accuracy4label(int, char **);
 extern SEXP opf_check(int, char **);
@@ -32,7 +31,6 @@ extern SEXP svm2opf(int, char **);
 extern SEXP txt2opf(int, char **);
 
 static const R_CallMethodDef CallEntries[] = {
-    {"kmeans",             (DL_FUNC) &kmeans,             2},
     {"opf_accuracy",       (DL_FUNC) &opf_accuracy,       2},
     {"opf_accuracy4label", (DL_FUNC) &opf_accuracy4label, 2},
     {"opf_check",          (DL_FUNC) &opf_check,          2},

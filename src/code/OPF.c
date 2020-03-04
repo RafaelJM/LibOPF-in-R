@@ -1248,7 +1248,7 @@ Subgraph **kFoldSubgraph(Subgraph *sg, int k)
   int totelems, foldsize = 0, i, *label = (int *)calloc((sg->nlabels + 1), sizeof(int));
   int *nelems = (int *)calloc((sg->nlabels + 1), sizeof(int)), j, z, w, m, n;
   int *nelems_aux = (int *)calloc((sg->nlabels + 1), sizeof(int)), *resto = (int *)calloc((sg->nlabels + 1), sizeof(int));
-  char msg[64];
+  char msg[100];
 
   for (i = 0; i < sg->nnodes; i++)
   {
