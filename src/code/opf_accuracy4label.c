@@ -74,7 +74,7 @@ static int main(int argc, char **argv)
 	return 0;
 }
 
-void opf_accuracy4label(int *argc, char **argv){
+void c_opf_accuracy4label(int *argc, char **argv){
 	main(*argc,argv);
 	
 }

@@ -98,7 +98,7 @@ static int main(int argc, char **argv)
   return 0;
 }
 
-void opf_semi(int *argc, char **argv){
+void c_opf_semi(int *argc, char **argv){
 	main(*argc,argv);
 	
 }

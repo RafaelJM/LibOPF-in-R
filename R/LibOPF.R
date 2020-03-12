@@ -1,3 +1,6 @@
+#' @useDynLib LibOPF, .registration = TRUE
+NULL
+
 #'Computes the OPF accuracy
 #'
 #'@param dataSet Data object used in the opf_classify function (subGraph object), normaly is the testing object
@@ -17,14 +20,13 @@
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_accuracy <- function(dataSet, classification){
   file <- tempfile()
   opf_write_subGraph(dataSet,file)
   opf_write_classification(classification,paste(file,".out", sep = ""))
   argv <- c("", file)
-  aux <- .C("opf_accuracy",length(argv),as.character(argv))
+  aux <- .C("c_opf_accuracy",length(argv),as.character(argv))
   return(opf_read_classification(paste(file,".acc", sep = "")))
 }
 
@@ -47,14 +49,13 @@ opf_accuracy <- function(dataSet, classification){
 #'acc <- opf_accuracy4label(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_accuracy4label <- function(dataSet, classification){
   file <- tempfile()
   opf_write_subGraph(dataSet,file)
   opf_write_classification(classification,paste(file,".out", sep = ""))
   argv <- c("", file)
-  aux <- .C("opf_accuracy4label",length(argv),as.character(argv))
+  aux <- .C("c_opf_accuracy4label",length(argv),as.character(argv))
   return(opf_read_classification(paste(file,".acc", sep = "")))
 }
 
@@ -78,7 +79,6 @@ opf_accuracy4label <- function(dataSet, classification){
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_classify <- function(dataSet, classifier, precomputedDistance = NA){
   file <- tempfile()
@@ -89,7 +89,7 @@ opf_classify <- function(dataSet, classifier, precomputedDistance = NA){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
-  aux <- .C("opf_classify",length(argv),as.character(argv))
+  aux <- .C("c_opf_classify",length(argv),as.character(argv))
   return(opf_read_classification(paste(file,".out", sep = "")))
 }
 
@@ -115,7 +115,6 @@ opf_classify <- function(dataSet, classifier, precomputedDistance = NA){
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = NA){
   file <- tempfile()
@@ -125,7 +124,7 @@ opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = 
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
-  aux <- .C("opf_cluster",length(argv),as.character(argv))
+  aux <- .C("c_opf_cluster",length(argv),as.character(argv))
   return(list("classifier"=opf_read_modelfile(paste(file,".classifier.opf", sep = "")),"classification"=opf_read_classification(paste(file,".out", sep = ""))))
 }
 
@@ -160,13 +159,12 @@ opf_cluster <- function(dataSet, kmax, calculateOp, value,precomputedDistance = 
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_distance <- function(dataSet, distanceOp, normalize = 0){
   file <- tempfile()
   opf_write_subGraph(dataSet,file)
   argv <- c("", file,distanceOp,normalize)
-  aux <- .C("opf_distance",length(argv),as.character(argv))
+  aux <- .C("c_opf_distance",length(argv),as.character(argv))
   return(opf_read_distances(paste(file,".distances.dat", sep = "")))
 }
 
@@ -184,13 +182,12 @@ opf_distance <- function(dataSet, distanceOp, normalize = 0){
 #'folds <- opf_fold(dataset, 4)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_fold <- function(dataSet, k, normalize = 0){
   file <- tempfile()
   opf_write_subGraph(dataSet,file)
   argv <- c("", file,k,normalize)
-  aux <- .C("opf_fold",length(argv),as.character(argv))
+  aux <- .C("c_opf_fold",length(argv),as.character(argv))
   result <- c()
   for(i in 1:k){
     fold <- paste(file,as.character(i), sep = "")
@@ -208,7 +205,6 @@ opf_fold <- function(dataSet, k, normalize = 0){
 #'opf_info(dataset)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_info <- function(dataSet){
   file <- tempfile()
@@ -218,7 +214,7 @@ opf_info <- function(dataSet){
   writeBin(as.integer(dataSet$nfeats), size = 4, fp)
   close(fp)
   argv <- c("", file)
-  aux <- .C("opf_info",length(argv),as.character(argv))
+  aux <- .C("c_opf_info",length(argv),as.character(argv))
 }
 
 #'Executes the learning phase of the OPF classifier
@@ -245,7 +241,6 @@ opf_info <- function(dataSet){
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
   file <- tempfile()
@@ -256,7 +251,7 @@ opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
-  aux <- .C("opf_learn",length(argv),as.character(argv))
+  aux <- .C("c_opf_learn",length(argv),as.character(argv))
   return(list("classifier"=opf_read_modelfile(paste(file,".classifier.opf", sep = ""))))
 }
 
@@ -274,7 +269,6 @@ opf_learn <- function(trainFile, evaluatFile, precomputedDistance = NA){
 #'opf_merge(c(X$training,X$testing))
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_merge <- function(dataSets){
   file <- tempfile()
@@ -283,7 +277,7 @@ opf_merge <- function(dataSets){
     opf_write_subGraph(dataSets[[i]],paste(file,as.character(i), sep = ""))
     argv <- c(argv, paste(file,as.character(i), sep = ""))
   }
-  aux <- .C("opf_merge",length(argv),as.character(argv))
+  aux <- .C("c_opf_merge",length(argv),as.character(argv))
   return(opf_read_subGraph(paste(file,"1.merged.dat", sep = "")))
 }
 
@@ -299,13 +293,12 @@ opf_merge <- function(dataSets){
 #'dat <- opf_normalize(dataset)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_normalize <- function(dataSet){
   file <- tempfile()
   opf_write_subGraph(dataSet,file)
   argv <- c("", file, paste(file,".out", sep = ""))
-  aux <- .C("opf_normalize",length(argv),as.character(argv))
+  aux <- .C("c_opf_normalize",length(argv),as.character(argv))
   return(opf_read_subGraph(paste(file,".out", sep = "")))
 }
 
@@ -330,7 +323,6 @@ opf_normalize <- function(dataSet){
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precomputedDistance = NA){
   file <- tempfile()
@@ -341,7 +333,7 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
-  aux <- .C("opf_pruning",length(argv),as.character(argv))
+  aux <- .C("c_opf_pruning",length(argv),as.character(argv))
   return(list("classifier"=opf_read_modelfile(paste(file,".classifier.opf", sep = ""))))
 }
 
@@ -367,7 +359,6 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_semi <- function(labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile = NA,  precomputedDistance = NA){
     argv <- c("", labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile)
@@ -375,7 +366,7 @@ opf_semi <- function(labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile
       opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
       argv <- append(argv,paste(file,".distances", sep = ""))
     }
-    aux <- .C("opf_semi",length(argv),as.character(argv))
+    aux <- .C("c_opf_semi",length(argv),as.character(argv))
 }
 
 #'Generates training, evaluation and test sets for the OPF classifier
@@ -400,13 +391,12 @@ opf_semi <- function(labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize = 0){
   file <- tempfile()
   opf_write_subGraph(dataSet,file)
   argv <- c("", file, training_p, evaluating_p, testing_p, normalize)
-  aux <- .C("opf_split",length(argv),as.character(argv))
+  aux <- .C("c_opf_split",length(argv),as.character(argv))
   return(list("training" = (if(training_p > 0.0) opf_read_subGraph(paste(file,".training.dat", sep = "")) else NA),
               "evaluating" = (if(evaluating_p > 0.0) opf_read_subGraph(paste(file,".evaluating.dat", sep = "")) else NA),
               "testing" = (if(testing_p > 0.0) opf_read_subGraph(paste(file,".testing.dat", sep = "")) else NA)))
@@ -431,7 +421,6 @@ opf_split <- function(dataSet, training_p, evaluating_p, testing_p, normalize = 
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_train <- function(dataSet, precomputedDistance = NA){
   file <- tempfile()
@@ -441,7 +430,7 @@ opf_train <- function(dataSet, precomputedDistance = NA){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
-  aux <- .C("opf_train",length(argv),as.character(argv))
+  aux <- .C("c_opf_train",length(argv),as.character(argv))
   return(list("classifier"=opf_read_modelfile(paste(file,".classifier.opf", sep = "")),"classification"=opf_read_classification(paste(file,".out", sep = ""))))
 }
 
@@ -465,7 +454,6 @@ opf_train <- function(dataSet, precomputedDistance = NA){
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_knn_classify <- function(dataSet, classifier, precomputedDistance = NA){
   file <- tempfile()
@@ -476,7 +464,7 @@ opf_knn_classify <- function(dataSet, classifier, precomputedDistance = NA){
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
-  aux <- .C("opfknn_classify",length(argv),as.character(argv))
+  aux <- .C("c_opfknn_classify",length(argv),as.character(argv))
   return(opf_read_classification(paste(file,".out", sep = "")))
 }
 
@@ -501,7 +489,6 @@ opf_knn_classify <- function(dataSet, classifier, precomputedDistance = NA){
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA){
   file <- tempfile()
@@ -512,7 +499,7 @@ opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA
     opf_write_distances(precomputedDistance,paste(file,".distances", sep = ""))
     argv <- append(argv,paste(file,".distances", sep = ""))
   }
-  aux <- .C("opfknn_train",length(argv),as.character(argv))
+  aux <- .C("c_opfknn_train",length(argv),as.character(argv))
   return(list("classifier"=opf_read_modelfile(paste(file,".classifier.opf", sep = "")),"classification"=opf_read_classification(paste(file,".out", sep = ""))))
 }
 
@@ -533,11 +520,10 @@ opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA
 #'opf_check("C:/dataset.txt")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_check <- function(file){
   argv <- c("", file)
-  aux <- .C("opf_check",length(argv),as.character(argv))
+  aux <- .C("c_opf_check",length(argv),as.character(argv))
 }
 
 #'Converts an OPF subGraph object to a LIBSVM file
@@ -550,13 +536,12 @@ opf_check <- function(file){
 #'opf2svm(dataset,"C:/Users/Public/dataset.txt")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf2svm <- function(data, outputFile){
   file <- tempfile()
   opf_write_subGraph(data,file)
   argv <- c("", file, outputFile)
-  aux <- .C("opf2svm",length(argv),as.character(argv))
+  aux <- .C("c_opf2svm",length(argv),as.character(argv))
 }
 
 #'Converts an OPF subGraph object to a text file
@@ -569,13 +554,12 @@ opf2svm <- function(data, outputFile){
 #'opf2txt(dataset,"C:/Users/Public/dataset.txt")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf2txt <- function(data, outputFile){
   file <- tempfile()
   opf_write_subGraph(data,file)
   argv <- c("", file, outputFile)
-  aux <- .C("opf2txt",length(argv),as.character(argv))
+  aux <- .C("c_opf2txt",length(argv),as.character(argv))
 }
 
 #'Converts a LIBSVM file to an OPF subGraph object
@@ -590,12 +574,11 @@ opf2txt <- function(data, outputFile){
 #'dataset <- opf2svm("C:/Users/Public/dataset.txt")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 svm2opf <- function(inputFile){
   file <- tempfile()
   argv <- c("", inputFile, file)
-  aux <- .C("svm2opf",length(argv),as.character(argv))
+  aux <- .C("c_svm2opf",length(argv),as.character(argv))
   return(opf_read_subGraph(file))
 }
 
@@ -611,12 +594,11 @@ svm2opf <- function(inputFile){
 #'dataset <- txt2opf("C:/Users/Public/dataset.txt")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 txt2opf <- function(inputFile){
   file <- tempfile()
   argv <- c("", inputFile, file)
-  aux <- .C("txt2opf",length(argv),as.character(argv))
+  aux <- .C("c_txt2opf",length(argv),as.character(argv))
   return(opf_read_subGraph(file))
 }
 
@@ -707,7 +689,6 @@ subGraph <- setRefClass (
 #'@examples
 #'EmptySubgraph <- opf_create_subGraph(10)
 #'
-#'@useDynLib libOPF
 #'@export
 opf_create_subGraph <- function(nnodes){
   sg <- subGraph()
@@ -739,7 +720,6 @@ opf_create_subGraph <- function(nnodes){
 #'acc <- opf_accuracy(T2, class)
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_read_subGraph <- function(file){
   binFile <- file(file, "rb")
@@ -768,7 +748,6 @@ opf_read_subGraph <- function(file){
 #'opf_write_subGraph(dataset, "C:/Users/Public/dataset.dat")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_write_subGraph <- function(g, file){
   if(!is.null(g)){
@@ -799,7 +778,6 @@ opf_write_subGraph <- function(g, file){
 #'classifier <- opf_read_modelfile("C:/Users/Public/classifier.dat")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_read_modelfile <- function(file){
   binFile <- file(file, "rb")
@@ -847,7 +825,6 @@ opf_read_modelfile <- function(file){
 #'opf_write_modelfile(Y$classifier, "C:/Users/Public/classifier.dat")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_write_modelfile <- function(g, file){
   fp <- file(file, "wb")
@@ -891,7 +868,6 @@ opf_write_modelfile <- function(g, file){
 #'classification <- opf_read_classification("C:/Users/Public/classification.txt")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_read_classification <- function(file){
   fp <- file(file, "r")
@@ -915,7 +891,6 @@ opf_read_classification <- function(file){
 #'opf_write_modelfile(Y$classification, "C:/Users/Public/classification.txt")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_write_classification <- function(classes, file){
   fp <- file(file, "w")
@@ -935,7 +910,6 @@ opf_write_classification <- function(classes, file){
 #'distances <- opf_read_distances("C:/Users/Public/distances.dat")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_read_distances <- function(file)
 {
@@ -965,7 +939,6 @@ opf_read_distances <- function(file)
 #'opf_write_distances(dist, "C:/Users/Public/distances.dat")
 #'}
 #'
-#'@useDynLib libOPF
 #'@export
 opf_write_distances <- function(distances, file)
 {
@@ -999,7 +972,6 @@ opf_write_distances <- function(distances, file)
 #'@return
 #'Will return the accuracy
 #'
-#'@useDynLib libOPF
 #'@export
 opf_run_example <- function(dataset)
 {

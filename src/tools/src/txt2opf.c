@@ -87,7 +87,7 @@ static int main(int argc, char **argv)
 	return 0;
 }
 
-void txt2opf(int *argc, char **argv){
+void c_txt2opf(int *argc, char **argv){
 	main(*argc,argv);
 	
 }

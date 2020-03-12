@@ -11,7 +11,7 @@ PKG_CPPFLAGS = $(INCFLAGS) -lOPF -lm -w
 PKG_LIBS = -L./$(INCLUDE) -lOPF -lm -w
 
 OPFSOURCES = code/opf_split.c code/opf_accuracy.c code/opf_accuracy4label.c code/opf_train.c code/opf_semi.c code/opf_classify.c code/opf_learn.c code/opf_distance.c code/opf_info.c code/opf_fold.c code/opf_merge.c code/opf_cluster.c code/opf_pruning.c code/opf_normalize.c code/opfknn_train.c code/opfknn_classify.c
-TOOLSSOURCES = init.c tools/src/statistics.c tools/src/txt2opf.c tools/src/opf2txt.c tools/src/opf_check.c tools/src/opf2svm.c tools/src/svm2opf.c
+TOOLSSOURCES = init.c tools/src/txt2opf.c tools/src/opf2txt.c tools/src/opf_check.c tools/src/opf2svm.c tools/src/svm2opf.c
 OBJECTS = $(OPFSOURCES:.c=.o) $(TOOLSSOURCES:.c=.o)
 
 all: libOPF $(SHLIB)

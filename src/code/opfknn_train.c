@@ -81,7 +81,7 @@ static int main(int argc, char **argv)
 	return 0;
 }
 
-void opfknn_train(int *argc, char **argv){
+void c_opfknn_train(int *argc, char **argv){
 	main(*argc,argv);
 	
 }

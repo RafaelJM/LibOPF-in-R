@@ -157,7 +157,7 @@ static int main(int argc, char **argv)
     return 1;
 }
 
-void opf_check(int *argc, char **argv){
+void c_opf_check(int *argc, char **argv){
 	main(*argc,argv);
 	
 }

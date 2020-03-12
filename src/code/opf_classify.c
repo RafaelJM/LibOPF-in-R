@@ -69,7 +69,7 @@ static int main(int argc, char **argv)
 	return 0;
 }
 
-void opf_classify(int *argc, char **argv){
+void c_opf_classify(int *argc, char **argv){
 	main(*argc,argv);
 	
 }
