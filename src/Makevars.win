@@ -5,7 +5,6 @@ UTIL=util
 
 FLAGS=  -O3 -Wall
 
-DLLF = $(SHLIB_LD) -shared $(DLLFLAGS) $(LIBR) 
 INCFLAGS = -I$(INCLUDE) -I$(INCLUDE)/$(UTIL) $(R_XTRA_CPPFLAGS) 
 
 PKG_CPPFLAGS = $(INCFLAGS) -lOPF -lm -w

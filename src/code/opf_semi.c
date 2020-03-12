@@ -49,8 +49,9 @@ static int main(int argc, char **argv)
     
   }
 
-  if (opf_PrecomputedDistance)
+  if (opf_PrecomputedDistance){
     opf_DistanceValue = opf_ReadDistances(argv[4], &n); if(errorOccurred) return 0;
+  }
 
   Rprintf("\nTraining Semi OPF classifier ...");
   
