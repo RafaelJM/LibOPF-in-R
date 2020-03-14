@@ -3,7 +3,7 @@
 static int main(int argc, char **argv)
 {
 	errorOccurred = 0;	
-
+	opf_PrecomputedDistance = 0;
 	if ((argc != 3) && (argc != 4))
 	{
 		REprintf("\nusage opf_learn <P1> <P2> <P3>");

@@ -3,7 +3,7 @@
 static int main(int argc, char **argv)
 {
 	errorOccurred = 0;
-
+	opf_PrecomputedDistance = 0;
 
 	if ((argc != 5) && (argc != 4))
 	{

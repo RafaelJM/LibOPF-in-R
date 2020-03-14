@@ -3,7 +3,7 @@
 static int main(int argc, char **argv)
 {
 	errorOccurred = 0;
-
+	opf_PrecomputedDistance = 0;
 
 	if ((argc != 3) && (argc != 2))
 	{
@@ -73,7 +73,7 @@ static int main(int argc, char **argv)
 	f = fopen(fileName, "a");
 	fprintf(f, "%f\n", time);
 	fclose(f);
-
+	
 	return 0;
 }
 

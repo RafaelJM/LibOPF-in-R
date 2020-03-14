@@ -107,7 +107,7 @@ static int main(int argc, char **argv)
 	Rprintf("Creating graph...\n");
 	for (i = 0; i < d.ndata; i++)
 	{
-		fgets(line, N, file);
+		if(fgets(line, N, file) == NULL){};
 		graph->node[i].position = (long int)i;
 		seg = strtok(line, " ");
 		label = atoi(seg);
