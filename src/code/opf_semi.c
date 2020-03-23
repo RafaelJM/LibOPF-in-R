@@ -64,12 +64,14 @@ static int main(int argc, char **argv)
 
   Rprintf("\nWriting classifier's model file ...");
   
-  opf_WriteModelFile(s, "classifier.opf");
+  sprintf(fileName, "%s.classifier.opf", argv[1]);
+  opf_WriteModelFile(g, fileName);
   Rprintf(" OK");
   
 
   Rprintf("\nWriting output file ...");
   
+
   sprintf(fileName, "%s.out", argv[1]);
   opf_WriteOutputFile(s, fileName);
   Rprintf(" OK");

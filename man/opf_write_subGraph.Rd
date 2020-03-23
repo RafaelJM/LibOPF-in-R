@@ -15,8 +15,7 @@ opf_write_subGraph(g, file)
 Writes into a file a subGraph
 }
 \examples{
-\dontrun{
-opf_write_subGraph(dataset, "C:/Users/Public/dataset.dat")
-}
+dataset <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
+opf_write_subGraph(dataset, file.path(tempdir(), "boat.dat"))
 
 }

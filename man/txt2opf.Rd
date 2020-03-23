@@ -16,8 +16,6 @@ Returns the OPF object
 Converts a text file to an OPF subGraph object
 }
 \examples{
-\dontrun{
-dataset <- txt2opf("C:/Users/Public/dataset.txt")
-}
+dataset <- txt2opf(system.file("extdata/boat.txt",package = "LibOPF"))
 
 }

@@ -16,8 +16,7 @@ Returns the normalized subGraph
 Normalizes data for the OPF classifier
 }
 \examples{
-\dontrun{
+dataset <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
 dat <- opf_normalize(dataset)
-}
 
 }

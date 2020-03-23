@@ -18,9 +18,9 @@ Note that the input file for opf_check must be a text file.
 Use opf2txt to convert your OPF binary file into a text file.
 }
 \examples{
-\dontrun{
-opf2txt(dataset,"C:/Users/Public/dataset.txt")
-opf_check("C:/dataset.txt")
-}
+dataset <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
+File <- file.path(tempdir(), "boat.txt")
+opf2txt(dataset,File)
+opf_check(File)
 
 }

@@ -16,8 +16,7 @@ Returns the predicted labels list
 Reads a file which contains the nodes' predicted labels
 }
 \examples{
-\dontrun{
-classification <- opf_read_classification("C:/Users/Public/classification.txt")
-}
+File <- system.file("extdata/classification.txt",package = "LibOPF")
+classification <- opf_read_classification(File)
 
 }

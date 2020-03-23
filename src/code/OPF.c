@@ -154,16 +154,14 @@ void opf_OPFClassifyingAndMarkNodes(Subgraph *sgtrain, Subgraph *sg)
       weight = opf_ArcWeight(sgtrain->node[k].feat, sg->node[i].feat, sg->nfeats);
     else
       weight = opf_DistanceValue[sgtrain->node[k].position][sg->node[i].position];
-
+	
     minCost = MAX(sgtrain->node[k].pathval, weight);
     label = sgtrain->node[k].label;
-
     while ((j < sgtrain->nnodes - 1) &&
            (minCost > sgtrain->node[sgtrain->ordered_list_of_nodes[j + 1]].pathval))
     {
 
       l = sgtrain->ordered_list_of_nodes[j + 1];
-
       if (!opf_PrecomputedDistance)
         weight = opf_ArcWeight(sgtrain->node[l].feat, sg->node[i].feat, sg->nfeats);
       else
@@ -864,6 +862,7 @@ void opf_SwapErrorsbyNonPrototypes(Subgraph **sgtrain, Subgraph **sgeval)
 //mark nodes and the whole path as relevants
 void opf_MarkNodes(Subgraph *g, int i)
 {
+  if(i == NIL) return;
   while (g->node[i].pred != NIL)
   {
     g->node[i].relevant = 1;
@@ -2564,7 +2563,6 @@ void opf_OPFPruning(Subgraph **gTrain, Subgraph **gEval, float desiredAcc)
     Rprintf("\nRunning iteration %d ... ", t);
     oldAcc = currentAcc;
     opf_ResetSubgraph(*gTrain);
-
     opf_OPFTraining(*gTrain); if(errorOccurred) return;
     opf_OPFClassifyingAndMarkNodes(*gTrain, *gEval);
     opf_RemoveIrrelevantNodes(gTrain); if(errorOccurred) return;

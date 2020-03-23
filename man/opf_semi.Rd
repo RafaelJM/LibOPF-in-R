@@ -27,15 +27,11 @@ Executes the semi supervised training phase
 Returns the learned model object
 }
 \examples{
-\dontrun{
-dat <- opf_read_subGraph("C:/boat.dat")
-TUnlabeled <- opf_read_subGraph("C:/UnleabeledTrain.dat")
-X <- opf_split(dat,0.8,0,0.2,0)
-T <- X$training
-T2 <- X$testing
-Y <- opf_semi(T,TUnlabeled)
-class <- opf_knn_classify(T2, Y$classifier)
-acc <- opf_accuracy(T2, class)
-}
+Training <- opf_read_subGraph(system.file("extdata/Z1LINE.dat",package = "LibOPF"))
+TUnlabeled <- opf_read_subGraph(system.file("extdata/Z1DOUBLELINE.dat",package = "LibOPF"))
+Testing <- opf_read_subGraph(system.file("extdata/Z3.dat",package = "LibOPF"))
+Y <- opf_semi(Training,TUnlabeled)
+class <- opf_classify(Testing, Y$classifier)
+acc <- opf_accuracy(Testing, class)
 
 }

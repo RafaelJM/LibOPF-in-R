@@ -54,8 +54,8 @@ static int main(int argc, char **argv)
 	
 	Rprintf(" OK");
 	
-
-	f = fopen("prate.pr", "a");
+	sprintf(fileName, "%s.prate.pr", argv[1]);
+	f = fopen(fileName, "a");
 	fprintf(f, "%f\n", prate);
 	fclose(f);
 

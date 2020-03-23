@@ -16,7 +16,7 @@ opf_pruning(
 
 \item{dataEvaluating}{The evaluating object produced by the opf_split (subGraph object)}
 
-\item{percentageAccuracy}{Percentage of accuracy [0,1]}
+\item{percentageAccuracy}{Max percentage of lost accuracy [0,1]}
 
 \item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
@@ -27,14 +27,13 @@ Returns a list which contains the classifier model object
 Executes the pruning algorithm
 }
 \examples{
-\dontrun{
-dat <- opf_read_subGraph("C:/boat.dat")
-X <- opf_split(dat,0.8,0,0.2,0)
+dat <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
+X <- opf_split(dat,0.3,0.2,0.5,0)
 T <- X$training
 T2 <- X$testing
+E <- X$evaluating
 Y <- opf_pruning(T,E,0.8)
-class <- opf_knn_classify(T2, Y$classifier)
+class <- opf_classify(T2, Y$classifier)
 acc <- opf_accuracy(T2, class)
-}
 
 }

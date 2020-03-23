@@ -16,14 +16,12 @@ Returns the subGraph object
 Reads a file which contains the subGraph
 }
 \examples{
-\dontrun{
-dat <- opf_read_subGraph("C:/boat.dat")
+dat <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
 X <- opf_split(dat,0.5,0,0.5,0)
 T <- X$training
 T2 <- X$testing
 Y <- opf_train(T)
 class <- opf_classify(T2, Y$classifier)
 acc <- opf_accuracy(T2, class)
-}
 
 }

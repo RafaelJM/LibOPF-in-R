@@ -20,14 +20,12 @@ Returns the given subGraph classification list
 Executes the test phase of the OPF classifier with knn adjacency
 }
 \examples{
-\dontrun{
-dat <- opf_read_subGraph("C:/boat.dat")
+dat <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
 X <- opf_split(dat,0.8,0,0.2,0)
 T <- X$training
 T2 <- X$testing
 Y <- opf_cluster(T,100,1,0.2)
 class <- opf_knn_classify(T2, Y$classifier)
 acc <- opf_accuracy(T2, class)
-}
 
 }

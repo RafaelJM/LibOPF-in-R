@@ -16,8 +16,6 @@ Returns the OPF object
 Converts a LIBSVM file to an OPF subGraph object
 }
 \examples{
-\dontrun{
-dataset <- opf2svm("C:/Users/Public/dataset.txt")
-}
+dataset <- svm2opf(system.file("extdata/boat.svm",package = "LibOPF"))
 
 }

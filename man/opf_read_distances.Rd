@@ -16,8 +16,6 @@ Returns the precalculated distances matrix
 Reads a file which contains the precalculated distances
 }
 \examples{
-\dontrun{
-distances <- opf_read_distances("C:/Users/Public/distances.dat")
-}
+distances <- opf_read_distances(system.file("extdata/distances.dat",package = "LibOPF"))
 
 }

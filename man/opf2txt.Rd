@@ -15,8 +15,8 @@ opf2txt(data, outputFile)
 Converts an OPF subGraph object to a text file
 }
 \examples{
-\dontrun{
-opf2txt(dataset,"C:/Users/Public/dataset.txt")
-}
+dataset <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
+File <- file.path(tempdir(), "boat.txt")
+opf2txt(dataset,File)
 
 }

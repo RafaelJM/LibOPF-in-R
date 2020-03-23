@@ -127,6 +127,8 @@ static int main(int argc, char **argv)
 				break;
 			index = atoi(seg);
 			seg = strtok(NULL, " \n");
+			if (seg == NULL)
+				break;
 			value = atof(seg);
 			//REprintf("%d %f\n", index, value);
 			graph->node[i].feat[index - 1] = value;

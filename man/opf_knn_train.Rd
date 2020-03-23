@@ -22,14 +22,13 @@ Executes the training phase of the OPF classifier with knn adjacency
 Returns a list which contains the classifier object and the classification list object
 }
 \examples{
-\dontrun{
-dat <- opf_read_subGraph("C:/boat.dat")
-X <- opf_split(dat,0.8,0,0.2,0)
+dat <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
+X <- opf_split(dat,0.3,0.2,0.5,0)
 T <- X$training
 T2 <- X$testing
+E <- X$evaluating
 Y <- opf_knn_train(T,E,100)
 class <- opf_knn_classify(T2, Y$classifier)
 acc <- opf_accuracy(T2, class)
-}
 
 }

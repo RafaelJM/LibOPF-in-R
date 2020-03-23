@@ -16,10 +16,8 @@ Returns the merged subGraph object
 Merge subGraphs
 }
 \examples{
-\dontrun{
-dat <- opf_read_subGraph("C:/boat.dat")
-X <- opf_split(dat,0.5,0,0.5,0)
-opf_merge(c(X$training,X$testing))
-}
+dat <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
+dat2 <- opf_read_subGraph(system.file("extdata/Z1LINE.dat",package = "LibOPF"))
+dataSet <- opf_merge(c(dat,dat2))
 
 }

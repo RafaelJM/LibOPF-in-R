@@ -15,10 +15,8 @@ opf_write_distances(distances, file)
 Writes into a file the precalculated distances computed by opf_distances function
 }
 \examples{
-\dontrun{
-dat <- opf_read_subGraph("C:/boat.dat")
+dat <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
 dist <- opf_distance(dat,3,0)
-opf_write_distances(dist, "C:/Users/Public/distances.dat")
-}
+opf_write_distances(dist, file.path(tempdir(), "distances.dat"))
 
 }

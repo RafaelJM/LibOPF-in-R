@@ -16,8 +16,6 @@ Returns the learned model object
 Reads a file which contains the learned model
 }
 \examples{
-\dontrun{
-classifier <- opf_read_modelfile("C:/Users/Public/classifier.dat")
-}
+classifier <- opf_read_modelfile(system.file("extdata/classifier.opf",package = "LibOPF"))
 
 }

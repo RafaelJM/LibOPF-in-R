@@ -13,8 +13,7 @@ opf_info(dataSet)
 Gives information about the OPF file
 }
 \examples{
-\dontrun{
-opf_info(dataset)
-}
+dat <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
+opf_info(dat)
 
 }
