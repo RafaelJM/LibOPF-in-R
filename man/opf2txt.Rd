@@ -11,6 +11,9 @@ opf2txt(data, outputFile)
 
 \item{outputFile}{Text output file name}
 }
+\value{
+`NULL`
+}
 \description{
 Converts an OPF subGraph object to a text file
 }

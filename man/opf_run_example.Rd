@@ -10,7 +10,7 @@ opf_run_example(dataset)
 \item{dataset}{A dataset folder for the test}
 }
 \value{
-Will return the accuracy
+Returns the accuracy
 }
 \description{
 This function will run this example:\cr

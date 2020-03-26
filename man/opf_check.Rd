@@ -9,6 +9,9 @@ opf_check(file)
 \arguments{
 \item{file}{The text OPF file name}
 }
+\value{
+`NULL`
+}
 \description{
 Checks the OPF file for proper formatting purposes
 }

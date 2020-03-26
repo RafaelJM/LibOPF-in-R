@@ -11,6 +11,9 @@ opf_write_subGraph(g, file)
 
 \item{file}{The file name to save the subGraph}
 }
+\value{
+`NULL`
+}
 \description{
 Writes into a file a subGraph
 }

@@ -193,6 +193,8 @@ opf_fold <- function(dataSet, k, normalize = 0){
 #'dat <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
 #'opf_info(dat)
 #'
+#'@return `NULL`
+#'
 #'@export
 opf_info <- function(dataSet){
   file <- tempfile()
@@ -337,6 +339,9 @@ opf_pruning <- function(dataTraining, dataEvaluating, percentageAccuracy, precom
 #'class <- opf_classify(Testing, Y$classifier)
 #'acc <- opf_accuracy(Testing, class)
 #'
+#'@return
+#'Returns a list which contains the classifier object and the classification list object
+#'
 #'@export
 opf_semi <- function(labeledTrainSubGraph,  unLabeledTrainSubGraph,  evaluatFile = NA,  precomputedDistance = NA){
   file <- tempfile()
@@ -468,6 +473,9 @@ opf_knn_classify <- function(dataSet, classifier, precomputedDistance = NA){
 #'class <- opf_knn_classify(T2, Y$classifier)
 #'acc <- opf_accuracy(T2, class)
 #'
+#'@return
+#'Returns a list which contains the classifier object and the classification list object (i.e., clusters' id)
+#'
 #'@export
 opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA){
   file <- tempfile()
@@ -499,6 +507,8 @@ opf_knn_train <- function(trainFile, evaluatFile, kmax, precomputedDistance = NA
 #'opf2txt(dataset,File)
 #'opf_check(File)
 #'
+#'@return `NULL`
+#'
 #'@export
 opf_check <- function(file){
   argv <- c("", file)
@@ -515,6 +525,8 @@ opf_check <- function(file){
 #'File <- file.path(tempdir(), "boat.svm")
 #'opf2svm(dataset,File)
 #'opf_check(File)
+#'
+#'@return `NULL`
 #'
 #'@export
 opf2svm <- function(data, outputFile){
@@ -533,6 +545,8 @@ opf2svm <- function(data, outputFile){
 #'dataset <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
 #'File <- file.path(tempdir(), "boat.txt")
 #'opf2txt(dataset,File)
+#'
+#'@return `NULL`
 #'
 #'@export
 opf2txt <- function(data, outputFile){
@@ -690,6 +704,8 @@ opf_read_subGraph <- function(file){
 #'dataset <- opf_read_subGraph(system.file("extdata/boat.dat",package = "LibOPF"))
 #'opf_write_subGraph(dataset, file.path(tempdir(), "boat.dat"))
 #'
+#'@return `NULL`
+#'
 #'@export
 opf_write_subGraph <- function(g, file){
   if(!is.null(g)){
@@ -763,6 +779,8 @@ opf_read_modelfile <- function(file){
 #'Y <- opf_train(T)
 #'opf_write_modelfile(Y$classifier, file.path(tempdir(), "classifier.opf"))
 #'
+#'@return `NULL`
+#'
 #'@export
 opf_write_modelfile <- function(g, file){
   fp <- file(file, "wb")
@@ -826,6 +844,8 @@ opf_read_classification <- function(file){
 #'Y <- opf_train(T)
 #'opf_write_classification(Y$classification, file.path(tempdir(), "classification.txt"))
 #'
+#'@return `NULL`
+#'
 #'@export
 opf_write_classification <- function(classes, file){
   fp <- file(file, "w")
@@ -870,6 +890,8 @@ opf_read_distances <- function(file)
 #'dist <- opf_distance(dat,3,0)
 #'opf_write_distances(dist, file.path(tempdir(), "distances.dat"))
 #'
+#'@return `NULL`
+#'
 #'@export
 opf_write_distances <- function(distances, file)
 {
@@ -901,7 +923,7 @@ opf_write_distances <- function(distances, file)
 #'@param dataset A dataset folder for the test
 #'
 #'@return
-#'Will return the accuracy
+#'Returns the accuracy
 #'
 #'@export
 opf_run_example <- function(dataset)

@@ -9,6 +9,9 @@ opf_info(dataSet)
 \arguments{
 \item{dataSet}{The OPF file}
 }
+\value{
+`NULL`
+}
 \description{
 Gives information about the OPF file
 }

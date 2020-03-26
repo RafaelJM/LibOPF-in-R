@@ -11,6 +11,9 @@ opf_write_classification(classes, file)
 
 \item{file}{Where you want to save the classification vector}
 }
+\value{
+`NULL`
+}
 \description{
 Writes into a file the predicted labels produced by the opf classificator
 }

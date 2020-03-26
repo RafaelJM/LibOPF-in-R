@@ -11,6 +11,9 @@ opf2svm(data, outputFile)
 
 \item{outputFile}{LIBSVM output file name}
 }
+\value{
+`NULL`
+}
 \description{
 Converts an OPF subGraph object to a LIBSVM file
 }

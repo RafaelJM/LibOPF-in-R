@@ -1,14 +1,14 @@
 Package: LibOPF
 Type: Package
-Title: Design of 'Optimum-Path Forest' Classifiers
-Version: 2.4.0
+Title: Design of Optimum-Path Forest Classifiers
+Version: 2.5.0
 Authors@R: c(
     person("Rafael", "Junqueira Martarelli", email = "rfel.jm@gmail.com", role = c("aut","cre")),
     person("João", "Paulo Papa", role = "aut"),
     person("Alexandre", "Xavier Falcão", role = "cph")
     )
 Maintainer: Rafael Junqueira Martarelli <rfel.jm@gmail.com>
-Description: The 'LibOPF' is a framework to develop pattern recognition techniques based on 'optimum-path forests' (OPF), João P. Papa and Alexandre X. Falcão (2008) <doi:10.1007/978-3-540-89639-5_89>, with methods for supervised learning and data clustering.
+Description: The 'LibOPF' is a framework to develop pattern recognition techniques based on optimum-path forests (OPF), João P. Papa and Alexandre X. Falcão (2008) <doi:10.1007/978-3-540-89639-5_89>, with methods for supervised learning and data clustering.
 Imports: methods
 License: BSD_2_clause + file LICENSE
 Encoding: UTF-8

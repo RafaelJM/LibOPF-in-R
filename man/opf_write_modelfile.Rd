@@ -11,6 +11,9 @@ opf_write_modelfile(g, file)
 
 \item{file}{The file name to save the classifier}
 }
+\value{
+`NULL`
+}
 \description{
 Writes into a file the trained OPF classifier
 }

@@ -11,6 +11,9 @@ opf_write_distances(distances, file)
 
 \item{file}{The file name where you want to save the distances}
 }
+\value{
+`NULL`
+}
 \description{
 Writes into a file the precalculated distances computed by opf_distances function
 }

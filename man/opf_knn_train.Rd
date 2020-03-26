@@ -15,6 +15,9 @@ opf_knn_train(trainFile, evaluatFile, kmax, precomputedDistance = NA)
 
 \item{precomputedDistance}{The precomputed distance matrix produced by the opf_distance (leave it in blank if you are not using this resource)}
 }
+\value{
+Returns a list which contains the classifier object and the classification list object (i.e., clusters' id)
+}
 \description{
 Executes the training phase of the OPF classifier with knn adjacency
 }

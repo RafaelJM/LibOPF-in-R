@@ -14,7 +14,9 @@ OPFSOURCES = code/opf_split.c code/opf_accuracy.c code/opf_accuracy4label.c code
 TOOLSSOURCES = init.c tools/src/txt2opf.c tools/src/opf2txt.c tools/src/opf_check.c tools/src/opf2svm.c tools/src/svm2opf.c
 OBJECTS = $(OPFSOURCES:.c=.o) $(TOOLSSOURCES:.c=.o)
 
-all: libOPF $(SHLIB)
+$(SHLIB): libOPF
+
+all: $(SHLIB)
 
 libOPF: libOPF-build
 	echo "libOPF.a built..."
