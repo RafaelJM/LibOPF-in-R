@@ -7,7 +7,7 @@ FLAGS=  -O3 -Wall
 
 INCFLAGS = -I$(INCLUDE) -I$(INCLUDE)/$(UTIL) $(R_XTRA_CPPFLAGS) 
 
-PKG_CPPFLAGS = $(INCFLAGS) -lOPF -lm
+PKG_CPPFLAGS = $(INCFLAGS)
 PKG_LIBS = -L./$(INCLUDE) -lOPF -lm
 
 OPFSOURCES = code/opf_split.c code/opf_accuracy.c code/opf_accuracy4label.c code/opf_train.c code/opf_semi.c code/opf_classify.c code/opf_learn.c code/opf_distance.c code/opf_info.c code/opf_fold.c code/opf_merge.c code/opf_cluster.c code/opf_pruning.c code/opf_normalize.c code/opfknn_train.c code/opfknn_classify.c
