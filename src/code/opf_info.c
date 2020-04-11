@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <time.h>
 
-static int main(int argc, char **argv)
+void c_opf_info(int *argc, char **argv)
 {
 	errorOccurred = 0;	
 
-	if (argc != 2)
+	if (*argc != 2)
 	{
 		REprintf("\nusage opf_info <P1>");
 		REprintf("\nP1: OPF file\n");
-		return 0;
+		return;
 	}
 
 	Subgraph *g = NULL;
@@ -21,24 +21,24 @@ static int main(int argc, char **argv)
 	if ((fp = fopen(argv[1], "rb")) == NULL)
 	{
 		sprintf(msg, "%s%s", "Unable to open file ", argv[1]);
-		Error(msg, "opf_info"); return 0;
+		Error(msg, "opf_info"); return;
 	}
 
 	if (fread(&ndata, sizeof(int), 1, fp) != 1)
 	{
 		REprintf("\n Could not read number of samples");
-		return 0;
+		return;
 	}
 	if (fread(&nlabels, sizeof(int), 1, fp) != 1)
 	{
 		REprintf("\n Could not read number of labels");
-		return 0;
+		return;
 	}
 
 	if (fread(&nfeats, sizeof(int), 1, fp) != 1)
 	{
 		REprintf("\n Could not read number of features");
-		return 0;
+		return;
 	}
 
 	Rprintf("\nInformations about %s file\n --------------------------------", argv[1]);
@@ -49,11 +49,4 @@ static int main(int argc, char **argv)
 
 	DestroySubgraph(&g);
 	fclose(fp);
-
-	return 0;
-}
-
-void c_opf_info(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

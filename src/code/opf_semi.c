@@ -1,17 +1,17 @@
 #include "OPF.h"
 
-static int main(int argc, char **argv)
+void c_opf_semi(int *argc, char **argv)
 {
   errorOccurred = 0;  
   opf_PrecomputedDistance = 0;
-  if ((argc != 5) && (argc != 4) && (argc != 3) && (argc != 2))
+  if ((*argc != 5) && (*argc != 4) && (*argc != 3) && (*argc != 2))
   {
     REprintf("\nusage opf_semi_train <P1> <P2>");
     REprintf("\nP1: Labeled training set in the OPF file format");
     REprintf("\nP2: Unlabeled training set in the OPF file format");
     REprintf("\nP3: Evaluation set in the OPF file format");
     REprintf("\nP4: Precomputed distance file (leave it in blank if you are not using this resource)\n");
-    return 0;
+    return;
   }
 
   int n, i;
@@ -22,21 +22,21 @@ static int main(int argc, char **argv)
   float time;
   Subgraph *geval = NULL;
 
-  if (argc == 4)
+  if (*argc == 4)
     opf_ComputeEvaluation = 1;
 
-  if (argc == 5)
+  if (*argc == 5)
     opf_PrecomputedDistance = 1;
 
   Rprintf("\nReading labeled data file...");
   
-  Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
+  Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return;
   Rprintf(" OK");
   
 
   Rprintf("\nReading unlabeled data file...");
   
-  Subgraph *gunl = ReadSubgraph(argv[2]); if(errorOccurred) return 0;
+  Subgraph *gunl = ReadSubgraph(argv[2]); if(errorOccurred) return;
   Rprintf(" OK");
   
 
@@ -44,20 +44,20 @@ static int main(int argc, char **argv)
   {
     Rprintf("\nReading evaluation data file...");
     
-    geval = ReadSubgraph(argv[3]); if(errorOccurred) return 0;
+    geval = ReadSubgraph(argv[3]); if(errorOccurred) return;
     Rprintf(" OK");
     
   }
 
   if (opf_PrecomputedDistance){
-    opf_DistanceValue = opf_ReadDistances(argv[4], &n); if(errorOccurred) return 0;
+    opf_DistanceValue = opf_ReadDistances(argv[4], &n); if(errorOccurred) return;
   }
 
   Rprintf("\nTraining Semi OPF classifier ...");
   
   gettimeofday(&tic, NULL);
-  Subgraph *s = opf_OPFSemiLearning(g, gunl, geval); if(errorOccurred) return 0;
-  opf_OPFTraining(s); if(errorOccurred) return 0;
+  Subgraph *s = opf_OPFSemiLearning(g, gunl, geval); if(errorOccurred) return;
+  opf_OPFTraining(s); if(errorOccurred) return;
   gettimeofday(&toc, NULL);
   Rprintf(" OK");
   
@@ -96,11 +96,4 @@ static int main(int argc, char **argv)
   f = fopen(fileName, "a");
   fprintf(f, "%f\n", time);
   fclose(f);
-
-  return 0;
-}
-
-void c_opf_semi(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

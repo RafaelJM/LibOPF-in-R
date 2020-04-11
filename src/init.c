@@ -8,27 +8,27 @@
 */
 
 /* .Call calls */
-extern SEXP c_opf_accuracy(int, char **);
-extern SEXP c_opf_accuracy4label(int, char **);
-extern SEXP c_opf_check(int, char **);
-extern SEXP c_opf_classify(int, char **);
-extern SEXP c_opf_cluster(int, char **);
-extern SEXP c_opf_distance(int, char **);
-extern SEXP c_opf_fold(int, char **);
-extern SEXP c_opf_info(int, char **);
-extern SEXP c_opf_learn(int, char **);
-extern SEXP c_opf_merge(int, char **);
-extern SEXP c_opf_normalize(int, char **);
-extern SEXP c_opf_pruning(int, char **);
-extern SEXP c_opf_semi(int, char **);
-extern SEXP c_opf_split(int, char **);
-extern SEXP c_opf_train(int, char **);
-extern SEXP c_opf2svm(int, char **);
-extern SEXP c_opf2txt(int, char **);
-extern SEXP c_opfknn_classify(int, char **);
-extern SEXP c_opfknn_train(int, char **);
-extern SEXP c_svm2opf(int, char **);
-extern SEXP c_txt2opf(int, char **);
+extern void c_opf_accuracy(int *, char **);
+extern void c_opf_accuracy4label(int *, char **);
+extern void c_opf_check(int *, char **);
+extern void c_opf_classify(int *, char **);
+extern void c_opf_cluster(int *, char **);
+extern void c_opf_distance(int *, char **);
+extern void c_opf_fold(int *, char **);
+extern void c_opf_info(int *, char **);
+extern void c_opf_learn(int *, char **);
+extern void c_opf_merge(int *, char **);
+extern void c_opf_normalize(int *, char **);
+extern void c_opf_pruning(int *, char **);
+extern void c_opf_semi(int *, char **);
+extern void c_opf_split(int *, char **);
+extern void c_opf_train(int *, char **);
+extern void c_opf2svm(int *, char **);
+extern void c_opf2txt(int *, char **);
+extern void c_opfknn_classify(int *, char **);
+extern void c_opfknn_train(int *, char **);
+extern void c_svm2opf(int *, char **);
+extern void c_txt2opf(int *, char **);
 
 static const R_CallMethodDef CallEntries[] = {
     {"c_opf_accuracy",       (DL_FUNC) &c_opf_accuracy,       2},

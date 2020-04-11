@@ -106,13 +106,13 @@ int CheckLine(char *line, int nlabels, int nfeats, int lineid)
     return 1;
 }
 
-static int main(int argc, char **argv)
+void c_opf_check(int *argc, char **argv)
 {
 	errorOccurred = 0;
-    if (argc != 2)
+    if (*argc != 2)
     {
         REprintf("\nusage opf_check <input ASCII file in the LibOPF format>\nNote that the input file for opf_check must be a text file.\nUse opf2txt to convert your OPF binary file into a text file.\n");
-        return 0;
+        return;
     }
     FILE *fp = NULL;
     char header[HEADERSIZE], line[LINESIZE], OK = 1;
@@ -123,7 +123,7 @@ static int main(int argc, char **argv)
     if (!fp)
     {
         REprintf("\nunable to open file %s\n", argv[1]);
-        return 0;
+        return;
     }
 
     /* it checks the header */
@@ -153,11 +153,4 @@ static int main(int argc, char **argv)
 
     if (OK)
         REprintf("\nThis file is in the proper format. Enjoy.\n");
-
-    return 1;
-}
-
-void c_opf_check(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

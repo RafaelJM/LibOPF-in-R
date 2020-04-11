@@ -1,16 +1,16 @@
 #include "OPF.h"
 
-static int main(int argc, char **argv)
+void c_opf_accuracy(int *argc, char **argv)
 {
 	errorOccurred = 0;
 
 	
 
-	if (argc != 2)
+	if (*argc != 2)
 	{
 		REprintf("\nusage opf_accuracy <P1>");
 		REprintf("\nP1: data set in the OPF file format");
-		return 0;
+		return;
 	}
 
 	int i, j, **CM = NULL;
@@ -21,7 +21,7 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nReading data file ...");
 	
-	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
+	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return;
 	Rprintf(" OK");
 	
 
@@ -32,12 +32,12 @@ static int main(int argc, char **argv)
 	if (!f)
 	{
 		REprintf("\nunable to open file %s", argv[2]);
-		return 0;
+		return;
 	}
 	for (i = 0; i < g->nnodes; i++)
 		if (fscanf(f, "%d", &g->node[i].label) != 1)
 		{
-			Error("Error reading node label", "opf_Accuracy"); return 0;
+			Error("Error reading node label", "opf_Accuracy"); return;
 		}
 	fclose(f);
 	Rprintf(" OK");
@@ -60,7 +60,7 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nComputing accuracy ...");
 	
-	Acc = opf_Accuracy(g); if(errorOccurred) return 0;
+	Acc = opf_Accuracy(g); if(errorOccurred) return;
 	Rprintf("\nAccuracy: %.2f%%", Acc * 100);
 	
 
@@ -77,11 +77,5 @@ static int main(int argc, char **argv)
 	
 	DestroySubgraph(&g);
 	Rprintf(" OK\n");
-
-	return 0;
 }
 
-void c_opf_accuracy(int *argc, char **argv){
-	main(*argc,argv);
-	
-}

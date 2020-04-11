@@ -1,15 +1,15 @@
 #include "OPF.h"
 
-static int main(int argc, char **argv)
+void c_opfknn_classify(int *argc, char **argv)
 {
 	errorOccurred = 0;
 	opf_PrecomputedDistance = 0;
-	if ((argc != 3) && (argc != 2))
+	if ((*argc != 3) && (*argc != 2))
 	{
 		REprintf("\nusage opfknn_classify <P1> <P2>");
 		REprintf("\nP1: test set in the OPF file format");
 		REprintf("\nP2: precomputed distance file (leave it in blank if you are not using this resource\n");
-		return 0;
+		return;
 	}
 
 	int n, i;
@@ -18,23 +18,23 @@ static int main(int argc, char **argv)
 	FILE *f = NULL;
 	timer tic, toc;
 
-	if (argc == 3)
+	if (*argc == 3)
 		opf_PrecomputedDistance = 1;
 	Rprintf("\nReading data files ...");
 	
 	sprintf(fileName, "%s.classifier.opf", argv[1]);
-	Subgraph *gTest = ReadSubgraph(argv[1]), *gTrain = opf_ReadModelFile(fileName); if(errorOccurred) return 0;
+	Subgraph *gTest = ReadSubgraph(argv[1]), *gTrain = opf_ReadModelFile(fileName); if(errorOccurred) return;
 	Rprintf(" OK");
 	
 
 	if (opf_PrecomputedDistance){
-		opf_DistanceValue = opf_ReadDistances(argv[2], &n); if(errorOccurred) return 0;
+		opf_DistanceValue = opf_ReadDistances(argv[2], &n); if(errorOccurred) return;
 	}
 
 	Rprintf("\nClassifying test set ...");
 	
 	gettimeofday(&tic, NULL);
-	opf_OPFknnClassify(gTrain, gTest); if(errorOccurred) return 0;
+	opf_OPFknnClassify(gTrain, gTest); if(errorOccurred) return;
 	gettimeofday(&toc, NULL);
 	Rprintf(" OK");
 	
@@ -65,11 +65,4 @@ static int main(int argc, char **argv)
 	f = fopen(fileName, "a");
 	fprintf(f, "%f\n", time);
 	fclose(f);
-
-	return 0;
-}
-
-void c_opfknn_classify(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

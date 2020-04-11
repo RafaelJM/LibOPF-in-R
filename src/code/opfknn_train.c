@@ -1,18 +1,18 @@
 #include "OPF.h"
 
-static int main(int argc, char **argv)
+void c_opfknn_train(int *argc, char **argv)
 {
 	errorOccurred = 0;
 	opf_PrecomputedDistance = 0;
 
-	if ((argc != 5) && (argc != 4))
+	if ((*argc != 5) && (*argc != 4))
 	{
 		REprintf("\nusage opf_train <P1> <P2>");
 		REprintf("\nP1: training set in the OPF file format");
 		REprintf("\nP2: evaluating set in the OPF file format (used to learn k)");
 		REprintf("\nP3: kmax");
 		REprintf("\nP4: precomputed distance file (leave it in blank if you are not using this resource)\n");
-		return 0;
+		return;
 	}
 
 	int n, i, kmax = atoi(argv[3]);
@@ -21,24 +21,24 @@ static int main(int argc, char **argv)
 	timer tic, toc;
 	double time;
 
-	if (argc == 5)
+	if (*argc == 5)
 		opf_PrecomputedDistance = 1;
 
 	Rprintf("\nReading data file ...");
 	
-	Subgraph *Train = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
-	Subgraph *Eval = ReadSubgraph(argv[2]); if(errorOccurred) return 0;
+	Subgraph *Train = ReadSubgraph(argv[1]); if(errorOccurred) return;
+	Subgraph *Eval = ReadSubgraph(argv[2]); if(errorOccurred) return;
 	Rprintf(" OK");
 	
 
 	if (opf_PrecomputedDistance){
-		opf_DistanceValue = opf_ReadDistances(argv[4], &n); if(errorOccurred) return 0;
+		opf_DistanceValue = opf_ReadDistances(argv[4], &n); if(errorOccurred) return;
 	}
 
 	Rprintf("\nTraining OPF classifier ...");
 	
 	gettimeofday(&tic, NULL);
-	opf_OPFknnTraining(Train, Eval, kmax); if(errorOccurred) return 0;
+	opf_OPFknnTraining(Train, Eval, kmax); if(errorOccurred) return;
 	gettimeofday(&toc, NULL);
 	Rprintf(" OK");
 	
@@ -77,11 +77,4 @@ static int main(int argc, char **argv)
 	f = fopen(fileName, "a");
 	fprintf(f, "%f\n", time);
 	fclose(f);
-
-	return 0;
-}
-
-void c_opfknn_train(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

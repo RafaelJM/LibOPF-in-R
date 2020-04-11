@@ -19,23 +19,16 @@ static void WriteSubgraph2SVMFormat(Subgraph *cg, char *file)
 	fclose(fp);
 }
 
-static int main(int argc, char **argv)
+void c_opf2svm(int *argc, char **argv)
 {
 	errorOccurred = 0;
-	if (argc != 3)
+	if (*argc != 3)
 	{
 		REprintf("\nusage opf2svm <input libopf file> <output libsvm file>\n");
-		return 0;
+		return;
 	}
 
-	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
+	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return;
 	WriteSubgraph2SVMFormat(g, argv[2]);
 	DestroySubgraph(&g);
-
-	return 0;
-}
-
-void c_opf2svm(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

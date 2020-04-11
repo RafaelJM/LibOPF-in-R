@@ -1,11 +1,11 @@
 #include "OPF.h"
 #include <stdio.h>
 
-static int main(int argc, char **argv)
+void c_opf_distance(int *argc, char **argv)
 {
 	errorOccurred = 0;	
 
-	if (argc != 4)
+	if (*argc != 4)
 	{
 		REprintf("\nusage opf_distance <P1> <P2> <P3>");
 		REprintf("\nP1: Dataset in the OPF file format");
@@ -18,10 +18,10 @@ static int main(int argc, char **argv)
 		REprintf("\n	6 - Squared Chi-Squared");
 		REprintf("\n	7 - BrayCurtis");
 		REprintf("\nP3: Distance normalization? 1- yes 0 - no");
-		return 0;
+		return;
 	}
 
-	Subgraph *sg = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
+	Subgraph *sg = ReadSubgraph(argv[1]); if(errorOccurred) return;
 	char fileName[256];
 	sprintf(fileName, "%s.distances.dat", argv[1]);
 	FILE *fp = fopen(fileName, "wb"); //Changed to send to tempdir
@@ -165,11 +165,4 @@ static int main(int argc, char **argv)
 
 	DestroySubgraph(&sg);
 	fclose(fp);
-
-	return 0;
-}
-
-void c_opf_distance(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

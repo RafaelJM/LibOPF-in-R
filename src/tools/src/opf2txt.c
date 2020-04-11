@@ -3,13 +3,13 @@
 #include <R.h>
 #include <Rinternals.h>
 
-static int main(int argc, char **argv)
+void c_opf2txt(int *argc, char **argv)
 {
 
-	if (argc != 3)
+	if (*argc != 3)
 	{
 		REprintf("\nusage: opf2txt <opf file name> <output file name> \n");
-		return 0;
+		return;
 	}
 
 	Rprintf("\nProgram to convert files written in the OPF binary format to the OPF ASCII format.");
@@ -52,11 +52,4 @@ static int main(int argc, char **argv)
 	fclose(fpIn);
 	fclose(fpOut);
 	result++;
-
-	return 0;
-}
-
-void c_opf2txt(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

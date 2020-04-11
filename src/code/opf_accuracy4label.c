@@ -1,14 +1,14 @@
 #include "OPF.h"
 
-static int main(int argc, char **argv)
+void c_opf_accuracy4label(int *argc, char **argv)
 {
 	errorOccurred = 0;	
 
-	if (argc != 2)
+	if (*argc != 2)
 	{
 		REprintf("\nusage opf_accuracyforlabel <P1>");
 		REprintf("\nP1: data set in the OPF file format\n");
-		return 0;
+		return;
 	}
 
 	int i;
@@ -18,7 +18,7 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nReading data file ...");
 	
-	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
+	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return;
 	Rprintf(" OK");
 	
 
@@ -29,14 +29,14 @@ static int main(int argc, char **argv)
 	if (!f)
 	{
 		REprintf("\nunable to open file %s", argv[2]);
-		return 0;
+		return;
 	}
 
 	for (i = 0; i < g->nnodes; i++)
 	{
 		if (fscanf(f, "%d", &g->node[i].label) != 1)
 		{
-			Error("Error reading node label", "opf_Accuracy"); return 0;
+			Error("Error reading node label", "opf_Accuracy"); return;
 		}
 	}
 	fclose(f);
@@ -45,7 +45,7 @@ static int main(int argc, char **argv)
 
 	Rprintf("\nComputing accuracy ...");
 	
-	Acc = opf_Accuracy4Label(g); if(errorOccurred) return 0;
+	Acc = opf_Accuracy4Label(g); if(errorOccurred) return;
 	for (i = 1; i <= g->nlabels; i++)
 		Rprintf("\nClass %d: %.2f%%", i, Acc[i] * 100);
 	
@@ -70,11 +70,4 @@ static int main(int argc, char **argv)
 	Rprintf(" OK\n");
 
 	free(Acc);
-
-	return 0;
-}
-
-void c_opf_accuracy4label(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

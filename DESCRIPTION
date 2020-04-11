@@ -1,7 +1,7 @@
 Package: LibOPF
 Type: Package
 Title: Design of Optimum-Path Forest Classifiers
-Version: 2.5.5
+Version: 2.6.0
 Authors@R: c(
     person("Rafael", "Junqueira Martarelli", email = "rfel.jm@gmail.com", role = c("aut","cre")),
     person("João", "Paulo Papa", role = "aut"),

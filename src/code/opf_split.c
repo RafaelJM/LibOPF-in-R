@@ -16,11 +16,11 @@ void CheckInputData(float TrPercentage, float EvalPercentage, float TestPercenta
 	Rprintf(" OK");
 }
 
-static int main(int argc, char **argv)
+void c_opf_split(int *argc, char **argv)
 {
 	errorOccurred = 0;	
 
-	if (argc != 6)
+	if (*argc != 6)
 	{
 		REprintf("\nusage opf_split <P1> <P2> <P3> <P4> <P5>");
 		REprintf("\nP1: input dataset in the OPF file format");
@@ -28,34 +28,34 @@ static int main(int argc, char **argv)
 		REprintf("\nP3: percentage for the evaluation set size [0,1] (leave 0 in the case of no learning)");
 		REprintf("\nP4: percentage for the test set size [0,1]");
 		REprintf("\nP5: normalize features? 1 - Yes  0 - No\n\n");
-		return 0;
+		return;
 	}
 	Subgraph *g = NULL, *gAux = NULL, *gTraining = NULL, *gEvaluating = NULL, *gTesting = NULL;
 	float training_p = atof(argv[2]), evaluating_p = atof(argv[3]), testing_p = atof(argv[4]);
 	int normalize = atoi(argv[5]);
 	char fileName[256];
 
-	CheckInputData(training_p, evaluating_p, testing_p); if(errorOccurred) return 0;
+	CheckInputData(training_p, evaluating_p, testing_p); if(errorOccurred) return;
 
 	Rprintf("\nReading data set ...");
 	
-	g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
+	g = ReadSubgraph(argv[1]); if(errorOccurred) return;
 	Rprintf(" OK");
 	
 
 	if (normalize){
-		opf_NormalizeFeatures(g); if(errorOccurred) return 0;
+		opf_NormalizeFeatures(g); if(errorOccurred) return;
 	}
 
 	Rprintf("\nSplitting data set ...");
 	
-	opf_SplitSubgraph(g, &gAux, &gTesting, training_p + evaluating_p); if(errorOccurred) return 0;
+	opf_SplitSubgraph(g, &gAux, &gTesting, training_p + evaluating_p); if(errorOccurred) return;
 
 	if (evaluating_p > 0){
-		opf_SplitSubgraph(gAux, &gTraining, &gEvaluating, training_p / (training_p + evaluating_p)); if(errorOccurred) return 0;
+		opf_SplitSubgraph(gAux, &gTraining, &gEvaluating, training_p / (training_p + evaluating_p)); if(errorOccurred) return;
 	}
 	else{
-		gTraining = CopySubgraph(gAux); if(errorOccurred) return 0;
+		gTraining = CopySubgraph(gAux); if(errorOccurred) return;
 	}
 
 	Rprintf(" OK");
@@ -64,13 +64,13 @@ static int main(int argc, char **argv)
 	Rprintf("\nWriting data sets to disk ...");
 	
 	sprintf(fileName, "%s.training.dat", argv[1]);
-	WriteSubgraph(gTraining, fileName); if(errorOccurred) return 0;
+	WriteSubgraph(gTraining, fileName); if(errorOccurred) return;
 	if (evaluating_p > 0){
 		sprintf(fileName, "%s.evaluating.dat", argv[1]);
-		WriteSubgraph(gEvaluating, fileName); if(errorOccurred) return 0;
+		WriteSubgraph(gEvaluating, fileName); if(errorOccurred) return;
 	}
 	sprintf(fileName, "%s.testing.dat", argv[1]);
-	WriteSubgraph(gTesting, fileName); if(errorOccurred) return 0;
+	WriteSubgraph(gTesting, fileName); if(errorOccurred) return;
 	Rprintf(" OK");
 	
 
@@ -81,11 +81,4 @@ static int main(int argc, char **argv)
 	DestroySubgraph(&gEvaluating);
 	DestroySubgraph(&gTesting);
 	Rprintf(" OK\n");
-
-	return 0;
-}
-
-void c_opf_split(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

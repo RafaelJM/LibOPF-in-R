@@ -15,6 +15,7 @@ struct data
 	int nfeats;
 };
 
+/*
 static void InsertLabel(struct label **node, int real, int value)
 {
 	struct label *p = calloc(1, sizeof(struct label));
@@ -30,7 +31,7 @@ static void InsertLabel(struct label **node, int real, int value)
 	}
 	*node = p;
 }
-
+*/
 /*int FindLabel(struct label *node, int value){
 	struct label *p = node;
 
@@ -39,7 +40,7 @@ static void InsertLabel(struct label **node, int real, int value)
 			return p->value;
 		p = p->next;
 	}
-	return 0;
+	return;
 }*/
 
 struct data CountData(char *file)
@@ -79,13 +80,13 @@ struct data CountData(char *file)
 	return d;
 }
 
-static int main(int argc, char **argv)
+void c_svm2opf(int *argc, char **argv)
 {
 	errorOccurred = 0;
-	if (argc != 3)
+	if (*argc != 3)
 	{
 		REprintf("\nusage svm2opf <input libsvm file> <output libopf file>\n");
-		return 0;
+		return;
 	}
 
 	FILE *file = fopen(argv[1], "r");
@@ -99,7 +100,7 @@ static int main(int argc, char **argv)
 
 	d = CountData(argv[1]);
 	Rprintf("Allocating memory...\n");
-	Subgraph *graph = CreateSubgraph(d.ndata); if(errorOccurred) return 0;
+	Subgraph *graph = CreateSubgraph(d.ndata); if(errorOccurred) return;
 	Rprintf("OK.\n\n");
 	//struct label *node = NULL;
 	graph->nlabels = d.nlabels;
@@ -141,10 +142,4 @@ static int main(int argc, char **argv)
 	DestroySubgraph(&graph);
 	fclose(file);
 	free(line);
-	return 0;
-}
-
-void c_svm2opf(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

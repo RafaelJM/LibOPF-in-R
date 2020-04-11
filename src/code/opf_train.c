@@ -1,16 +1,16 @@
 #include "OPF.h"
 
-static int main(int argc, char **argv)
+void c_opf_train(int *argc, char **argv)
 {
 	errorOccurred = 0;
 	opf_PrecomputedDistance = 0;
 
-	if ((argc != 3) && (argc != 2))
+	if ((*argc != 3) && (*argc != 2))
 	{
 		REprintf("\nusage opf_train <P1> <P2>");
 		REprintf("\nP1: training set in the OPF file format");
 		REprintf("\nP2: precomputed distance file (leave it in blank if you are not using this resource)\n");
-		return 0;
+		return;
 	}
 
 	int n, i;
@@ -19,23 +19,23 @@ static int main(int argc, char **argv)
 	timer tic, toc;
 	float time;
 
-	if (argc == 3)
+	if (*argc == 3)
 		opf_PrecomputedDistance = 1;
 
 	Rprintf("\nReading data file ...");
 	
-	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return 0;
+	Subgraph *g = ReadSubgraph(argv[1]); if(errorOccurred) return;
 	Rprintf(" OK");
 	
 
 	if (opf_PrecomputedDistance){
-		opf_DistanceValue = opf_ReadDistances(argv[2], &n); if(errorOccurred) return 0;
+		opf_DistanceValue = opf_ReadDistances(argv[2], &n); if(errorOccurred) return;
 	}
 
 	Rprintf("\nTraining OPF classifier ...");
 	
 	gettimeofday(&tic, NULL);
-	opf_OPFTraining(g); if(errorOccurred) return 0;
+	opf_OPFTraining(g); if(errorOccurred) return;
 	gettimeofday(&toc, NULL);
 	Rprintf(" OK");
 	
@@ -73,11 +73,4 @@ static int main(int argc, char **argv)
 	f = fopen(fileName, "a");
 	fprintf(f, "%f\n", time);
 	fclose(f);
-	
-	return 0;
-}
-
-void c_opf_train(int *argc, char **argv){
-	main(*argc,argv);
-	
 }

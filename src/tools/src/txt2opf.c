@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include "OPF.h"
 
-static int main(int argc, char **argv)
+void c_txt2opf(int *argc, char **argv)
 {
 	errorOccurred = 0;
-	if (argc != 3)
+	if (*argc != 3)
 	{
 		REprintf("\nusage txt2opf <P1> <P2>\n");
 		REprintf("\nP1: input file name in the OPF ASCII format");
 		REprintf("\nP2: output file name in the OPF binary format\n");
-		return 0;
+		return;
 	}
 
 	Rprintf("\nProgram to convert files written in the OPF ASCII format to the OPF binary format.");
@@ -27,7 +27,7 @@ static int main(int argc, char **argv)
 	if (fscanf(fpIn, "%d", &n) != 1)
 	{
 		REprintf("\n Could not read number of samples");
-		return 0;
+		return;
 	}
 	Rprintf("\n number of samples: %d", n);
 	fwrite(&n, sizeof(int), 1, fpOut);
@@ -36,7 +36,7 @@ static int main(int argc, char **argv)
 	if (fscanf(fpIn, "%d", &nclasses) != 1)
 	{
 		REprintf("\n Could not read number of classes \n");
-		return 0;
+		return;
 	}
 
 	Rprintf("\n number of classes: %d", nclasses);
@@ -46,7 +46,7 @@ static int main(int argc, char **argv)
 	if (fscanf(fpIn, "%d", &nfeats) != 1)
 	{
 		REprintf("\n Could not read number of features \n");
-		return 0;
+		return;
 	}
 
 	Rprintf("\n number of features: %d", nfeats);
@@ -58,14 +58,14 @@ static int main(int argc, char **argv)
 		if (fscanf(fpIn, "%d", &id) != 1)
 		{
 			REprintf("\n Could not read sample id at line %d \n", i);
-			return 0;
+			return;
 		}
 		fwrite(&id, sizeof(int), 1, fpOut);
 
 		if (fscanf(fpIn, "%d", &label) != 1)
 		{
 			REprintf("\n Could not read sample label at line %d \n", i);
-			return 0;
+			return;
 		}
 		fwrite(&label, sizeof(int), 1, fpOut);
 
@@ -74,7 +74,7 @@ static int main(int argc, char **argv)
 			if (fscanf(fpIn, "%f", &aux) != 1)
 			{
 				REprintf("\n Could not read sample features at line %d, feature %d  \n", i, j);
-				return 0;
+				return;
 			}
 
 			fwrite(&aux, sizeof(float), 1, fpOut);
@@ -83,11 +83,4 @@ static int main(int argc, char **argv)
 
 	fclose(fpIn);
 	fclose(fpOut);
-
-	return 0;
-}
-
-void c_txt2opf(int *argc, char **argv){
-	main(*argc,argv);
-	
 }
